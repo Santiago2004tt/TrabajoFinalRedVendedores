@@ -23,7 +23,7 @@ public class Vendedor {
 
     //Get and Set
     /**
-     * metodo get de nombre
+     * get method of name
      * @return
      */
     public String getNombre() {
@@ -31,7 +31,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo set de nombre
+     * set name method
      * @param nombre
      */
     public void setNombre(String nombre) {
@@ -39,7 +39,7 @@ public class Vendedor {
     }
 
     /**
-     *metodo get de apellido
+     * lastname get method
      * @return
      */
     public String getApellido() {
@@ -47,7 +47,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo set de apellido
+     * surname set method
      * @param apellido
      */
     public void setApellido(String apellido) {
@@ -55,7 +55,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo get de cedula
+     * cedula get method
      * @return
      */
     public String getCedula() {
@@ -63,7 +63,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo set de cedula
+     * cedula set method
      * @param cedula
      */
     public void setCedula(String cedula) {
@@ -71,7 +71,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo get de direccion
+     * address get method
      * @return
      */
     public String getDireccion() {
@@ -79,7 +79,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo set de direccion
+     * address set method
      * @param direccion
      */
     public void setDireccion(String direccion) {
@@ -87,7 +87,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo get de vendedor
+     * vendor get method
      * @return
      */
     public Vendedor getTheVendedor() {
@@ -96,7 +96,7 @@ public class Vendedor {
 
     /**
      *
-     * metodo set de vendedor
+     * vendor set method
      * @param theVendedor
      */
     public void setTheVendedor(Vendedor theVendedor) {
@@ -104,7 +104,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo get de la lista de vendedores aliados
+     * allied vendor list get method
      * @return
      */
     public ArrayList<Vendedor> getListaVendedoresAliados() {
@@ -112,7 +112,7 @@ public class Vendedor {
     }
 
     /**
-     * metodo set de la lista de vendedores aliados
+     * allied sellers list set method
      * @param listaVendedoresAliados
      */
     public void setListaVendedoresAliados(ArrayList<Vendedor> listaVendedoresAliados) {
