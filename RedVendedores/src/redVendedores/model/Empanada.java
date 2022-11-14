@@ -5,14 +5,15 @@ public class Empanada extends Producto {
     //Atributs
     private String relleno;
 
-    public Empanada(String nombre, String codigo, String categoria, double precio, String relleno) {
-        super(nombre, codigo, categoria, precio);
+    public Empanada(String nombre, String codigo, String categoria, double precio, Estado estado, String relleno) {
+        super(nombre, codigo, categoria, precio, estado);
         this.relleno = relleno;
     }
 
-    /**
-     * constructor de gaseosaa
-     */
+    public Empanada() {
+
+    }
+
 
 
     //get y set

@@ -6,13 +6,19 @@ public class Gaseosa extends Producto {
     private String litros;
     private String sabor;
 
+    public Gaseosa(String nombre, String codigo, String categoria, double precio, Estado estado, String litros, String sabor) {
+        super(nombre, codigo, categoria, precio, estado);
+        this.litros = litros;
+        this.sabor = sabor;
+    }
+
     /**
      * constructor de gaseosaa
      */
-    public Gaseosa(String categoria, String codigo, String nombre, double precio, String litros, String sabor) {
-        super(categoria, codigo, nombre, precio);
-        this.litros = litros;
-        this.sabor = sabor;
+
+
+    public Gaseosa() {
+
     }
 
     //get y set
