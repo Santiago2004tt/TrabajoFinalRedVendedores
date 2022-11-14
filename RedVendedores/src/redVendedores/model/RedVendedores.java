@@ -1,5 +1,7 @@
 package redVendedores.model;
 
+import redVendedores.exceptions.UserException;
+
 import java.util.ArrayList;
 
 public class RedVendedores {
@@ -14,10 +16,13 @@ public class RedVendedores {
      * constructor de red vendedores
      * @param nombre
      */
+
     public RedVendedores(String nombre) {
         this.nombre = nombre;
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
+
+
     }
 
     //get and set
@@ -85,5 +90,40 @@ public class RedVendedores {
                 ", listaProductos=" + listaProductos +
                 ", listaVendedor=" + listaVendedores +
                 '}';
+    }
+
+
+    public boolean verificarUsuario(String usuario, String contrasenia){
+        for (Vendedor vendedor :listaVendedores
+             ) {
+            if(vendedor.verifcarUsuario(usuario, contrasenia)){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
+    public boolean eliminarUsuario() {
+        for (Vendedor vendedor:listaVendedores) {
+            if(vendedor != null){
+                vendedor.eliminarUsuario();
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean actualizarVendedor(String nuevoUsuario, String contrasenia) throws UserException {
+        for (Vendedor vendedor:listaVendedores) {
+            if(vendedor != null){
+                vendedor.actualizarUsuario(nuevoUsuario, contrasenia);
+                return true;
+            }
+
+        }
+        return false;
     }
 }
