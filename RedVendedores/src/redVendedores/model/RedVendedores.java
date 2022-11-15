@@ -1,18 +1,10 @@
 package redVendedores.model;
 
-<<<<<<< HEAD
-import redVendedores.exceptions.UserException;
-=======
-import redVendedores.exceptions.CafeException;
-import redVendedores.exceptions.EmpanadaException;
-import redVendedores.exceptions.GaseosaException;
-import redVendedores.exceptions.HeladoException;
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
+import redVendedores.exceptions.*;
 
 import java.util.ArrayList;
 
 public class RedVendedores {
-    //Atributs
     private String nombre;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;
@@ -99,16 +91,16 @@ public class RedVendedores {
                 '}';
     }
 
-<<<<<<< HEAD
 
-    public boolean verificarUsuario(String usuario, String contrasenia){
-        for (Vendedor vendedor :listaVendedores
-             ) {
-            if(vendedor.verifcarUsuario(usuario, contrasenia)){
+    public Boolean verificarUsuario(String usuario, String contrasenia) {
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.verifcarUsuario(usuario, contrasenia)) {
                 return true;
             }
+        }
+        return false;
+    }
 
-=======
     //--------------------------------------------------------------
 
     /**
@@ -164,7 +156,6 @@ public class RedVendedores {
      * @param estado
      */
     public void actualizarCafe(String nombre2, String codigo , String categoria, double precio, String libras, Estado estado) {
-
         for (Producto producto : listaProductos) {
             if (producto instanceof Cafe){
                 if(producto.getCodigo().equals(codigo)){
@@ -196,21 +187,21 @@ public class RedVendedores {
             }
         }else{
             return false;
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
         }
         return false;
     }
 
-<<<<<<< HEAD
-
     public boolean eliminarUsuario(String cedula) {
-        for (Vendedor vendedor:listaVendedores) {
-            if(vendedor.getCedula().equals(cedula)){
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.getCedula().equals(cedula)) {
                 vendedor.eliminarUsuario();
                 return true;
             }
+        }
+        return false;
+    }
 
-=======
+
     /**
      * metodo para buscar un cafe
      * @param codigo
@@ -327,20 +318,20 @@ public class RedVendedores {
             }
         }else{
             return false;
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
         }
         return false;
     }
 
-<<<<<<< HEAD
+
     public boolean actualizarUsuario(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
-        for (Vendedor vendedor:listaVendedores) {
-            if(vendedor.getCedula().equals(cedula)){
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.getCedula().equals(cedula)) {
                 vendedor.actualizarUsuario(nuevoUsuario, contrasenia);
                 return true;
             }
-
-=======
+        }
+        return false;
+    }
     /**
      * metodo para buscar un helado
      * @param codigo
@@ -364,7 +355,7 @@ public class RedVendedores {
         }
         return helado;
     }
-    //------------------------------------------------------------------------
+                            //------------------------------------------------------------------------
 
     /**
      * metodo para crear una gaseosa
@@ -395,7 +386,6 @@ public class RedVendedores {
         listaProductos.add(gaseosa);
         return gaseosa;
     }
-
 
     /**
      * metodo para verificar si la gaseosa existe
@@ -507,7 +497,6 @@ public class RedVendedores {
         empanada.setPrecio(precio);
         empanada.setEstado(estado);
         empanada.setRelleno(relleno);
-
         if(existeEmpanada(codigo) == true){
             throw new EmpanadaException("La empanada ya existe");
         }
@@ -527,15 +516,10 @@ public class RedVendedores {
                     return true;
                 }
             }
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
         }
         return false;
     }
 
-<<<<<<< HEAD
-
-
-=======
     /**
      * metodo para actualizar una empanada
      * @param nombre2
@@ -555,7 +539,6 @@ public class RedVendedores {
                     producto.setPrecio(precio);
                     producto.setEstado(estado);
                     ((Empanada) producto).setRelleno(relleno);
-
                 }
             }
         }
@@ -583,6 +566,7 @@ public class RedVendedores {
         return false;
     }
 
+
     /**
      * metodo para buscar una empanada por el codigo
      * @param codigo
@@ -606,5 +590,5 @@ public class RedVendedores {
         }
         return empanada;
     }
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
+
 }
