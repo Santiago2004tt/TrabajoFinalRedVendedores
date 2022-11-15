@@ -1,13 +1,12 @@
 package redVendedores.model;
 
-<<<<<<< HEAD
+
 import redVendedores.exceptions.UserException;
-=======
 import redVendedores.exceptions.CafeException;
 import redVendedores.exceptions.EmpanadaException;
 import redVendedores.exceptions.GaseosaException;
 import redVendedores.exceptions.HeladoException;
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
+
 
 import java.util.ArrayList;
 
@@ -99,7 +98,7 @@ public class RedVendedores {
                 '}';
     }
 
-<<<<<<< HEAD
+
 
     public boolean verificarUsuario(String usuario, String contrasenia){
         for (Vendedor vendedor :listaVendedores
@@ -108,7 +107,7 @@ public class RedVendedores {
                 return true;
             }
 
-=======
+
     //--------------------------------------------------------------
 
     /**
@@ -196,12 +195,12 @@ public class RedVendedores {
             }
         }else{
             return false;
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
+
         }
         return false;
     }
 
-<<<<<<< HEAD
+
 
     public boolean eliminarUsuario(String cedula) {
         for (Vendedor vendedor:listaVendedores) {
@@ -210,7 +209,7 @@ public class RedVendedores {
                 return true;
             }
 
-=======
+
     /**
      * metodo para buscar un cafe
      * @param codigo
@@ -327,7 +326,7 @@ public class RedVendedores {
             }
         }else{
             return false;
->>>>>>> e2a9657e4ac0b9aa9de8eb2d3536484c8527ae2a
+
         }
         return false;
     }
