@@ -8,10 +8,17 @@ public class Helado extends Producto {
     /**
      * metodo constructor
      */
-    public Helado(String nombre, String codigo, String categoria, double precio, String tamanio, String sabor) {
-        super(nombre, codigo, categoria, precio);
+    public Helado(String nombre, String codigo, String categoria, double precio, Estado estado, String tamanio, String sabor) {
+        super(nombre, codigo, categoria, precio, estado);
         this.tamanio = tamanio;
         this.sabor = sabor;
+    }
+
+    /**
+     * constructor vacio
+     */
+    public Helado() {
+
     }
 
     /**

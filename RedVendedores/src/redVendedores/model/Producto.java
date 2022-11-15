@@ -9,16 +9,26 @@ public class Producto {
     private String codigo;
     private String categoria;
     private double precio;
+    private Estado estado;
 
     /**
      * Constructor
      */
-    public Producto(String nombre, String codigo, String categoria, double precio) {
+    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.categoria = categoria;
         this.precio = precio;
+        this.estado = estado;
     }
+
+    public Producto() {
+
+    }
+
+
+
+
     /**
      * get and set nombre
      */
@@ -59,6 +69,18 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    /**
+     * get and set the status
+     * @return
+     */
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
     /**
      * has code
      */
@@ -77,6 +99,7 @@ public class Producto {
     /**
      * to string
      */
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -84,6 +107,7 @@ public class Producto {
                 ", codigo='" + codigo + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", precio=" + precio +
+                ", estado=" + estado +
                 '}';
     }
 }
