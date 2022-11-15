@@ -105,9 +105,9 @@ public class RedVendedores {
     }
 
 
-    public boolean eliminarUsuario() {
+    public boolean eliminarUsuario(String cedula) {
         for (Vendedor vendedor:listaVendedores) {
-            if(vendedor != null){
+            if(vendedor.getCedula().equals(cedula)){
                 vendedor.eliminarUsuario();
                 return true;
             }
@@ -116,9 +116,9 @@ public class RedVendedores {
         return false;
     }
 
-    public boolean actualizarVendedor(String nuevoUsuario, String contrasenia) throws UserException {
+    public boolean actualizarUsuario(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
         for (Vendedor vendedor:listaVendedores) {
-            if(vendedor != null){
+            if(vendedor.getCedula().equals(cedula)){
                 vendedor.actualizarUsuario(nuevoUsuario, contrasenia);
                 return true;
             }
@@ -126,4 +126,7 @@ public class RedVendedores {
         }
         return false;
     }
+
+
+
 }

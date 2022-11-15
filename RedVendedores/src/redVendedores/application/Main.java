@@ -27,12 +27,12 @@ public class Main extends Application {
         return red.verificarUsuario(usuario, contrasenia);
     }
 
-    public boolean eliminarUsuario(){
-        return red.eliminarUsuario();
+    public boolean eliminarUsuario(String cedula){
+        return red.eliminarUsuario(cedula);
     }
 
-    public boolean actualizarUsuario(String nuevoUsuario, String contrasenia) throws UserException {
-        return red.actualizarVendedor(nuevoUsuario, contrasenia);
+    public boolean actualizarUsuario(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
+        return red.actualizarUsuario(nuevoUsuario, contrasenia, cedula);
     }
 
 

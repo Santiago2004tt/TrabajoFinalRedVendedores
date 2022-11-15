@@ -57,10 +57,11 @@ public class SignUpController {
 
 
     public void regiserSeller(ActionEvent event) throws IOException {
-        registerSellerAction(event);
+        //registerSellerAction(event);
 
 
     }
+
 
     private void registerSellerAction(ActionEvent event) throws IOException {
         String name = "";
@@ -103,6 +104,7 @@ public class SignUpController {
 
 
     }
+
 
     private boolean verificarCampos(String name, String apellidos, String direccion, String cedula, String password, String user) {
         if(name.equals("")){
