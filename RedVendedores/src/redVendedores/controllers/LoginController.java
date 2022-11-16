@@ -15,11 +15,12 @@ import redVendedores.application.Main;
 
 import java.io.IOException;
 
-
 public class LoginController {
-    Parent root;
-    Scene scene;
-    Stage stage;
+
+    private Main main;
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
 
     @FXML
     private Button loginButton;
@@ -28,17 +29,10 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    private Button signUpButton;
-
-    @FXML
     private TextField userField;
 
-    Main main = new Main();
-
-
     @FXML
-    void logInUser(ActionEvent event) throws IOException {
-        logInEvet(event);
+    void logInUser(ActionEvent event) {
 
     }
 
@@ -84,12 +78,5 @@ public class LoginController {
         return true;
     }
 
-    public void switchToSignUp(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("../views/signUp.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Sign Up");
-        stage.setScene(scene);
-        stage.show();
-    }
 }
+

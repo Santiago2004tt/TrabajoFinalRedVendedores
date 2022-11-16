@@ -20,9 +20,25 @@ public class RedVendedores {
         this.nombre = nombre;
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
-
-
+        inicializarDatos();
     }
+
+    private void inicializarDatos() {
+        Vendedor vendedor = new Vendedor();
+        vendedor.setNombre("pepe");
+        vendedor.setApellido("Martinez");
+        vendedor.setCedula("123");
+        vendedor.setDireccion("en una casa");
+        listaVendedores.add(vendedor);
+
+        Vendedor vendedor1 = new Vendedor();
+        vendedor1.setNombre("miguel");
+        vendedor1.setApellido("garcia");
+        vendedor1.setCedula("7");
+        vendedor1.setDireccion("Waza");
+        listaVendedores.add(vendedor1);
+    }
+
 
     //get and set
 
