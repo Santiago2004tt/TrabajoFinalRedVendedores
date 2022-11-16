@@ -1,10 +1,10 @@
 package redVendedores.model;
 
-<<<<<<< HEAD
+
 import redVendedores.exceptions.*;
-=======
+
 import redVendedores.exception.VendedorException;
->>>>>>> huendy
+
 
 import java.util.ArrayList;
 
@@ -111,7 +111,7 @@ public class RedVendedores {
                 '}';
     }
 
-<<<<<<< HEAD
+
 
     public Boolean verificarUsuario(String usuario, String contrasenia) {
         for (Vendedor vendedor : listaVendedores) {
@@ -160,7 +160,7 @@ public class RedVendedores {
         for (Producto producto : listaProductos) {
             if (producto instanceof Cafe){
                 if(producto.getCodigo().equals(codigo)){
-=======
+
     // CRUD---------VENDEDOR---------------------------------
 
     /**
@@ -199,7 +199,7 @@ public class RedVendedores {
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor instanceof Vendedor){
                 if(vendedor.getCedula().equals(cedula)){
->>>>>>> huendy
+
                     return true;
                 }
             }
@@ -357,7 +357,7 @@ public class RedVendedores {
                     producto.setEstado(estado);
                     ((Helado) producto).setTamanio(tamanio);
                     ((Helado) producto).setSabor(sabor);
-=======
+
      * actualizar datos vendedor
      * @param nombre2
      * @param apellido
@@ -375,14 +375,14 @@ public class RedVendedores {
                     vendedor.setApellido(apellido);
                     vendedor.setDireccion(direccion);
                     vendedor.setTheVendedor(theVendedor);
->>>>>>> huendy
+
                 }
             }
         }
     }
 
     /**
-<<<<<<< HEAD
+
      * metodo para eliminar un helado
      * @param codigo
      * @return
@@ -523,7 +523,7 @@ public class RedVendedores {
                 if(producto instanceof Gaseosa){
                     if(producto.getCodigo().equals(codigo)){
                         listaProductos.remove(producto);
-=======
+
      * delete vendedor
      * @param cedula
      * @return
@@ -535,7 +535,7 @@ public class RedVendedores {
                 if(vendedor instanceof Vendedor){
                     if(vendedor.getCedula().equals(cedula)){
                         listaVendedores.remove(vendedor);
->>>>>>> huendy
+
                         return true;
                     }
                 }
@@ -547,7 +547,7 @@ public class RedVendedores {
     }
 
     /**
-<<<<<<< HEAD
+
      * metodo para buscar una gaseosa
      * @param codigo
      * @return
@@ -685,7 +685,7 @@ public class RedVendedores {
             throw new EmpanadaException("La empanada no se encuentra");
         }
         return empanada;
-=======
+
      * search vendedor
      * @param cedula
      * @return
@@ -701,8 +701,7 @@ public class RedVendedores {
         if(vendedor == null){
             throw new VendedorException("El vendedor no se encuentra");
         }
-        return vendedor;
->>>>>>> huendy
+
     }
 
 }
