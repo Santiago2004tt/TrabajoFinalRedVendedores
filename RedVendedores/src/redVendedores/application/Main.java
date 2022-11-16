@@ -4,21 +4,49 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import redVendedores.controllers.SignUpController;
 import redVendedores.exceptions.UserException;
 import redVendedores.model.RedVendedores;
+import redVendedores.model.Vendedor;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends Application {
+
+    private Stage stage;
 
     RedVendedores red = new RedVendedores("Red Vendedores");
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        //Parent root = FXMLLoader.load(getClass().getResource("../views/signUp.fxml"));
+        //Scene scene = new Scene(root);
+        //stage.setScene(scene);
+        //stage.show();
+        this.stage=stage;
+        this.stage.setTitle("hola");
+        mostrarPanelAdministrador();
 
     }
+
+    private void mostrarPanelAdministrador() {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
+            AnchorPane rootLayout = loader.load();
+            SignUpController controller = loader.getController();
+            controller.setMain(this);
+
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -36,5 +64,7 @@ public class Main extends Application {
     }
 
 
-
+    public ArrayList<Vendedor> obtenerVendedores() {
+        return red.getListaVendedores();
+    }
 }

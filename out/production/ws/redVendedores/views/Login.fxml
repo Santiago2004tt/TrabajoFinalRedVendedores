@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.LoginController">
    <children>
-      <Label layoutX="223.0" layoutY="85.0" prefHeight="38.0" prefWidth="155.0" text="Inicia sesion " textAlignment="CENTER">
+      <Label layoutX="184.0" layoutY="85.0" prefHeight="38.0" prefWidth="255.0" text="Inicia sesion en la Red " textAlignment="CENTER">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="165.0" layoutY="169.0" text="Usuario o nombre:">
+      <Label layoutX="218.0" layoutY="168.0" text="Usuario:">
          <font>
             <Font size="14.0" />
          </font>
@@ -26,12 +26,6 @@
       </Label>
       <TextField fx:id="userField" layoutX="280.0" layoutY="165.0" promptText="user@Example" />
       <Button fx:id="loginButton" layoutX="257.0" layoutY="258.0" mnemonicParsing="false" onAction="#logInUser" text="Iniciar sesion" />
-      <Label layoutX="202.0" layoutY="339.0" text="No tienes cuenta?" textFill="#9a9292" />
-      <Button fx:id="signUpButton" layoutX="308.0" layoutY="335.0" mnemonicParsing="false" onAction="#switchToSignUp" prefHeight="26.0" prefWidth="73.0" text="Registrate">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Button>
       <PasswordField fx:id="passwordField" layoutX="280.0" layoutY="206.0" />
       <Label layoutX="194.0" layoutY="366.0" prefHeight="17.0" prefWidth="114.0" text="Eres administrador?" textFill="#9a9292" />
       <Button layoutX="303.0" layoutY="362.0" mnemonicParsing="false" text="Ingresa aqui" />
