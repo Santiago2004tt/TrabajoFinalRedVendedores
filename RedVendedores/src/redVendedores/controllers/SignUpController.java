@@ -13,10 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import redVendedores.application.Main;
+import redVendedores.exception.VendedorException;
+import redVendedores.model.Estado;
+import redVendedores.model.Usuario;
 import redVendedores.model.Vendedor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class SignUpController {
 
@@ -77,7 +81,32 @@ public class SignUpController {
 
     @FXML
     void actualizarVendedor(ActionEvent event) {
+        actualizarVendedorAction();
+    }
 
+    private void actualizarVendedorAction() {
+        String nombre = txtNombre.getText();
+        String apellido = txtApellidos.getText();
+        String direccion = txtDireccion.getText();
+        String cedula = txtCedula.getText();
+        String usuario = txtUsuario.getText();
+        String contrasenia = txtClave.getText();
+
+
+        if(vendedorSeleccionado == null){
+            mostrarMensaje("Notificacion vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
+        }else{
+            //2. Validar la informaci�n
+            if(verificarCampos(nombre, apellido, direccion, cedula,contrasenia,usuario) == true){
+                Usuario usuarioNuevo = new Usuario(usuario, contrasenia);
+                main.actualizarVendedor(vendedorSeleccionado.getCedula(),nombre, apellido, direccion, cedula,usuarioNuevo);
+                tableListaVendedores.refresh();
+            }else{
+                mostrarMensaje("Notificaci�n Estudiante", "Estudiante no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
+
+            }
+
+        }
     }
 
     @FXML
@@ -91,53 +120,67 @@ public class SignUpController {
     }
 
     @FXML
-    void crearVendedor(ActionEvent event) {
-        //crearVendedorAction();
+    void crearVendedor(ActionEvent event) throws VendedorException {
+        crearVendedorAction();
     }
-/**
-    private void crearVendedorAction() {
-        String name = "";
-        String apellidos = "";
-        String cedula = "";
-        String direccion = "";
-        String password = "";
-        String user = "";
-        name = txtNombre.getText();
-        apellidos = txtApellidos.getText();
-        cedula = txtCedula.getText();
-        direccion = txtDireccion.getText();
-        password = txtClave.getText();
-        user =txtUsuario.getText();
-        if(verificarCampos(name, apellidos, direccion, cedula, password, user)){
-            if(main.vendedorExiste(cedula)){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Atencion");
-                alert.setContentText("El vendedor que intentas crear ya existe");
-                alert.showAndWait();
-            }else{
-                Vendedor nuevoVendedor = main.crearVendedor(name, apellidos, direccion, cedula, password, user);
-                listaVendedorData.add(nuevoVendedor);
-                if(nuevoVendedor != null){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Listo");
-                    alert.setContentText("Vendedor creado exitosamente");
-                    alert.showAndWait();
-                }
+
+    private void crearVendedorAction() throws VendedorException {
+        String name = txtNombre.getText();
+        String apellidos = txtApellidos.getText();
+        String cedula = txtCedula.getText();
+        String direccion = txtDireccion.getText();
+        String password = txtClave.getText();
+        String user =txtUsuario.getText();
+        Usuario usuario = new Usuario(user, password);
+        if(verificarCampos(name, apellidos, direccion, cedula, password, user) == true){
+
+            Vendedor vendedor = null;
+            try {
+                vendedor = main.crearVendedor(name, apellidos, cedula, direccion, usuario);
+                listaVendedorData.add(vendedor);
+                mostrarMensaje("Notificacion vendedor", "Vendedor registrado", "El Vendedor se ha registrado con exito", Alert.AlertType.INFORMATION);
+                limpiarDatos();
+            } catch (VendedorException e){
+                mostrarMensaje("Notificacion vendedor", "El vendedor no registrado", "El vendedor con cedula "+cedula+" ya se encuentra registrado", Alert.AlertType.ERROR);
             }
-
-
-        }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Atencion");
-            alert.setContentText("Completa todos los campos para poder continuar");
-            alert.showAndWait();
         }
     }
-*/
+
     @FXML
     void eliminarVendedor(ActionEvent event) {
+        eliminarVendedorAction();
+    }
+
+    private void eliminarVendedorAction() {
+        if(vendedorSeleccionado == null){
+            mostrarMensaje("Notificacion Estudiante", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
+        }else{
+            boolean eliminado = main.eliminarVendedor(vendedorSeleccionado.getCedula());
+            if(eliminado){
+                listaVendedorData.remove(vendedorSeleccionado);
+                vendedorSeleccionado = null;
+                limpiarDatos();
+                tableListaVendedores.refresh();
+                tableListaVendedores.getSelectionModel().clearSelection();
+                mostrarMensaje("Notificacion vendedor", "Vendedor eliminado", "El vendedor ha sido eliminado", Alert.AlertType.ERROR);
+            }else{
+                mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+
+            }
+        }
 
     }
+
+    private void limpiarDatos() {
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtCedula.setText("");
+        txtDireccion.setText("");
+        txtUsuario.setText("");
+        txtClave.setText("");
+    }
+
+
 
     @FXML
     void initialize(){
@@ -190,6 +233,15 @@ public class SignUpController {
         }
         return true;
     }
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+
 
 
 }
