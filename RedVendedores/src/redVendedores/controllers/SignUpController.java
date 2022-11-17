@@ -241,7 +241,4 @@ public class SignUpController {
         alert.setContentText(contenido);
         alert.showAndWait();
     }
-
-
-
 }
