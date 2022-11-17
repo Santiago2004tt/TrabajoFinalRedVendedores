@@ -598,13 +598,13 @@ public class RedVendedores {
      * @return
      * @throws VendedorException
      */
-    public Vendedor nuevoVendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor) throws VendedorException {
+    public Vendedor nuevoVendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) throws VendedorException {
         Vendedor vendedor = new Vendedor();
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
-        vendedor.setTheVendedor(theVendedor);
+        vendedor.setUsuario(usuario);
 
         if(existeVendedor(cedula) == true){
             throw new VendedorException("El vendedor ya existe");
@@ -618,7 +618,7 @@ public class RedVendedores {
      * @param cedula
      * @return
      */
-    private boolean existeVendedor(String cedula) {
+    public boolean existeVendedor(String cedula) {
 
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor instanceof Vendedor){
@@ -640,14 +640,14 @@ public class RedVendedores {
      * @param theVendedor
      */
     public void actualizarVendedor(String nombre2, String apellido, String cedula,
-                                   String direccion, Vendedor theVendedor) {
+                                   String direccion, Usuario usuario) {
 
         for (Vendedor vendedor : listaVendedores) {
             if(vendedor.getCedula().equals(cedula)){
                 vendedor.setNombre(nombre2);
                 vendedor.setApellido(apellido);
                 vendedor.setDireccion(direccion);
-                vendedor.setTheVendedor(theVendedor);
+                vendedor.setUsuario(usuario);
 
             }
         }
@@ -658,7 +658,7 @@ public class RedVendedores {
      * @param cedula
      * @return
      */
-    public boolean eliminarVendedor (String cedula){
+    public boolean eliminarVendedor (String cedula) {
 
         if (existeVendedor(cedula)) {
             for (Vendedor vendedor : listaVendedores) {
@@ -669,8 +669,6 @@ public class RedVendedores {
                     }
                 }
             }
-        } else {
-            return false;
         }
         return false;
     }
