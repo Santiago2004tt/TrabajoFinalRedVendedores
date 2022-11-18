@@ -199,6 +199,8 @@ public class SignUpController {
         txtApellidos.setText(vendedorSeleccionado.getApellido());
         txtCedula.setText(vendedorSeleccionado.getCedula());
         txtDireccion.setText(vendedorSeleccionado.getDireccion());
+        txtUsuario.setText(vendedorSeleccionado.getUsuario().getUsuario());
+        txtClave.setText(vendedorSeleccionado.getUsuario().getContrasenia());;
     }
 
     public void setMain(Main main){
