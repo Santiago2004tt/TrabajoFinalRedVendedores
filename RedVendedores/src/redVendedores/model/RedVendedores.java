@@ -30,6 +30,8 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
+        Usuario usuario = new Usuario("pepito","pepe123");
+        vendedor.setUsuario(usuario);
         listaVendedores.add(vendedor);
 
         Vendedor vendedor1 = new Vendedor();
@@ -37,6 +39,8 @@ public class RedVendedores {
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
+        Usuario usuario1 = new Usuario("Pachito","elpacho123");
+        vendedor1.setUsuario(usuario);
         listaVendedores.add(vendedor1);
     }
 

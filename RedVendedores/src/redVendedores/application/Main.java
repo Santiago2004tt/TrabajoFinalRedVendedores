@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import redVendedores.controllers.LoginController;
 import redVendedores.controllers.SignUpController;
 import redVendedores.exception.VendedorException;
 import redVendedores.exceptions.UserException;
@@ -35,11 +36,11 @@ public class Main extends Application {
             //carga el fxml
             FXMLLoader loader = new FXMLLoader();
             //localiza el fxml
-            loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
+            loader.setLocation(Main.class.getResource("../views/Login.fxml"));
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
-            SignUpController controller = loader.getController();
-            controller.setMain(this);
+            LoginController controller = loader.getController();
+            //controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
