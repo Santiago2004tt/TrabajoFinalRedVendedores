@@ -3,10 +3,7 @@ package redVendedores.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.AccessibleAction;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import redVendedores.application.Main;
 import redVendedores.model.Administrador;
 import redVendedores.model.Vendedor;
@@ -46,12 +43,18 @@ public class LoginAdministradorController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Datos incorrectos");
                 alert.setContentText("Por favor verifica tus datos y vuelve a intentar");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Atencion");
             alert.setContentText("Completa todos los campos para poder continuar");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
     }
