@@ -1,5 +1,6 @@
 package redVendedores.model;
 
+import javafx.scene.image.Image;
 import redVendedores.exception.ProductoException;
 import redVendedores.exceptions.*;
 import redVendedores.exception.VendedorException;
@@ -30,8 +31,12 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
+        vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
         Usuario usuario = new Usuario("pepito","pepe123");
         vendedor.setUsuario(usuario);
+        vendedor.setListaProductos(listaProductos);
         listaVendedores.add(vendedor);
 
         Vendedor vendedor1 = new Vendedor();
@@ -39,9 +44,16 @@ public class RedVendedores {
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+        ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
+        listaVendedoresAliados.add(vendedor);
+        vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
         Usuario usuario1 = new Usuario("Pachito","elpacho123");
-        vendedor1.setUsuario(usuario);
+        vendedor1.setUsuario(usuario1);
+        vendedor1.setListaProductos(listaProductos2);
         listaVendedores.add(vendedor1);
+
+
     }
 
     //get and set
@@ -69,8 +81,8 @@ public class RedVendedores {
      *
      * @return
      */
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
+    public ArrayList<Producto> getListaProductos(Vendedor vendedor) {
+        return vendedor.getListaProductos();
     }
 
     /**
@@ -122,30 +134,30 @@ public class RedVendedores {
     //--------------------------------------------------------------
 
     /**
-     * metodo para crear un cafe
-     * @param nombre2
+     * metodo para crear un producto
+     * @param nombre
      * @param codigo
      * @param categoria
      * @param precio
-     * @param libras
-     * @param estado
-     * @return
-     * @throws CafeException
-     */
-    public Cafe crearCafe(String nombre2, String codigo , String categoria, double precio, String libras, Estado estado) throws ProductoException {
-        Cafe cafe = new Cafe();
-        cafe.setNombre(nombre);
-        cafe.setCodigo(codigo);
-        cafe.setCategoria(categoria);
-        cafe.setPrecio(precio);
-        cafe.setLibras(libras);
-        cafe.setEstado(estado);
 
-        if(existeCafe(codigo) == true){
-            throw new ProductoException("El cafe ya existe");
+     * @return
+     * @throws ProductoException
+     */
+    public boolean crearProducto(String nombre, String codigo , String categoria, double precio, Image image, Vendedor vendedor) throws ProductoException {
+        Producto producto = new Producto();
+        producto.setNombre(nombre);
+        producto.setCodigo(codigo);
+        producto.setCategoria(categoria);
+        producto.setPrecio(precio);
+        producto.setEstado(Estado.PUBLICADO);
+        producto.setImage(image);
+
+
+        if(existeProducto(codigo, vendedor) == true){
+            throw new ProductoException("El producto ya existe");
         }
-        listaProductos.add(cafe);
-        return cafe;
+        vendedor.getListaProductos().add(producto);
+        return true;
     }
 
     /**
@@ -154,19 +166,18 @@ public class RedVendedores {
      * @param codigo
      * @return
      */
-    private boolean existeCafe(String codigo) throws ProductoException {
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Cafe) {
-                if (producto.getCodigo().equals(codigo)) {
-                    return true;
-                }
+    private boolean existeProducto(String codigo, Vendedor vendedor) throws ProductoException {
+        for (Producto producto : vendedor.getListaProductos()) {
+            if (producto.getCodigo().equals(codigo)) {
+                return true;
             }
+
         }
         return false;
     }
 
     /**
-     * Metodo para actualizar un producto de cafe
+     * Metodo para actualizar un producto
      * @param nombre2
      * @param codigo
      * @param categoria
@@ -174,35 +185,35 @@ public class RedVendedores {
      * @param libras
      * @param estado
      */
-    public void actualizarCafe(String nombre2, String codigo , String categoria, double precio, String libras, Estado estado) {
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Cafe){
-                if(producto.getCodigo().equals(codigo)){
-                    producto.setNombre(nombre2);
-                    producto.setCategoria(categoria);
-                    producto.setPrecio(precio);
-                    ((Cafe) producto).setLibras(libras);
-                    producto.setEstado(estado);
-                }
+    public boolean actualizarProducto(String nombre, String codigo , String categoria, double precio, Estado estado, Vendedor vendedor, Image image) {
+        for (Producto producto : vendedor.getListaProductos()){
+            if(producto.getCodigo().equals(codigo)){
+                producto.setNombre(nombre);
+                producto.setCategoria(categoria);
+                producto.setPrecio(precio);
+                producto.setEstado(estado);
+                producto.setImage(image);
+                return true;
             }
+
         }
+        return false;
     }
 
     /**
-     * metodo para eliminar un cafe
+     * metodo para eliminar un producto
      * @param codigo
      * @return
      */
-    public boolean eliminarCafe(String codigo) throws ProductoException {
+    public boolean eliminarProducto(String codigo, Vendedor vendedor) throws ProductoException {
 
-        if(existeCafe(codigo)){
-            for (Producto producto : listaProductos) {
-                if(producto instanceof Cafe){
-                    if(producto.getCodigo().equals(codigo)){
-                        listaProductos.remove(producto);
-                        return true;
-                    }
+        if(existeProducto(codigo, vendedor)){
+            for (Producto producto : vendedor.getListaProductos()) {
+                if(producto.getCodigo().equals(codigo)){
+                    vendedor.getListaProductos().remove(producto);
+                    return true;
                 }
+
             }
         }else{
             return false;
@@ -211,384 +222,28 @@ public class RedVendedores {
     }
 
     /**
-     * metodo para buscar un cafe
+     * metodo para buscar un producto
      * @param codigo
      * @return
-     * @throws CafeException
+     * @throws ProductoException
      */
-    public Cafe buscarCafe(String codigo) throws ProductoException {
-        Cafe cafe = null;
-        if(existeCafe(codigo)){
-            for (Producto producto : listaProductos) {
-                if(producto instanceof Cafe){
-                    if(producto.getCodigo().equals(codigo)){
-                        cafe = (Cafe) producto;
-                        return cafe;
-                    }
+    public Producto buscarProducto(String codigo, Vendedor vendedor) throws ProductoException {
+        Producto productoEncontrado = null;
+        if(existeProducto(codigo, vendedor)){
+            for (Producto producto : vendedor.getListaProductos()) {
+                if(producto.getCodigo().equals(codigo)){
+                    productoEncontrado = producto;
+                    return productoEncontrado;
                 }
             }
         }
-        if(cafe == null){
+        if(productoEncontrado == null){
             throw new ProductoException("El cafe no se encuentra");
         }
-        return cafe;
-    }
-
-    //--------------------------------Crud empanada------------------------
-
-    /**
-     * metodo para crear una empanada
-     * @param nombre2
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param relleno
-     * @return
-     * @throws EmpanadaException
-     */
-    public Empanada crearEmpanada (String nombre2, String codigo, String categoria, double precio, Estado estado, String relleno) throws ProductoException {
-
-        Empanada empanada = new Empanada();
-        empanada.setNombre(nombre);
-        empanada.setCodigo(codigo);
-        empanada.setCategoria(categoria);
-        empanada.setPrecio(precio);
-        empanada.setEstado(estado);
-        empanada.setRelleno(relleno);
-        if (existeEmpanada(codigo) == true) {
-            throw new ProductoException("La empanada ya existe");
-        }
-        listaProductos.add(empanada);
-        return empanada;
-    }
-
-    /**
-     * metodo para verificar si una empanada existe
-     * @param codigo
-     * @return
-     */
-    private boolean existeEmpanada (String codigo){
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Empanada) {
-                if (producto.getCodigo().equals(codigo)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * metodo para actualizar una empanada
-     * @param nombre2
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param relleno
-     */
-    public void actualizarEmpanada (String nombre2, String codigo, String categoria, double precio, Estado estado, String relleno){
-
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Empanada) {
-                if (producto.getCodigo().equals(codigo)) {
-                    producto.setNombre(nombre2);
-                    producto.setCategoria(categoria);
-                    producto.setPrecio(precio);
-                    producto.setEstado(estado);
-                    ((Empanada) producto).setRelleno(relleno);
-                }
-            }
-        }
-    }
-
-    /**
-     * metodo para eliminar una empanada
-     * @param codigo
-     * @return
-     */
-    public boolean eliminarEmpanada (String codigo){
-
-        if (existeEmpanada(codigo)) {
-            for (Producto producto : listaProductos) {
-                if (producto instanceof Empanada) {
-                    if (producto.getCodigo().equals(codigo)) {
-                        listaProductos.remove(producto);
-                        return true;
-                    }
-                }
-            }
-        } else {
-            return false;
-        }
-        return false;
-    }
-
-    /**
-     * metodo para buscar una empanada por el codigo
-     * @param codigo
-     * @return
-     * @throws EmpanadaException
-     */
-    public Empanada buscarEmpanada (String codigo) throws ProductoException {
-        Empanada empanada = null;
-        if (existeEmpanada(codigo)) {
-            for (Producto producto : listaProductos) {
-                if (producto instanceof Empanada) {
-                    if (producto.getCodigo().equals(codigo)) {
-                        empanada = (Empanada) producto;
-                        return empanada;
-                    }
-                }
-            }
-        }
-        if (empanada == null) {
-            throw new ProductoException("La empanada no se encuentra");
-        }
-        return empanada;
-    }
-
-    //----------------------------Crud helado--------------------
-
-    /**
-     * metodo para crear un helado
-     * @param nombre2
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param tamanio
-     * @param sabor
-     * @return
-     * @throws HeladoException
-     */
-    public Helado crearHelado(String nombre2, String codigo , String categoria, double precio, Estado estado, String tamanio, String sabor) throws ProductoException{
-
-        Helado helado = new Helado();
-        helado.setNombre(nombre);
-        helado.setCodigo(codigo);
-        helado.setCategoria(categoria);
-        helado.setPrecio(precio);
-        helado.setEstado(estado);
-        helado.setTamanio(tamanio);
-        helado.setSabor(sabor);
-
-        if(existeHelado(codigo) == true){
-            throw new ProductoException("El helado ya existe");
-        }
-        listaProductos.add(helado);
-        return helado;
-    }
-
-    /**
-     * metodo para verificar si existe un helado
-     * @param codigo
-     * @return
-     */
-    private boolean existeHelado(String codigo) {
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Helado){
-                if(producto.getCodigo().equals(codigo)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * metodo para actualizar un helado
-     * @param nombre2
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param sabor
-     * @param tamanio
-     */
-    public void actualizarHelado(String nombre2, String codigo , String categoria, double precio, Estado estado, String sabor, String tamanio) {
-
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Helado) {
-                if (producto.getCodigo().equals(codigo)) {
-                    producto.setNombre(nombre2);
-                    producto.setCategoria(categoria);
-                    producto.setPrecio(precio);
-                    producto.setEstado(estado);
-                    ((Helado) producto).setTamanio(tamanio);
-                    ((Helado) producto).setSabor(sabor);
-                }
-            }
-        }
-    }
-
-    /**
-
-     * metodo para eliminar un helado
-     * @param codigo
-     * @return
-     */
-    public boolean eliminarHelado(String codigo) {
-
-        if(existeHelado(codigo)){
-            for (Producto producto : listaProductos) {
-                if(producto instanceof Helado){
-                    if(producto.getCodigo().equals(codigo)){
-                        listaProductos.remove(producto);
-                        return true;
-                    }
-                }
-            }
-        }else{
-            return false;
-        }
-        return false;
-    }
-
-    /**
-     * metodo para buscar un helado
-     * @param codigo
-     * @return
-     * @throws HeladoException
-     */
-    public Helado buscarHelado(String codigo) throws HeladoException{
-        Helado helado = null;
-        if(existeHelado(codigo)){
-            for (Producto producto : listaProductos) {
-                if(producto instanceof Helado){
-                    if(producto.getCodigo().equals(codigo)){
-                        helado = (Helado) producto;
-                        return helado;
-                    }
-                }
-            }
-        }
-        if(helado == null){
-            throw new HeladoException("El helado no se encuentra");
-        }
-        return helado;
-    }
-
-    //----------------------------------------Crud gaseosa--------------------------------
-
-    /**
-     * metodo para crear una gaseosa
-     * @param nombre2
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param litros
-     * @param sabor
-     * @return
-     * @throws GaseosaException
-     */
-    public Gaseosa crearGaseosa(String nombre2, String codigo , String categoria, double precio, Estado estado, String litros, String sabor) throws GaseosaException {
-
-        Gaseosa gaseosa = new Gaseosa();
-        gaseosa.setNombre(nombre);
-        gaseosa.setCodigo(codigo);
-        gaseosa.setCategoria(categoria);
-        gaseosa.setPrecio(precio);
-        gaseosa.setEstado(estado);
-        gaseosa.setLitros(litros);
-        gaseosa.setSabor(sabor);
-
-        if(existeGaseosa(codigo) == true){
-            throw new GaseosaException("El helado ya existe");
-        }
-        listaProductos.add(gaseosa);
-        return gaseosa;
-    }
-
-    /**
-     * metodo para verificar si la gaseosa existe
-     * @param codigo
-     * @return
-     */
-    private boolean existeGaseosa(String codigo) {
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Gaseosa){
-                if(producto.getCodigo().equals(codigo)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * metodo para actualizar una gaseosa
-     * @param nombre2
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param sabor
-     * @param litros
-     */
-    public void actualizarGaseosa(String nombre2, String codigo , String categoria, double precio, Estado estado, String sabor, String litros) {
-
-        for (Producto producto : listaProductos) {
-            if (producto instanceof Gaseosa){
-                if(producto.getCodigo().equals(codigo)){
-                    producto.setNombre(nombre2);
-                    producto.setCategoria(categoria);
-                    producto.setPrecio(precio);
-                    producto.setEstado(estado);
-                    ((Gaseosa) producto).setSabor(sabor);
-                    ((Gaseosa) producto).setLitros(litros);
-                }
-            }
-        }
-    }
-
-    /**
-     * metodo para eliminar una gaseosa
-     * @param codigo
-     * @return
-     */
-    public boolean eliminarGaseosa(String codigo){
-
-        if (existeGaseosa(codigo)) {
-            for (Producto producto : listaProductos) {
-                if (producto instanceof Gaseosa) {
-                    if (producto.getCodigo().equals(codigo)) {
-                        listaProductos.remove(producto);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return productoEncontrado;
     }
 
 
-
-    /**
-     * metodo para buscar una gaseosa
-     * @param codigo
-     * @return
-     * @throws GaseosaException
-     */
-    public Gaseosa buscarGaseosa (String codigo) throws GaseosaException {
-        Gaseosa gaseosa = null;
-        if (existeGaseosa(codigo)) {
-            for (Producto producto : listaProductos) {
-                if (producto instanceof Gaseosa) {
-                    if (producto.getCodigo().equals(codigo)) {
-                        gaseosa = (Gaseosa) producto;
-                        return gaseosa;
-                    }
-                }
-            }
-        }
-        if (gaseosa == null) {
-            throw new GaseosaException("La gaseosa no se encuentra");
-        }
-        return gaseosa;
-    }
 
     // CRUD---------VENDEDOR---------------------------------
 
@@ -598,17 +253,20 @@ public class RedVendedores {
      * @param apellido
      * @param cedula
      * @param direccion
-     * @param theVendedor
      * @return
      * @throws VendedorException
      */
     public Vendedor nuevoVendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) throws VendedorException {
         Vendedor vendedor = new Vendedor();
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
         vendedor.setUsuario(usuario);
+        vendedor.setListaProductos(listaProductos);
+        vendedor.setListaVendedoresAliados(listaVendedoresAliados);
 
         if(existeVendedor(cedula) == true){
             throw new VendedorException("El vendedor ya existe");
@@ -641,7 +299,6 @@ public class RedVendedores {
      * @param apellido
      * @param cedula
      * @param direccion
-     * @param theVendedor
      */
     public void actualizarVendedor(String nombre2, String apellido, String cedula,
                                    String direccion, Usuario usuario) {
@@ -716,6 +373,21 @@ public class RedVendedores {
             }
         }
         return false;
+    }
+
+    public Vendedor obtenerVendedor(String user, String password) {
+        Vendedor vendedorEncontrado = null;
+        for (Vendedor vendedor:listaVendedores) {
+            if (vendedor.verificarUsuario(user, password)){
+                vendedorEncontrado = vendedor;
+                break;
+            }
+        }
+        return vendedorEncontrado;
+    }
+
+    public ArrayList<Vendedor> obtenerlistaVendedoresAliados(Vendedor vendedor) {
+        return vendedor.getListaVendedoresAliados();
     }
 
     //-----------------------------------------------------------------------------------

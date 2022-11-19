@@ -14,6 +14,8 @@ public class Vendedor {
     private Vendedor theVendedor;
     private ArrayList<Vendedor> listaVendedoresAliados;
 
+    private ArrayList<Producto> listaProductos;
+
     private Muro muro;
 
     private Usuario user;
@@ -36,6 +38,7 @@ public class Vendedor {
         this.theVendedor = theVendedor;
         this.muro = muro;
         this.user = usuario;
+        listaProductos = new ArrayList<Producto>();
         listaVendedoresAliados = new ArrayList<Vendedor>();
     }
 
@@ -155,6 +158,23 @@ public class Vendedor {
      */
     public void setUsuario(Usuario usuario) {
         this.user = usuario;
+    }
+
+    /**
+     * lista productos getter method
+     * @return
+     */
+    public ArrayList<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+
+    /**
+     * listaProductos setter method
+     * @param listaProductos
+     */
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
     }
 
     /**
@@ -302,5 +322,11 @@ public class Vendedor {
     }
 
 
+    public boolean verificarUsuario(String usuario, String password) {
 
+        if(user.getUsuario().equals(usuario)&&user.getContrasenia().equals(password)){
+            return true;
+        }
+        return false;
+    }
 }

@@ -133,7 +133,6 @@ public class SignUpController {
         String user =txtUsuario.getText();
         Usuario usuario = new Usuario(user, password);
         if(verificarCampos(name, apellidos, direccion, cedula, password, user) == true){
-
             Vendedor vendedor = null;
             try {
                 vendedor = main.crearVendedor(name, apellidos, cedula, direccion, usuario);
@@ -243,4 +242,6 @@ public class SignUpController {
         alert.setContentText(contenido);
         alert.showAndWait();
     }
+
+
 }
