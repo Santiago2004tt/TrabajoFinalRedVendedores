@@ -11,12 +11,35 @@ public class Vendedor extends Usuario {
     private Vendedor theVendedor;
     private ArrayList<Vendedor> listaVendedoresAliados;
 
+    private ArrayList<Producto> listaProductos;
+
     private Muro muro;
 
     private Cuenta cuenta;
 
+<<<<<<< HEAD
+    /**
+     * Constructor method for Vendedor class
+     * @param nombre
+     * @param apellido
+     * @param cedula
+     * @param direccion
+     * @param theVendedor
+     * @param usuario
+     */
+    public Vendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor, Usuario usuario, Muro muro) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.theVendedor = theVendedor;
+        this.muro = muro;
+        this.user = usuario;
+        listaProductos = new ArrayList<Producto>();
+=======
     public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
         super(nombre, apellido, cedula, direccion, usuario);
+>>>>>>> master
         listaVendedoresAliados = new ArrayList<Vendedor>();
     }
 
@@ -40,6 +63,46 @@ public class Vendedor extends Usuario {
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
+<<<<<<< HEAD
+    /**
+     * Usuario getter method
+     * @return
+     */
+    public Usuario getUsuario() {
+        return user;
+    }
+
+    /**
+     * Usuario setter method
+     * @param usuario
+     */
+    public void setUsuario(Usuario usuario) {
+        this.user = usuario;
+    }
+
+    /**
+     * lista productos getter method
+     * @return
+     */
+    public ArrayList<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+
+    /**
+     * listaProductos setter method
+     * @param listaProductos
+     */
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    /**
+     * Muro getter method
+     * @return
+     */
+=======
+>>>>>>> master
     public Muro getMuro() {
         return muro;
     }
@@ -152,4 +215,15 @@ public class Vendedor extends Usuario {
 
     }
 
+<<<<<<< HEAD
+
+    public boolean verificarUsuario(String usuario, String password) {
+
+        if(user.getUsuario().equals(usuario)&&user.getContrasenia().equals(password)){
+            return true;
+        }
+        return false;
+    }
+=======
+>>>>>>> master
 }
