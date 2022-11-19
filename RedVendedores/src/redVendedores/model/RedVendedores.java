@@ -1,5 +1,10 @@
 package redVendedores.model;
 
+<<<<<<< HEAD
+import javafx.scene.image.Image;
+import redVendedores.exception.ProductoException;
+=======
+>>>>>>> master
 import redVendedores.exceptions.*;
 import redVendedores.exceptions.VendedorException;
 import java.util.ArrayList;
@@ -33,9 +38,18 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
+<<<<<<< HEAD
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
+        vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
+        Usuario usuario = new Usuario("pepito","pepe123");
+        vendedor.setUsuario(usuario);
+        vendedor.setListaProductos(listaProductos);
+=======
         Cuenta cuenta = new Cuenta("pepito","pepe123");
         vendedor.setCuenta(cuenta);
         listaCuentas.add(cuenta);
+>>>>>>> master
         listaVendedores.add(vendedor);
 
         Vendedor vendedor1 = new Vendedor();
@@ -43,10 +57,22 @@ public class RedVendedores {
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
+<<<<<<< HEAD
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+        ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
+        listaVendedoresAliados.add(vendedor);
+        vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
+        Usuario usuario1 = new Usuario("Pachito","elpacho123");
+        vendedor1.setUsuario(usuario1);
+        vendedor1.setListaProductos(listaProductos2);
+=======
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
+>>>>>>> master
         listaVendedores.add(vendedor1);
+
+
     }
 
     //get and set
@@ -74,8 +100,8 @@ public class RedVendedores {
      *
      * @return
      */
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
+    public ArrayList<Producto> getListaProductos(Vendedor vendedor) {
+        return vendedor.getListaProductos();
     }
 
     /**
@@ -124,6 +150,122 @@ public class RedVendedores {
         return false;
     }
 
+<<<<<<< HEAD
+    //--------------------------------------------------------------
+
+    /**
+     * metodo para crear un producto
+     * @param nombre
+     * @param codigo
+     * @param categoria
+     * @param precio
+
+     * @return
+     * @throws ProductoException
+     */
+    public boolean crearProducto(String nombre, String codigo , String categoria, double precio, Image image, Vendedor vendedor) throws ProductoException {
+        Producto producto = new Producto();
+        producto.setNombre(nombre);
+        producto.setCodigo(codigo);
+        producto.setCategoria(categoria);
+        producto.setPrecio(precio);
+        producto.setEstado(Estado.PUBLICADO);
+        producto.setImage(image);
+
+
+        if(existeProducto(codigo, vendedor) == true){
+            throw new ProductoException("El producto ya existe");
+        }
+        vendedor.getListaProductos().add(producto);
+        return true;
+    }
+
+    /**
+     * metodo para verificar si el cafe existe o no
+     *
+     * @param codigo
+     * @return
+     */
+    private boolean existeProducto(String codigo, Vendedor vendedor) throws ProductoException {
+        for (Producto producto : vendedor.getListaProductos()) {
+            if (producto.getCodigo().equals(codigo)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * Metodo para actualizar un producto
+     * @param nombre2
+     * @param codigo
+     * @param categoria
+     * @param precio
+     * @param libras
+     * @param estado
+     */
+    public boolean actualizarProducto(String nombre, String codigo , String categoria, double precio, Estado estado, Vendedor vendedor, Image image) {
+        for (Producto producto : vendedor.getListaProductos()){
+            if(producto.getCodigo().equals(codigo)){
+                producto.setNombre(nombre);
+                producto.setCategoria(categoria);
+                producto.setPrecio(precio);
+                producto.setEstado(estado);
+                producto.setImage(image);
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * metodo para eliminar un producto
+     * @param codigo
+     * @return
+     */
+    public boolean eliminarProducto(String codigo, Vendedor vendedor) throws ProductoException {
+
+        if(existeProducto(codigo, vendedor)){
+            for (Producto producto : vendedor.getListaProductos()) {
+                if(producto.getCodigo().equals(codigo)){
+                    vendedor.getListaProductos().remove(producto);
+                    return true;
+                }
+
+            }
+        }else{
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * metodo para buscar un producto
+     * @param codigo
+     * @return
+     * @throws ProductoException
+     */
+    public Producto buscarProducto(String codigo, Vendedor vendedor) throws ProductoException {
+        Producto productoEncontrado = null;
+        if(existeProducto(codigo, vendedor)){
+            for (Producto producto : vendedor.getListaProductos()) {
+                if(producto.getCodigo().equals(codigo)){
+                    productoEncontrado = producto;
+                    return productoEncontrado;
+                }
+            }
+        }
+        if(productoEncontrado == null){
+            throw new ProductoException("El cafe no se encuentra");
+        }
+        return productoEncontrado;
+    }
+
+
+=======
+>>>>>>> master
 
     // CRUD---------VENDEDOR---------------------------------
 
@@ -133,17 +275,24 @@ public class RedVendedores {
      * @param apellido
      * @param cedula
      * @param direccion
-     * @param theVendedor
      * @return
      * @throws VendedorException
      */
     public Vendedor nuevoVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws VendedorException {
         Vendedor vendedor = new Vendedor();
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
+<<<<<<< HEAD
+        vendedor.setUsuario(usuario);
+        vendedor.setListaProductos(listaProductos);
+        vendedor.setListaVendedoresAliados(listaVendedoresAliados);
+=======
         vendedor.setCuenta(cuenta);
+>>>>>>> master
 
         if(existeVendedor(cedula) == true){
             throw new VendedorException("El vendedor ya existe");
@@ -175,7 +324,6 @@ public class RedVendedores {
      * @param apellido
      * @param cedula
      * @param direccion
-     * @param theVendedor
      */
     public void actualizarVendedor(String nombre2, String apellido, String cedula,
                                    String direccion) {
@@ -250,6 +398,23 @@ public class RedVendedores {
         return false;
     }
 
+<<<<<<< HEAD
+    public Vendedor obtenerVendedor(String user, String password) {
+        Vendedor vendedorEncontrado = null;
+        for (Vendedor vendedor:listaVendedores) {
+            if (vendedor.verificarUsuario(user, password)){
+                vendedorEncontrado = vendedor;
+                break;
+            }
+        }
+        return vendedorEncontrado;
+    }
+
+    public ArrayList<Vendedor> obtenerlistaVendedoresAliados(Vendedor vendedor) {
+        return vendedor.getListaVendedoresAliados();
+    }
+
+=======
     public Cuenta crearCuenta(String user, String password) throws UserException {
         Cuenta cuenta = new Cuenta();
         cuenta.setUsuario(user);
@@ -272,6 +437,7 @@ public class RedVendedores {
     }
 
 
+>>>>>>> master
     //-----------------------------------------------------------------------------------
 
 

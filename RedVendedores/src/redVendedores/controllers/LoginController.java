@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import redVendedores.application.Main;
+import redVendedores.model.Vendedor;
 
 import java.io.IOException;
 
@@ -32,7 +33,8 @@ public class LoginController {
     private TextField userField;
 
     @FXML
-    void logInUser(ActionEvent event) {
+    void logInUser(ActionEvent event) throws IOException {
+        logInEvet(event);
 
     }
 
@@ -43,11 +45,12 @@ public class LoginController {
         password = passwordField.getText();
         if(verificarCampos(user, password)){
             if(main.verificarUsuario(user, password)){
-                mostrarPantallaprincipal(event);
+                Vendedor vendedor = main.obtenerVendedor(user,password);
+                main.mostrarPanelVendedor(vendedor);
             }else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Datos incorrectos");
-                alert.setContentText("Por favor verifica tus datos y vuelvelo a intentar");
+                alert.setContentText("Por favor verifica tus datos y vuelve a intentar");
                 alert.showAndWait();
             }
 
@@ -62,14 +65,7 @@ public class LoginController {
 
     }
 
-    private void mostrarPantallaprincipal(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("../views/VendedorView.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Bienvenido de vuelta!!");
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     private boolean verificarCampos(String user, String password) {
         if(user.equals("")||password.equals("")){
@@ -78,5 +74,8 @@ public class LoginController {
         return true;
     }
 
+    public void setMain(Main main) {
+        this.main = main;
+    }
 }
 

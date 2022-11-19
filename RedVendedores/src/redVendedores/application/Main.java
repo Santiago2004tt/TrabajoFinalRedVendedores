@@ -4,11 +4,20 @@ package redVendedores.application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import redVendedores.controllers.SignUpController;
 import redVendedores.exceptions.VendedorException;
+import redVendedores.controllers.*;
+import redVendedores.exception.ProductoException;
+import redVendedores.exception.VendedorException;
+
 import redVendedores.exceptions.UserException;
+import redVendedores.model.*;
+
 import redVendedores.model.Cuenta;
 import redVendedores.model.RedVendedores;
 import redVendedores.model.Vendedor;
@@ -25,12 +34,37 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         //inicializa el fxml
         this.stage=stage;
-        this.stage.setTitle("hola");
-        mostrarPanelAdministrador();
+        mostrarLogin();
 
     }
 
-    private void mostrarPanelAdministrador() {
+    public Stage getPrimaryStage() {
+        return stage;
+    }
+
+
+    public void mostrarLogin() {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+
+            LoginController controller = loader.getController();
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Que bueno verte de vuelta!!");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarPanelAdimintrador(){
         try{
             //carga el fxml
             FXMLLoader loader = new FXMLLoader();
@@ -43,6 +77,73 @@ public class Main extends Application {
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
+            stage.setTitle("Que bueno verte de vuelta!!");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarPanelVendedor(Vendedor vendedor){
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/VendedorView.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            VendedorController controller = loader.getController();
+            controller.mostrarBienvenida(vendedor);
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Que bueno verte de vuelta!!");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarCrearPublicacion(Vendedor vendedor) {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/CrearPublicacion.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            CrearPublicacionController controller = loader.getController();
+            controller.obtenertvendedor(vendedor);
+            controller.setMain(this);
+            SignUpController controller = loader.getController();
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Que quieres vender hoy?");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarActualizarProducto(Producto productoSeleccionado, Vendedor vendedor ) {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/ActualizarProducto.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            ActualizarProductoController controller = loader.getController();
+            controller.obtenerProducto(productoSeleccionado);
+            controller.obtenerVendedor(vendedor);
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Actualiza tu publicacion a continuacion");
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -121,5 +222,31 @@ public class Main extends Application {
 
     public Cuenta crearUsuario(String user, String password) throws UserException {
         return red.crearCuenta(user, password);
+    }
+
+    public Vendedor obtenerVendedor(String user, String password) {
+        return red.obtenerVendedor(user,password);
+    }
+
+    public ArrayList<Producto> obtenerListaProductos(Vendedor vendedor) {
+        return red.getListaProductos(vendedor);
+    }
+
+    public ArrayList<Vendedor> obtenerListaVendedoresAliados(Vendedor vendedor) {
+        return red.obtenerlistaVendedoresAliados(vendedor);
+    }
+
+
+    public boolean crearPublicacion(String nombre, String codigo, double precio, String categoria, Image image, Vendedor vendedor) throws ProductoException {
+        return red.crearProducto(nombre, codigo, categoria, precio, image, vendedor);
+    }
+
+    public boolean eliminarProducto(String codigo, Vendedor vendedor) throws ProductoException {
+        return red.eliminarProducto(codigo, vendedor);
+    }
+
+
+    public boolean actualizarProducto(String nombre, String codigo, Estado estado, String categoria, double precio, Image image, Vendedor vendedor) {
+        return red.actualizarProducto(nombre, codigo, categoria, precio, estado, vendedor, image );
     }
 }

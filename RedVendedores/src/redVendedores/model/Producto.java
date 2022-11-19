@@ -1,5 +1,7 @@
 package redVendedores.model;
 
+import javafx.scene.image.Image;
+
 public class Producto {
 
     /**
@@ -11,15 +13,18 @@ public class Producto {
     private double precio;
     private Estado estado;
 
+    private Image image;
+
     /**
      * Constructor
      */
-    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado) {
+    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.categoria = categoria;
         this.precio = precio;
         this.estado = estado;
+        this.image = image;
     }
 
     public Producto() {
@@ -81,6 +86,15 @@ public class Producto {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     /**
      * has code
      */
