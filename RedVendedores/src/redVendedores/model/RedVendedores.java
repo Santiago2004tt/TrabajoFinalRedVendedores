@@ -174,7 +174,7 @@ public class RedVendedores {
      * @return
      * @throws ProductoException
      */
-    public boolean crearProducto(String nombre, String codigo , String categoria, double precio, Image image, Vendedor vendedor) throws ProductoException {
+    public boolean crearProducto(String nombre, String codigo , String categoria, double precio, Image image, Vendedor vendedor, String date) throws ProductoException {
         Producto producto = new Producto();
         producto.setNombre(nombre);
         producto.setCodigo(codigo);
@@ -182,6 +182,7 @@ public class RedVendedores {
         producto.setPrecio(precio);
         producto.setEstado(Estado.PUBLICADO);
         producto.setImage(image);
+        producto.setDate(date);
 
 
         if(existeProducto(codigo, vendedor) == true){

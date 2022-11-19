@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.LoginAdministradorController">
     <children>
-        <Label layoutX="114.0" layoutY="91.0" prefHeight="38.0" prefWidth="372.0" text="Que bueno verte de nuevo admin!" textAlignment="CENTER">
+        <Label alignment="CENTER" layoutX="-2.0" layoutY="91.0" prefHeight="38.0" prefWidth="600.0" text="Que bueno verte de nuevo admin!" textAlignment="CENTER">
             <font>
                 <Font name="Arial" size="24.0" />
             </font>
