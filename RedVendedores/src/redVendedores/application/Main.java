@@ -8,19 +8,19 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import redVendedores.controllers.SignUpController;
+import redVendedores.exceptions.VendedorException;
 import redVendedores.controllers.*;
 import redVendedores.exception.ProductoException;
 import redVendedores.exception.VendedorException;
+
 import redVendedores.exceptions.UserException;
-<<<<<<< HEAD
 import redVendedores.model.*;
 
-=======
 import redVendedores.model.Cuenta;
 import redVendedores.model.RedVendedores;
-import redVendedores.model.Usuario;
 import redVendedores.model.Vendedor;
->>>>>>> master
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
-<<<<<<< HEAD
+
             LoginController controller = loader.getController();
             controller.setMain(this);
             //inicializa la escena
@@ -116,10 +116,8 @@ public class Main extends Application {
             CrearPublicacionController controller = loader.getController();
             controller.obtenertvendedor(vendedor);
             controller.setMain(this);
-=======
             SignUpController controller = loader.getController();
             controller.setMain(this);
->>>>>>> master
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);

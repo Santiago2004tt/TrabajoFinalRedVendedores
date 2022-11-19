@@ -1,4 +1,4 @@
-package redVendedores.exception;
+package redVendedores.exceptions;
 
 public class VendedorException extends Exception {
 
