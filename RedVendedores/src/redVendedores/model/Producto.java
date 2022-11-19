@@ -2,6 +2,8 @@ package redVendedores.model;
 
 import javafx.scene.image.Image;
 
+import java.time.format.DateTimeFormatter;
+
 public class Producto {
 
     /**
@@ -15,16 +17,19 @@ public class Producto {
 
     private Image image;
 
+    private String date;
+
     /**
      * Constructor
      */
-    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image) {
+    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image ,String  date) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.categoria = categoria;
         this.precio = precio;
         this.estado = estado;
         this.image = image;
+        this.date = date;
     }
 
     public Producto() {
@@ -93,6 +98,14 @@ public class Producto {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**

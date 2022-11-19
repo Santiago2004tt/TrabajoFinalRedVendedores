@@ -2,9 +2,7 @@ package redVendedores.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -13,6 +11,7 @@ import redVendedores.exceptions.ProductoException;
 import redVendedores.model.Vendedor;
 
 import java.io.File;
+import java.time.LocalDate;
 
 public class CrearPublicacionController {
     Main main = new Main();
@@ -20,6 +19,8 @@ public class CrearPublicacionController {
     private Image image;
 
     private Vendedor vendedorLogeado = null;
+
+    LocalDate date;
     @FXML
     private Button atrasButton;
 
@@ -39,6 +40,9 @@ public class CrearPublicacionController {
     private TextField precioProductoLabel;
 
     @FXML
+    private DatePicker fechaPicker;
+
+    @FXML
     private Button publicarButton;
 
     @FXML
@@ -56,7 +60,6 @@ public class CrearPublicacionController {
     }
 
     private void mostrarPanelVendedorAction() {
-
         main.mostrarPanelVendedor(this.vendedorLogeado);
     }
 
@@ -72,22 +75,30 @@ public class CrearPublicacionController {
         String codigo ="";
         double precio =0;
         String categoria ="";
+        String date = "";
         nombre = nombreProductoLabel.getText();
         codigo = codigoProductoLabel.getText();
         precio = Double.parseDouble(precioProductoLabel.getText());
         categoria = categoriaProductoLabel.getText();
+        date = this.date.toString();
         if(vericarCampos(nombre,codigo,precio,categoria)){
-            boolean publicacionCreada = main.crearPublicacion(nombre, codigo, precio, categoria, this.image, this.vendedorLogeado);
+            boolean publicacionCreada = main.crearPublicacion(nombre, codigo, precio, categoria, this.image, this.vendedorLogeado, date);
             if(publicacionCreada){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Listo!!");
                 alert.setContentText("Publicacion creada");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
                 limpiarCampos();
             }else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Error");
                 alert.setContentText("no fue posible crear la publicacion");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
             }
 
@@ -95,6 +106,9 @@ public class CrearPublicacionController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Error");
             alert.setContentText("Rellena los campos de texto faltantes y vuelve a intentar");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
     }
@@ -165,6 +179,12 @@ public class CrearPublicacionController {
 
     }
 
+    @FXML
+    void obtenerFecha(ActionEvent event) {
+        LocalDate date = fechaPicker.getValue();
+        this.date = date;
+
+    }
 
 
 

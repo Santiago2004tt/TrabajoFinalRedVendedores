@@ -36,6 +36,10 @@ public class SignUpController {
     private Button btnCrear;
 
     @FXML
+    private Button btnNuevo;
+
+
+    @FXML
     private Button btnEliminar;
 
     @FXML
@@ -110,6 +114,20 @@ public class SignUpController {
     @FXML
     void cerrarSesion(ActionEvent event) throws IOException {
         main.mostrarLogin();
+    }
+
+    @FXML
+    void nuevoVendedor(ActionEvent event) {
+        nuevoVendedorAction();
+    }
+
+    private void nuevoVendedorAction() {
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtCedula.setText("");
+        txtDireccion.setText("");
+        txtUsuario.setText("");
+        txtClave.setText("");
     }
 
     @FXML
@@ -237,6 +255,9 @@ public class SignUpController {
         alert.setTitle(titulo);
         alert.setHeaderText(header);
         alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog");
         alert.showAndWait();
     }
 
