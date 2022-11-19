@@ -8,19 +8,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="581.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.VendedorController">
    <children>
-      <Label fx:id="bienvenidaLabel" layoutX="33.0" layoutY="47.0" prefHeight="31.0" prefWidth="292.0" text="Que bueno verte de vuelta, ">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="crearPublicacionButton" layoutX="335.0" layoutY="50.0" mnemonicParsing="false" onAction="#crearPublucacion" text="Crear publicacion" />
       <TabPane layoutX="598.0" layoutY="24.0" prefHeight="445.0" prefWidth="305.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Mis productos">
+          <Tab id="tab1" text="Mis productos">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -36,11 +31,11 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Mis Amigos">
+          <Tab id="tab2" text="Mis Amigos">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="amigosTable" prefHeight="413.0" prefWidth="305.0">
+                        <TableView fx:id="amigosTable" prefHeight="416.0" prefWidth="305.0">
                           <columns>
                             <TableColumn fx:id="nombreAmigoColum" prefWidth="154.0" text="Nombre " />
                             <TableColumn fx:id="apellidosAmigoColum" prefWidth="150.0" text="Apellidos" />
@@ -55,7 +50,7 @@
       <ImageView fx:id="imagenProducto" fitHeight="168.0" fitWidth="191.0" layoutX="79.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="nombreProductoLabel" layoutX="72.0" layoutY="283.0" prefHeight="18.0" prefWidth="191.0">
          <font>
-            <Font size="14.0" />
+            <Font size="18.0" />
          </font>
       </Label>
       <Label fx:id="codigoProductoLabel" layoutX="75.0" layoutY="331.0" prefHeight="17.0" prefWidth="191.0">
@@ -78,6 +73,17 @@
       <Label fx:id="estadoProductoLabel" layoutX="81.0" layoutY="452.0" prefHeight="17.0" prefWidth="191.0" textFill="#726e6e" />
       <Button fx:id="irMuroButton" layoutX="803.0" layoutY="514.0" mnemonicParsing="false" onAction="#irMuroVendedor" text="Ir a muro" />
       <Button fx:id="solicitudesButton" layoutX="611.0" layoutY="514.0" mnemonicParsing="false" onAction="#obtenerSolicitudesAmistad" text="Solicitudes de amistad" />
-      <Button fx:id="cerrarSesionButton" layoutX="480.0" layoutY="50.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
+      <Label fx:id="fechaLabel" layoutX="310.0" layoutY="452.0" prefHeight="17.0" prefWidth="127.0" />
+      <Pane fx:id="pane1" layoutX="14.0" layoutY="27.0" prefHeight="73.0" prefWidth="571.0">
+         <children>
+            <Label fx:id="bienvenidaLabel" layoutX="7.0" layoutY="22.0" prefHeight="31.0" prefWidth="314.0" text="Que bueno verte de vuelta, ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="crearPublicacionButton" layoutX="328.0" layoutY="24.0" mnemonicParsing="false" onAction="#crearPublucacion" text="Crear publicacion" />
+            <Button fx:id="cerrarSesionButton" layoutX="458.0" layoutY="24.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

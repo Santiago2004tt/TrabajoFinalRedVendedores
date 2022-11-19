@@ -53,6 +53,10 @@ public class VendedorController {
     private Label codigoProductoLabel;
 
     @FXML
+    private Label fechaLabel;
+
+
+    @FXML
     private Button crearPublicacionButton;
 
     @FXML
@@ -172,6 +176,8 @@ public class VendedorController {
         categoriaProductoLabel.setText("Categoria: " + productoSeleccionado.getCategoria());
         estadoProductoLabel.setText("Estado: "+ productoSeleccionado.getEstado());
         imagenProducto.setImage(productoSeleccionado.getImage());
+        fechaLabel.setText("Fecha: " + productoSeleccionado.getDate());
+
     }
 
 

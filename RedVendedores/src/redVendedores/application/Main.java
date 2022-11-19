@@ -54,6 +54,7 @@ public class Main extends Application {
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Que bueno verte de vuelta!!");
             stage.show();
@@ -75,6 +76,7 @@ public class Main extends Application {
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Que bueno verte de vuelta!!");
             stage.show();
@@ -96,6 +98,7 @@ public class Main extends Application {
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Que bueno verte de vuelta!!");
             stage.show();
@@ -117,6 +120,7 @@ public class Main extends Application {
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Que quieres vender hoy?");
             stage.show();
@@ -139,6 +143,7 @@ public class Main extends Application {
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Actualiza tu publicacion a continuacion");
             stage.show();
@@ -159,6 +164,7 @@ public class Main extends Application {
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Que bueno verte de vuelta!!");
             stage.show();
@@ -207,7 +213,7 @@ public class Main extends Application {
      * @param apellidos
      * @param direccion
      * @param cedula
-     * @param usuario
+     * @param cuenta
      * @return
      * @throws VendedorException
      */
@@ -254,8 +260,8 @@ public class Main extends Application {
     }
 
 
-    public boolean crearPublicacion(String nombre, String codigo, double precio, String categoria, Image image, Vendedor vendedor) throws ProductoException {
-        return red.crearProducto(nombre, codigo, categoria, precio, image, vendedor);
+    public boolean crearPublicacion(String nombre, String codigo, double precio, String categoria, Image image, Vendedor vendedor, String date) throws ProductoException {
+        return red.crearProducto(nombre, codigo, categoria, precio, image, vendedor, date);
     }
 
     public boolean eliminarProducto(String codigo, Vendedor vendedor) throws ProductoException {

@@ -83,12 +83,18 @@ public class ActualizarProductoController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Listo");
                 alert.setContentText("Producto actualizado");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
 
             }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Error");
                 alert.setContentText("Imposible actualizar el producto, verifica de nuevo");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
             }
 
@@ -97,6 +103,9 @@ public class ActualizarProductoController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Error");
             alert.setContentText("Rellena los campos necesarios e intenta de nuevo");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
 
