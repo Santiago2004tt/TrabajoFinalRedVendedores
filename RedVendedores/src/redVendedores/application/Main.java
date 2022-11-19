@@ -12,8 +12,15 @@ import redVendedores.controllers.*;
 import redVendedores.exception.ProductoException;
 import redVendedores.exception.VendedorException;
 import redVendedores.exceptions.UserException;
+<<<<<<< HEAD
 import redVendedores.model.*;
 
+=======
+import redVendedores.model.Cuenta;
+import redVendedores.model.RedVendedores;
+import redVendedores.model.Usuario;
+import redVendedores.model.Vendedor;
+>>>>>>> master
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -41,9 +48,10 @@ public class Main extends Application {
             //carga el fxml
             FXMLLoader loader = new FXMLLoader();
             //localiza el fxml
-            loader.setLocation(Main.class.getResource("../views/Login.fxml"));
+            loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
+<<<<<<< HEAD
             LoginController controller = loader.getController();
             controller.setMain(this);
             //inicializa la escena
@@ -108,6 +116,10 @@ public class Main extends Application {
             CrearPublicacionController controller = loader.getController();
             controller.obtenertvendedor(vendedor);
             controller.setMain(this);
+=======
+            SignUpController controller = loader.getController();
+            controller.setMain(this);
+>>>>>>> master
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
@@ -152,12 +164,12 @@ public class Main extends Application {
 
     //metodo para eliminar a un usuario
     public boolean eliminarUsuario(String cedula){
-        return red.eliminarUsuario(cedula);
+        return red.eliminarCuenta(cedula);
     }
 
     //metodo para actualizar a un usuario
-    public boolean actualizarUsuario(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
-        return red.actualizarUsuario(nuevoUsuario, contrasenia, cedula);
+    public boolean actualizarCuenta(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
+        return red.actualizarCuenta(nuevoUsuario, contrasenia, cedula);
     }
 
     //Metodo para obtener la lista de vendedores
@@ -184,8 +196,8 @@ public class Main extends Application {
      * @return
      * @throws VendedorException
      */
-    public Vendedor crearVendedor(String name, String apellidos, String direccion, String cedula, Usuario usuario) throws VendedorException {
-        return red.nuevoVendedor(name, apellidos, direccion, cedula, usuario);
+    public Vendedor crearVendedor(String name, String apellidos, String direccion, String cedula, Cuenta cuenta) throws VendedorException {
+        return red.nuevoVendedor(name, apellidos, direccion, cedula, cuenta);
     }
 
     /**
@@ -199,15 +211,19 @@ public class Main extends Application {
 
     /**
      * metodo para actualizar vendedor
+     *
      * @param cedula
      * @param nombre
      * @param apellido
      * @param direccion
      * @param cedula1
-     * @param usuario
      */
-    public void actualizarVendedor(String cedula, String nombre, String apellido, String direccion, String cedula1, Usuario usuario) {
-        red.actualizarVendedor(nombre,apellido,cedula,direccion, usuario);
+    public void actualizarVendedor(String cedula, String nombre, String apellido, String direccion, String cedula1) {
+        red.actualizarVendedor(nombre,apellido,cedula,direccion);
+    }
+
+    public Cuenta crearUsuario(String user, String password) throws UserException {
+        return red.crearCuenta(user, password);
     }
 
     public Vendedor obtenerVendedor(String user, String password) {

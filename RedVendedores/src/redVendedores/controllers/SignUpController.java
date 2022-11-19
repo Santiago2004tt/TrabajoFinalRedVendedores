@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import redVendedores.application.Main;
 import redVendedores.exception.VendedorException;
+import redVendedores.exceptions.UserException;
+import redVendedores.model.Cuenta;
 import redVendedores.model.Estado;
 import redVendedores.model.Usuario;
 import redVendedores.model.Vendedor;
@@ -80,11 +82,11 @@ public class SignUpController {
     private Scene scene;
 
     @FXML
-    void actualizarVendedor(ActionEvent event) {
+    void actualizarVendedor(ActionEvent event) throws UserException {
         actualizarVendedorAction();
     }
 
-    private void actualizarVendedorAction() {
+    private void actualizarVendedorAction() throws UserException {
         String nombre = txtNombre.getText();
         String apellido = txtApellidos.getText();
         String direccion = txtDireccion.getText();
@@ -92,17 +94,19 @@ public class SignUpController {
         String usuario = txtUsuario.getText();
         String contrasenia = txtClave.getText();
 
-
         if(vendedorSeleccionado == null){
             mostrarMensaje("Notificacion vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             //2. Validar la informaci�n
             if(verificarCampos(nombre, apellido, direccion, cedula,contrasenia,usuario) == true){
-                Usuario usuarioNuevo = new Usuario(usuario, contrasenia);
-                main.actualizarVendedor(vendedorSeleccionado.getCedula(),nombre, apellido, direccion, cedula,usuarioNuevo);
-                tableListaVendedores.refresh();
+                if(main.actualizarCuenta(usuario,contrasenia,cedula)){
+                    main.actualizarVendedor(vendedorSeleccionado.getCedula(),nombre, apellido, direccion, cedula);
+                    tableListaVendedores.refresh();
+                }else{
+                    mostrarMensaje("Notificacion vendedor", "Vendedor no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
+                }
             }else{
-                mostrarMensaje("Notificaci�n Estudiante", "Estudiante no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificacion vendedor", "Vendedor no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
 
             }
 
@@ -120,27 +124,31 @@ public class SignUpController {
     }
 
     @FXML
-    void crearVendedor(ActionEvent event) throws VendedorException {
+    void crearVendedor(ActionEvent event) throws VendedorException, UserException {
         crearVendedorAction();
     }
 
-    private void crearVendedorAction() throws VendedorException {
+    private void crearVendedorAction() throws VendedorException, UserException {
         String name = txtNombre.getText();
         String apellidos = txtApellidos.getText();
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
         String password = txtClave.getText();
         String user =txtUsuario.getText();
-        Usuario usuario = new Usuario(user, password);
+
         if(verificarCampos(name, apellidos, direccion, cedula, password, user) == true){
             Vendedor vendedor = null;
+            Cuenta cuenta = null;
             try {
-                vendedor = main.crearVendedor(name, apellidos, cedula, direccion, usuario);
+                cuenta = main.crearUsuario(user, password);
+                vendedor = main.crearVendedor(name, apellidos, cedula, direccion, cuenta);
                 listaVendedorData.add(vendedor);
                 mostrarMensaje("Notificacion vendedor", "Vendedor registrado", "El Vendedor se ha registrado con exito", Alert.AlertType.INFORMATION);
                 limpiarDatos();
             } catch (VendedorException e){
                 mostrarMensaje("Notificacion vendedor", "El vendedor no registrado", "El vendedor con cedula "+cedula+" ya se encuentra registrado", Alert.AlertType.ERROR);
+            } catch (UserException e){
+                mostrarMensaje("Notificacion vendedor", "El vendedor no registrado", "El vendedor con usuario "+user+" ya se encuentra registrado", Alert.AlertType.ERROR);
             }
         }
     }
@@ -198,8 +206,8 @@ public class SignUpController {
         txtApellidos.setText(vendedorSeleccionado.getApellido());
         txtCedula.setText(vendedorSeleccionado.getCedula());
         txtDireccion.setText(vendedorSeleccionado.getDireccion());
-        txtUsuario.setText(vendedorSeleccionado.getUsuario().getUsuario());
-        txtClave.setText(vendedorSeleccionado.getUsuario().getContrasenia());;
+        txtUsuario.setText(vendedorSeleccionado.getCuenta().getUsuario());
+        txtClave.setText(vendedorSeleccionado.getCuenta().getContrasenia());;
     }
 
     public void setMain(Main main){

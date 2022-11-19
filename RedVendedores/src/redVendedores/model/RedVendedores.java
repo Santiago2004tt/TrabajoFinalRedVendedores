@@ -1,7 +1,10 @@
 package redVendedores.model;
 
+<<<<<<< HEAD
 import javafx.scene.image.Image;
 import redVendedores.exception.ProductoException;
+=======
+>>>>>>> master
 import redVendedores.exceptions.*;
 import redVendedores.exception.VendedorException;
 import java.util.ArrayList;
@@ -10,6 +13,8 @@ public class RedVendedores {
     private String nombre;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;
+    private ArrayList<Administrador> listaAdministradores;
+    private ArrayList<Cuenta> listaCuentas;
 
     // Builder
 
@@ -22,6 +27,8 @@ public class RedVendedores {
         this.nombre = nombre;
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
+        listaAdministradores = new ArrayList<Administrador>();
+        listaCuentas = new ArrayList<Cuenta>();
         inicializarDatos();
     }
 
@@ -31,12 +38,18 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
+<<<<<<< HEAD
         ArrayList<Producto> listaProductos = new ArrayList<Producto>();
         ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
         vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
         Usuario usuario = new Usuario("pepito","pepe123");
         vendedor.setUsuario(usuario);
         vendedor.setListaProductos(listaProductos);
+=======
+        Cuenta cuenta = new Cuenta("pepito","pepe123");
+        vendedor.setCuenta(cuenta);
+        listaCuentas.add(cuenta);
+>>>>>>> master
         listaVendedores.add(vendedor);
 
         Vendedor vendedor1 = new Vendedor();
@@ -44,6 +57,7 @@ public class RedVendedores {
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
+<<<<<<< HEAD
         ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
         ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
         listaVendedoresAliados.add(vendedor);
@@ -51,6 +65,11 @@ public class RedVendedores {
         Usuario usuario1 = new Usuario("Pachito","elpacho123");
         vendedor1.setUsuario(usuario1);
         vendedor1.setListaProductos(listaProductos2);
+=======
+        Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
+        vendedor1.setCuenta(cuenta1);
+        listaCuentas.add(cuenta1);
+>>>>>>> master
         listaVendedores.add(vendedor1);
 
 
@@ -124,13 +143,14 @@ public class RedVendedores {
 
     public Boolean verificarUsuario(String usuario, String contrasenia) {
         for (Vendedor vendedor : listaVendedores) {
-            if (vendedor.verifcarUsuario(usuario, contrasenia)) {
+            if (vendedor.verifcarCuenta(usuario, contrasenia)) {
                 return true;
             }
         }
         return false;
     }
 
+<<<<<<< HEAD
     //--------------------------------------------------------------
 
     /**
@@ -244,6 +264,8 @@ public class RedVendedores {
     }
 
 
+=======
+>>>>>>> master
 
     // CRUD---------VENDEDOR---------------------------------
 
@@ -256,7 +278,7 @@ public class RedVendedores {
      * @return
      * @throws VendedorException
      */
-    public Vendedor nuevoVendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) throws VendedorException {
+    public Vendedor nuevoVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws VendedorException {
         Vendedor vendedor = new Vendedor();
         ArrayList<Producto> listaProductos = new ArrayList<Producto>();
         ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
@@ -264,9 +286,13 @@ public class RedVendedores {
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
+<<<<<<< HEAD
         vendedor.setUsuario(usuario);
         vendedor.setListaProductos(listaProductos);
         vendedor.setListaVendedoresAliados(listaVendedoresAliados);
+=======
+        vendedor.setCuenta(cuenta);
+>>>>>>> master
 
         if(existeVendedor(cedula) == true){
             throw new VendedorException("El vendedor ya existe");
@@ -285,7 +311,6 @@ public class RedVendedores {
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor instanceof Vendedor){
                 if(vendedor.getCedula().equals(cedula)){
-
                     return true;
                 }
             }
@@ -301,15 +326,13 @@ public class RedVendedores {
      * @param direccion
      */
     public void actualizarVendedor(String nombre2, String apellido, String cedula,
-                                   String direccion, Usuario usuario) {
+                                   String direccion) {
 
         for (Vendedor vendedor : listaVendedores) {
             if(vendedor.getCedula().equals(cedula)){
                 vendedor.setNombre(nombre2);
                 vendedor.setApellido(apellido);
                 vendedor.setDireccion(direccion);
-                vendedor.setUsuario(usuario);
-
             }
         }
     }
@@ -354,27 +377,28 @@ public class RedVendedores {
     }
 
 
-    //--------------------------------------Usuario crud-------------------------------
-    public boolean eliminarUsuario(String cedula) {
+    //--------------------------------------Cuenta crud-------------------------------
+    public boolean eliminarCuenta(String cedula) {
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor.getCedula().equals(cedula)) {
-                vendedor.eliminarUsuario();
+                vendedor.eliminarCuenta();
                 return true;
             }
         }
         return false;
     }
 
-    public boolean actualizarUsuario(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
+    public boolean actualizarCuenta(String nuevoUsuario, String contrasenia, String cedula) throws UserException {
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor.getCedula().equals(cedula)) {
-                vendedor.actualizarUsuario(nuevoUsuario, contrasenia);
+                vendedor.actualizarCuenta(nuevoUsuario, contrasenia);
                 return true;
             }
         }
         return false;
     }
 
+<<<<<<< HEAD
     public Vendedor obtenerVendedor(String user, String password) {
         Vendedor vendedorEncontrado = null;
         for (Vendedor vendedor:listaVendedores) {
@@ -390,6 +414,30 @@ public class RedVendedores {
         return vendedor.getListaVendedoresAliados();
     }
 
+=======
+    public Cuenta crearCuenta(String user, String password) throws UserException {
+        Cuenta cuenta = new Cuenta();
+        cuenta.setUsuario(user);
+        cuenta.setContrasenia(password);
+
+        if(existeCuenta(user)==false){
+            throw new UserException("El usuario ya existe");
+        }
+        listaCuentas.add(cuenta);
+        return cuenta;
+    }
+
+    private boolean existeCuenta(String user) {
+        for (Cuenta cuenta: listaCuentas) {
+            if(cuenta.getUsuario().equals(user)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+>>>>>>> master
     //-----------------------------------------------------------------------------------
 
 
