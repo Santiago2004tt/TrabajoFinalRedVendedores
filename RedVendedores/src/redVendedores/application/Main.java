@@ -6,14 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import redVendedores.controllers.SignUpController;
+import redVendedores.exceptions.ProductoException;
 import redVendedores.exceptions.VendedorException;
 import redVendedores.controllers.*;
-import redVendedores.exception.ProductoException;
-import redVendedores.exception.VendedorException;
 
 import redVendedores.exceptions.UserException;
 import redVendedores.model.*;
@@ -48,7 +46,7 @@ public class Main extends Application {
             //carga el fxml
             FXMLLoader loader = new FXMLLoader();
             //localiza el fxml
-            loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
+            loader.setLocation(Main.class.getResource("../views/Login.fxml"));
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
 
@@ -64,7 +62,7 @@ public class Main extends Application {
         }
     }
 
-    public void mostrarPanelAdimintrador(){
+    public void mostrarPanelAdimintrador(Administrador administrador){
         try{
             //carga el fxml
             FXMLLoader loader = new FXMLLoader();
@@ -73,6 +71,7 @@ public class Main extends Application {
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
             SignUpController controller = loader.getController();
+            controller.ingresarBienvenida(administrador);
             controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
@@ -116,8 +115,6 @@ public class Main extends Application {
             CrearPublicacionController controller = loader.getController();
             controller.obtenertvendedor(vendedor);
             controller.setMain(this);
-            SignUpController controller = loader.getController();
-            controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
@@ -148,6 +145,26 @@ public class Main extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void mostrarLoginAdministrador() {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/LoginAdministrador.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            LoginAdministradorController controller = loader.getController();
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Que bueno verte de vuelta!!");
+            stage.show();
+        } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
     }
 
     public static void main(String[] args) {
@@ -248,5 +265,14 @@ public class Main extends Application {
 
     public boolean actualizarProducto(String nombre, String codigo, Estado estado, String categoria, double precio, Image image, Vendedor vendedor) {
         return red.actualizarProducto(nombre, codigo, categoria, precio, estado, vendedor, image );
+    }
+
+    public Administrador obtenerAdministrador(String user, String password) {
+        return red.obtenerAdministrador(user, password);
+    }
+
+
+    public boolean verificarUsuarioAdministrador(String user, String password) {
+        return red.verificarUsuarioAdministrador(user, password);
     }
 }

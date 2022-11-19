@@ -19,12 +19,12 @@ import java.io.IOException;
 public class LoginController {
 
     private Main main;
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private Button btnIngresarAdministrador;
 
     @FXML
     private PasswordField passwordField;
@@ -36,6 +36,11 @@ public class LoginController {
     void logInUser(ActionEvent event) throws IOException {
         logInEvet(event);
 
+    }
+
+    @FXML
+    void iniciarSesionAdministrador(ActionEvent event) {
+        main.mostrarLoginAdministrador();
     }
 
     private void logInEvet(ActionEvent event) throws IOException {
@@ -53,16 +58,12 @@ public class LoginController {
                 alert.setContentText("Por favor verifica tus datos y vuelve a intentar");
                 alert.showAndWait();
             }
-
-
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Atencion");
             alert.setContentText("Completa todos los campos para poder continuar");
             alert.showAndWait();
         }
-
-
     }
 
 

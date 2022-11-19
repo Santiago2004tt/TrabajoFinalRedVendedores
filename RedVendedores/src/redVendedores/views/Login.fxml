@@ -28,6 +28,6 @@
       <Button fx:id="loginButton" layoutX="257.0" layoutY="258.0" mnemonicParsing="false" onAction="#logInUser" text="Iniciar sesion" />
       <PasswordField fx:id="passwordField" layoutX="280.0" layoutY="206.0" />
       <Label layoutX="194.0" layoutY="366.0" prefHeight="17.0" prefWidth="114.0" text="Eres administrador?" textFill="#9a9292" />
-      <Button layoutX="303.0" layoutY="362.0" mnemonicParsing="false" text="Ingresa aqui" />
+      <Button fx:id="btnIngresarAdministrador" layoutX="303.0" layoutY="362.0" mnemonicParsing="false" onAction="#iniciarSesionAdministrador" text="Ingresa aqui" />
    </children>
 </AnchorPane>
