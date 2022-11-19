@@ -1,10 +1,6 @@
 package redVendedores.model;
 
-<<<<<<< HEAD
 import javafx.scene.image.Image;
-import redVendedores.exception.ProductoException;
-=======
->>>>>>> master
 import redVendedores.exceptions.*;
 import redVendedores.exceptions.VendedorException;
 import java.util.ArrayList;
@@ -30,6 +26,7 @@ public class RedVendedores {
         listaAdministradores = new ArrayList<Administrador>();
         listaCuentas = new ArrayList<Cuenta>();
         inicializarDatos();
+        inicializarAdministradores();
     }
 
     private void inicializarDatos() {
@@ -38,42 +35,56 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
-<<<<<<< HEAD
         ArrayList<Producto> listaProductos = new ArrayList<Producto>();
         ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
         vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
-        Usuario usuario = new Usuario("pepito","pepe123");
-        vendedor.setUsuario(usuario);
         vendedor.setListaProductos(listaProductos);
-=======
         Cuenta cuenta = new Cuenta("pepito","pepe123");
         vendedor.setCuenta(cuenta);
         listaCuentas.add(cuenta);
->>>>>>> master
         listaVendedores.add(vendedor);
+        //-----------------------------------
 
         Vendedor vendedor1 = new Vendedor();
         vendedor1.setNombre("miguel");
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
-<<<<<<< HEAD
         ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
         ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
         listaVendedoresAliados.add(vendedor);
         vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
-        Usuario usuario1 = new Usuario("Pachito","elpacho123");
-        vendedor1.setUsuario(usuario1);
         vendedor1.setListaProductos(listaProductos2);
-=======
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
->>>>>>> master
         listaVendedores.add(vendedor1);
-
-
     }
+
+    private void inicializarAdministradores(){
+        Administrador administrador = new Administrador();
+        administrador.setNombre("Cristian");
+        administrador.setApellido("Vargas");
+        administrador.setCedula("1092");
+        administrador.setDireccion("Casa de cristian y su familia <3");
+        Cuenta cuenta = new Cuenta("cris","curry123");
+        administrador.setCuenta(cuenta);
+        listaCuentas.add(cuenta);
+        listaAdministradores.add(administrador);
+
+        //------------------------------------------------------------
+
+        Administrador administrador1 = new Administrador();
+        administrador1.setNombre("Santiago");
+        administrador1.setApellido("Sepulveda");
+        administrador1.setCedula("1090");
+        administrador1.setDireccion("Casa con puertas y ventanas");
+        Cuenta cuenta1 = new Cuenta("eljere","1234");
+        administrador1.setCuenta(cuenta1);
+        listaCuentas.add(cuenta1);
+        listaAdministradores.add(administrador1);
+    }
+
 
     //get and set
 
@@ -150,7 +161,7 @@ public class RedVendedores {
         return false;
     }
 
-<<<<<<< HEAD
+
     //--------------------------------------------------------------
 
     /**
@@ -264,9 +275,6 @@ public class RedVendedores {
     }
 
 
-=======
->>>>>>> master
-
     // CRUD---------VENDEDOR---------------------------------
 
     /**
@@ -286,13 +294,9 @@ public class RedVendedores {
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
-<<<<<<< HEAD
-        vendedor.setUsuario(usuario);
         vendedor.setListaProductos(listaProductos);
         vendedor.setListaVendedoresAliados(listaVendedoresAliados);
-=======
         vendedor.setCuenta(cuenta);
->>>>>>> master
 
         if(existeVendedor(cedula) == true){
             throw new VendedorException("El vendedor ya existe");
@@ -398,11 +402,10 @@ public class RedVendedores {
         return false;
     }
 
-<<<<<<< HEAD
     public Vendedor obtenerVendedor(String user, String password) {
         Vendedor vendedorEncontrado = null;
         for (Vendedor vendedor:listaVendedores) {
-            if (vendedor.verificarUsuario(user, password)){
+            if (vendedor.verificarCuenta(user, password)){
                 vendedorEncontrado = vendedor;
                 break;
             }
@@ -414,7 +417,6 @@ public class RedVendedores {
         return vendedor.getListaVendedoresAliados();
     }
 
-=======
     public Cuenta crearCuenta(String user, String password) throws UserException {
         Cuenta cuenta = new Cuenta();
         cuenta.setUsuario(user);
@@ -436,11 +438,130 @@ public class RedVendedores {
         return true;
     }
 
+    //-----------------------------------------Administrador------------------------------------------
 
->>>>>>> master
-    //-----------------------------------------------------------------------------------
+    /**
+     * method for create vendedor
+     * @param nombre
+     * @param apellido
+     * @param cedula
+     * @param direccion
+     * @return
+     * @throws VendedorException
+     */
+    public Administrador nuevoAdministrador(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws AdministradorException {
+        Administrador administrador = new Administrador();
+        administrador.setNombre(nombre);
+        administrador.setApellido(apellido);
+        administrador.setCedula(cedula);
+        administrador.setDireccion(direccion);
+        administrador.setCuenta(cuenta);
 
+        if(existeAdministrador(cedula) == true){
+            throw new AdministradorException("El administrador ya existe");
+        }
+        listaAdministradores.add(administrador);
+        return administrador;
+    }
 
+    /**
+     * method for verificar existencia vendedor
+     * @param cedula
+     * @return
+     */
+    public boolean existeAdministrador(String cedula) {
+
+        for (Administrador administrador : listaAdministradores) {
+                if(administrador.getCedula().equals(cedula)){
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    /**
+     * actualizar vendedor
+     * @param nombre2
+     * @param apellido
+     * @param cedula
+     * @param direccion
+     */
+    public void actualizarAdministrador(String nombre2, String apellido, String cedula, String direccion) {
+
+        for (Administrador administrador : listaAdministradores) {
+            if(administrador.getCedula().equals(cedula)){
+                administrador.setNombre(nombre2);
+                administrador.setApellido(apellido);
+                administrador.setDireccion(direccion);
+            }
+        }
+    }
+
+    /**
+     * metodo para eliminar un vendedor
+     * @param cedula
+     * @return
+     */
+    public boolean eliminarAdministrador (String cedula) {
+
+        if (existeAdministrador(cedula)) {
+            for (Administrador administrador : listaAdministradores) {
+                    if (administrador.getCedula().equals(cedula)) {
+                        listaAdministradores.remove(administrador);
+                        return true;
+                    }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * search vendedor
+     * @param cedula
+     * @return
+     * @throws VendedorException
+     */
+    public Administrador buscarAdministrador(String cedula) throws AdministradorException{
+        Administrador administrador = null;
+        if(existeAdministrador(cedula)){
+            if(administrador.getCedula().equals(cedula)){
+                return administrador;
+            }
+        }
+        if(administrador == null){
+            throw new AdministradorException("El administrador no se encuentra");
+        }
+        return administrador;
+    }
+
+    public Administrador obtenerAdministrador(String user, String password) {
+        Administrador administradorEncontrado = null;
+        for (Administrador administrador:listaAdministradores) {
+            if (administrador.verificarCuentaAdministrador(user, password)){
+                administradorEncontrado = administrador;
+                break;
+            }
+        }
+        return administradorEncontrado;
+    }
+
+    public boolean verificarUsuarioVendedor(String usuario, String contrasenia) {
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.verificarCuenta(usuario, contrasenia)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarUsuarioAdministrador(String usuario, String contrasenia) {
+        for (Administrador administrador: listaAdministradores) {
+            if(administrador.verificarCuentaAdministrador(usuario, contrasenia)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 

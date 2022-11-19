@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import redVendedores.application.Main;
-import redVendedores.exception.ProductoException;
+import redVendedores.exceptions.ProductoException;
 import redVendedores.model.Producto;
 import redVendedores.model.Vendedor;
 

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import redVendedores.application.Main;
 import redVendedores.exceptions.VendedorException;
 import redVendedores.exceptions.UserException;
+import redVendedores.model.Administrador;
 import redVendedores.model.Cuenta;
 import redVendedores.model.Vendedor;
 
@@ -24,6 +25,7 @@ public class SignUpController {
     Main main = new Main();
     ObservableList<Vendedor> listaVendedorData= FXCollections.observableArrayList();
     Vendedor vendedorSeleccionado = null;
+    Administrador administradorLogeado = null;
     @FXML
     private Button btnActualizar;
 
@@ -72,9 +74,6 @@ public class SignUpController {
     @FXML
     private TextField txtUsuario;
 
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     void actualizarVendedor(ActionEvent event) throws UserException {
@@ -110,12 +109,7 @@ public class SignUpController {
 
     @FXML
     void cerrarSesion(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Sign Up");
-        stage.setScene(scene);
-        stage.show();
+        main.mostrarLogin();
     }
 
     @FXML
@@ -247,4 +241,10 @@ public class SignUpController {
     }
 
 
+    public void ingresarBienvenida(Administrador administrador) {
+        this.administradorLogeado = administrador;
+        String nombre ="";
+        nombre = administrador.getNombre();
+        txtNombreBienvenida.setText("Que bueno verte de nuevo, " + nombre + "!!");
+    }
 }

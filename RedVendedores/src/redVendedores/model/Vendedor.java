@@ -17,7 +17,6 @@ public class Vendedor extends Usuario {
 
     private Cuenta cuenta;
 
-<<<<<<< HEAD
     /**
      * Constructor method for Vendedor class
      * @param nombre
@@ -27,19 +26,19 @@ public class Vendedor extends Usuario {
      * @param theVendedor
      * @param usuario
      */
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor, Usuario usuario, Muro muro) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.cedula = cedula;
-        this.direccion = direccion;
+    public Vendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor, Cuenta cuenta1, Muro muro) {
+        this.setNombre(nombre);
+        this.setApellido(apellido);
+        this.setCedula(cedula);
+        this.setDireccion(direccion);
         this.theVendedor = theVendedor;
         this.muro = muro;
-        this.user = usuario;
+        this.cuenta = cuenta1;
         listaProductos = new ArrayList<Producto>();
-=======
+    }
+
     public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
         super(nombre, apellido, cedula, direccion, usuario);
->>>>>>> master
         listaVendedoresAliados = new ArrayList<Vendedor>();
     }
 
@@ -63,22 +62,6 @@ public class Vendedor extends Usuario {
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
-<<<<<<< HEAD
-    /**
-     * Usuario getter method
-     * @return
-     */
-    public Usuario getUsuario() {
-        return user;
-    }
-
-    /**
-     * Usuario setter method
-     * @param usuario
-     */
-    public void setUsuario(Usuario usuario) {
-        this.user = usuario;
-    }
 
     /**
      * lista productos getter method
@@ -101,8 +84,7 @@ public class Vendedor extends Usuario {
      * Muro getter method
      * @return
      */
-=======
->>>>>>> master
+
     public Muro getMuro() {
         return muro;
     }
@@ -215,15 +197,13 @@ public class Vendedor extends Usuario {
 
     }
 
-<<<<<<< HEAD
 
-    public boolean verificarUsuario(String usuario, String password) {
+    public boolean verificarCuenta(String usuario, String password) {
 
-        if(user.getUsuario().equals(usuario)&&user.getContrasenia().equals(password)){
+        if(cuenta.getUsuario().equals(usuario)&&cuenta.getContrasenia().equals(password)){
             return true;
         }
         return false;
     }
-=======
->>>>>>> master
+
 }

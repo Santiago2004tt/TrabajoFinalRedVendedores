@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import redVendedores.application.Main;
-import redVendedores.exception.ProductoException;
+import redVendedores.exceptions.ProductoException;
 import redVendedores.model.Vendedor;
 
 import java.io.File;
