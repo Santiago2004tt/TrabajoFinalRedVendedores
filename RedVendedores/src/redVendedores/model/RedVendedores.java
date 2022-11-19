@@ -1,7 +1,7 @@
 package redVendedores.model;
 
 import redVendedores.exceptions.*;
-import redVendedores.exception.VendedorException;
+import redVendedores.exceptions.VendedorException;
 import java.util.ArrayList;
 
 public class RedVendedores {

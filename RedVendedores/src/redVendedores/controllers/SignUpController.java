@@ -1,6 +1,5 @@
 package redVendedores.controllers;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,16 +12,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import redVendedores.application.Main;
-import redVendedores.exception.VendedorException;
+import redVendedores.exceptions.VendedorException;
 import redVendedores.exceptions.UserException;
 import redVendedores.model.Cuenta;
-import redVendedores.model.Estado;
-import redVendedores.model.Usuario;
 import redVendedores.model.Vendedor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class SignUpController {
 
