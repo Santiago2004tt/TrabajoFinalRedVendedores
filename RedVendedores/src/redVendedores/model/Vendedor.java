@@ -13,6 +13,8 @@ public class Vendedor extends Usuario {
 
     private ArrayList<Producto> listaProductos;
 
+    private  ArrayList<Comentario> listaComentarios;
+
     private Muro muro;
 
     private Cuenta cuenta;
@@ -24,7 +26,6 @@ public class Vendedor extends Usuario {
      * @param cedula
      * @param direccion
      * @param theVendedor
-     * @param usuario
      */
     public Vendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor, Cuenta cuenta1, Muro muro) {
         this.setNombre(nombre);
@@ -40,6 +41,7 @@ public class Vendedor extends Usuario {
     public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
         super(nombre, apellido, cedula, direccion, usuario);
         listaVendedoresAliados = new ArrayList<Vendedor>();
+        listaComentarios = new ArrayList<Comentario>();
     }
 
     public Vendedor() {
@@ -99,6 +101,14 @@ public class Vendedor extends Usuario {
 
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+
+    public ArrayList<Comentario> getListaComentarios() {
+        return listaComentarios;
+    }
+
+    public void setListaComentarios(ArrayList<Comentario> listaComentarios) {
+        this.listaComentarios = listaComentarios;
     }
 
     //--------------------------------------crud de cuenta

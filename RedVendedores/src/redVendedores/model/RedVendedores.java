@@ -37,6 +37,11 @@ public class RedVendedores {
         vendedor.setDireccion("en una casa");
         ArrayList<Producto> listaProductos = new ArrayList<Producto>();
         ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
+        Comentario comentario = new Comentario();
+        comentario.setMensaje("Ofrece buenos productos");
+        ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
+        listaComentarios.add(comentario);
+        vendedor.setListaComentarios(listaComentarios);
         vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
         vendedor.setListaProductos(listaProductos);
         Cuenta cuenta = new Cuenta("pepito","pepe123");
@@ -55,6 +60,7 @@ public class RedVendedores {
         listaVendedoresAliados.add(vendedor);
         vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
         vendedor1.setListaProductos(listaProductos2);
+
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
@@ -183,8 +189,6 @@ public class RedVendedores {
         producto.setEstado(Estado.PUBLICADO);
         producto.setImage(image);
         producto.setDate(date);
-
-
         if(existeProducto(codigo, vendedor) == true){
             throw new ProductoException("El producto ya existe");
         }
@@ -291,10 +295,12 @@ public class RedVendedores {
         Vendedor vendedor = new Vendedor();
         ArrayList<Producto> listaProductos = new ArrayList<Producto>();
         ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+        ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
+        vendedor.setListaComentarios(listaComentarios);
         vendedor.setListaProductos(listaProductos);
         vendedor.setListaVendedoresAliados(listaVendedoresAliados);
         vendedor.setCuenta(cuenta);
@@ -562,6 +568,19 @@ public class RedVendedores {
             }
         }
         return false;
+    }
+
+    public ArrayList<Comentario> obtenerListaComentarios(Vendedor vendedorAliado) {
+        return vendedorAliado.getListaComentarios();
+    }
+
+    public boolean agregarComentario(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
+
+        Comentario comentario = new Comentario();
+        comentario.setVendedor(vendedorLogeado);
+        comentario.setMensaje(mensaje);
+        vendedorAliado.getListaComentarios().add(comentario);
+        return true;
     }
 }
 

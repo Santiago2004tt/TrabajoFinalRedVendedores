@@ -170,8 +170,36 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
         throw new RuntimeException(e);
+        }
     }
+
+    public void mostrarMuroVendedorAliado(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/VendedorAliadoView.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            VendedorAliadoController controller = loader.getController();
+            controller.obtenerVendedorLogeado(vendedorLogeado);
+            controller.obtenerVendedorAliado(vendedorSeleccionado);
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Bienvenido al muro");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
+
+    //-----------RESTO DE METODOS------------
+
 
     public static void main(String[] args) {
 
@@ -280,5 +308,15 @@ public class Main extends Application {
 
     public boolean verificarUsuarioAdministrador(String user, String password) {
         return red.verificarUsuarioAdministrador(user, password);
+    }
+
+
+    public ArrayList<Comentario> obtenerListaComentarios(Vendedor vendedorAliado) {
+        return red.obtenerListaComentarios(vendedorAliado);
+    }
+
+
+    public boolean agregarComenterio(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
+        return red.agregarComentario(vendedorLogeado, vendedorAliado, mensaje);
     }
 }

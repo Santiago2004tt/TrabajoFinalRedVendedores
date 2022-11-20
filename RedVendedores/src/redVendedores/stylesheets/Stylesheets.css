@@ -29,7 +29,7 @@
 .password-field{
     -fx-font-size:12px ;
 }
-#tab1, #tab2, .tabs{
+#tab1, #tab2, #tab3, #tab4, .tabs{
     -fx-background-color: #FCFDEF;
     -fx-border-radius: 5px;
     -fx-font-family: Futura;
@@ -41,7 +41,7 @@
     -fx-border-radius: 2px;
     -fx-font-family: Futura;
 }
-#pane1,#pane2, .pane{
+#pane1,#pane2, #pane4, .pane{
     -fx-background-color: #cfe2f1;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
