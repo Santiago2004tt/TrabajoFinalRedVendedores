@@ -140,6 +140,8 @@ public class VendedorController {
 
     @FXML
     void irMuroVendedor(ActionEvent event) {
+        main.mostrarMuroVendedorAliado(vendedorLogeado, vendedorSeleccionado);
+
 
     }
 
