@@ -96,7 +96,7 @@ public class VendedorAliadoController {
 
     @FXML
     void irChat(ActionEvent event) {
-
+        main.mostrarChat(this.vendedorLogeado,this.vendedorAliado);
     }
 
     @FXML
@@ -144,14 +144,8 @@ public class VendedorAliadoController {
 
         tableComentarios.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection, newSelection) -> {
             comentarioSeleccionado = newSelection;
-
-
         });
-
-
     }
-
-
 
     private void mostrarDatosProducto(Producto productoSeleccionado) {
         nombreProductoLabel.setText(productoSeleccionado.getNombre());
@@ -175,7 +169,7 @@ public class VendedorAliadoController {
 
     @FXML
     void agregarComentario(ActionEvent event) {
-        agregarComentarioAction();
+        //agregarComentarioAction();
 
     }
 
@@ -206,7 +200,6 @@ public class VendedorAliadoController {
             dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
-
     }
 
     private boolean verificarTexto(String mensaje) {

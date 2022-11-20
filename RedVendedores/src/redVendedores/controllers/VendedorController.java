@@ -120,7 +120,6 @@ public class VendedorController {
             alert.showAndWait();
             listaProductosData.remove(productoSeleccionado);
             limpiarCamposProducto();
-
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Error :(");
@@ -141,7 +140,6 @@ public class VendedorController {
     @FXML
     void irMuroVendedor(ActionEvent event) {
         main.mostrarMuroVendedorAliado(vendedorLogeado, vendedorSeleccionado);
-
 
     }
 

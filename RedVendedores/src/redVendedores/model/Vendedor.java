@@ -1,6 +1,5 @@
 package redVendedores.model;
 
-import redVendedores.exceptions.MensajeExceptions;
 import redVendedores.exceptions.MuroException;
 import redVendedores.exceptions.UserException;
 
@@ -17,50 +16,29 @@ public class Vendedor extends Usuario {
     private  ArrayList<Comentario> listaComentarios;
 
     private Muro muro;
-    private ArrayList<Mensaje> listaMensajes;
+    private ArrayList<Chats> listaChats;
 
     private Cuenta cuenta;
 
-    /**
-     * Constructor method for Vendedor class
-     * @param nombre
-     * @param apellido
-     * @param cedula
-     * @param direccion
-     * @param theVendedor
-     */
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor, Cuenta cuenta1, Muro muro) {
-        this.setNombre(nombre);
-        this.setApellido(apellido);
-        this.setCedula(cedula);
-        this.setDireccion(direccion);
+    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario, Vendedor theVendedor, Muro muro, Cuenta cuenta) {
+        super(nombre, apellido, cedula, direccion, usuario);
         this.theVendedor = theVendedor;
         this.muro = muro;
-        this.cuenta = cuenta1;
+        this.cuenta = cuenta;
+        listaChats = new ArrayList<>();
+        listaComentarios= new ArrayList<Comentario>();
+        listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
-        listaMensajes = new ArrayList<Mensaje>();
     }
 
-<<<<<<< HEAD
-
-
-    public Vendedor(Vendedor theVendedor, ArrayList<Vendedor> listaVendedoresAliados, ArrayList<Producto> listaProductos, Muro muro, ArrayList<Mensaje> listaMensajes, Cuenta cuenta) {
+    public Vendedor(Vendedor theVendedor, Muro muro, Cuenta cuenta) {
         this.theVendedor = theVendedor;
-        this.listaVendedoresAliados = listaVendedoresAliados;
-        this.listaProductos = listaProductos;
         this.muro = muro;
-        this.listaMensajes = listaMensajes;
         this.cuenta = cuenta;
-=======
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
-        super(nombre, apellido, cedula, direccion, usuario);
-        listaVendedoresAliados = new ArrayList<Vendedor>();
-        listaComentarios = new ArrayList<Comentario>();
->>>>>>> master
     }
 
     public Vendedor() {
-        super();
+
     }
 
     public Vendedor getTheVendedor() {
@@ -79,50 +57,12 @@ public class Vendedor extends Usuario {
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
-    public ArrayList<Mensaje> getListaMensajes() {
-        return listaMensajes;
-    }
-
-    public void setListaMensajes(ArrayList<Mensaje> listaMensajes) {
-        this.listaMensajes = listaMensajes;
-    }
-
-    /**
-     * lista productos getter method
-     * @return
-     */
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
 
-
-    /**
-     * listaProductos setter method
-     * @param listaProductos
-     */
     public void setListaProductos(ArrayList<Producto> listaProductos) {
         this.listaProductos = listaProductos;
-    }
-
-    /**
-     * Muro getter method
-     * @return
-     */
-
-    public Muro getMuro() {
-        return muro;
-    }
-
-    public void setMuro(Muro muro) {
-        this.muro = muro;
-    }
-
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
     }
 
     public ArrayList<Comentario> getListaComentarios() {
@@ -133,7 +73,31 @@ public class Vendedor extends Usuario {
         this.listaComentarios = listaComentarios;
     }
 
-    //--------------------------------------crud de cuenta
+    public Muro getMuro() {
+        return muro;
+    }
+
+    public void setMuro(Muro muro) {
+        this.muro = muro;
+    }
+
+    public ArrayList<Chats> getListaChats() {
+        return listaChats;
+    }
+
+    public void setListaChats(ArrayList<Chats> listaChats) {
+        this.listaChats = listaChats;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    //--------------------------------------crud de cuenta-------------------------------
     
     
     
@@ -238,16 +202,15 @@ public class Vendedor extends Usuario {
         return false;
     }
 
-    public void enviarMensaje(String s, Vendedor vendedor1) throws MensajeExceptions {
-        Mensaje mensaje1 = null;
-        for (Mensaje mensaje: listaMensajes) {
-            if(mensaje.getVendedor().getCedula().equals(vendedor1.getCedula())){
-                mensaje1 = mensaje;
-                mensaje1.añadirMensaje(s);
+
+
+    public ArrayList<Mensaje> obtenerListaVendedor(Vendedor vendedorAliado) {
+        Chats chats = null;
+        for (Chats chats1: listaChats) {
+            if(chats.getVendedor().getCedula().equals(vendedorAliado.getCedula())){
+                chats = chats1;
             }
         }
-        if(mensaje1==null){
-            throw new MensajeExceptions("Error");
-        }
+        return chats.getMensajesVendedorLocal();
     }
 }

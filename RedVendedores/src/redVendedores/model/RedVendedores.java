@@ -35,36 +35,53 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
-        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
-        ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
-        Comentario comentario = new Comentario();
-        comentario.setMensaje("Ofrece buenos productos");
-        ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
-        listaComentarios.add(comentario);
-        vendedor.setListaComentarios(listaComentarios);
-        vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
-        vendedor.setListaProductos(listaProductos);
         Cuenta cuenta = new Cuenta("pepito","pepe123");
         vendedor.setCuenta(cuenta);
         listaCuentas.add(cuenta);
         listaVendedores.add(vendedor);
-        //-----------------------------------
 
+        //--------------------------------------------------------------------
         Vendedor vendedor1 = new Vendedor();
         vendedor1.setNombre("miguel");
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
-        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
-        ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
-        listaVendedoresAliados.add(vendedor);
-        vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
-        vendedor1.setListaProductos(listaProductos2);
-
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
         listaVendedores.add(vendedor1);
+        //--------------------------------------------------------------------
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
+        ArrayList<Chats> listaChats = new ArrayList<Chats>();
+        ArrayList<Mensaje> listaMensaje = new ArrayList<Mensaje>();
+
+        Comentario comentario = new Comentario();
+        comentario.setMensaje("Ofrece buenos productos");
+        listaComentarios.add(comentario);
+
+        Mensaje mensaje = new Mensaje();
+        mensaje.setMensaje("Hola");
+        listaMensaje.add(mensaje);
+        Chats chats = new Chats();
+        chats.setMensajesVendedorLocal(listaMensaje);
+        listaChats.add(chats);
+        vendedor.setListaChats(listaChats);
+        vendedor.setListaVendedoresAliados(listaVendedoresAliados);
+        vendedor.setListaProductos(listaProductos);
+        //-----------------------------------
+
+        ArrayList<Vendedor> listaVendedoresAliados1 = new ArrayList<Vendedor>();
+        ArrayList<Producto> listaProductos1 = new ArrayList<Producto>();
+        ArrayList<Comentario> listaComentarios1 = new ArrayList<Comentario>();
+        ArrayList<Chats> listaChats1 = new ArrayList<Chats>();
+        ArrayList<Mensaje> listaMensaje1 = new ArrayList<Mensaje>();
+
+        listaVendedoresAliados.add(vendedor);
+        vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
+        vendedor1.setListaProductos(listaProductos1);
+
     }
 
     private void inicializarAdministradores(){
@@ -581,6 +598,10 @@ public class RedVendedores {
         comentario.setMensaje(mensaje);
         vendedorAliado.getListaComentarios().add(comentario);
         return true;
+    }
+
+    public ArrayList<Mensaje> obtenerListaMensajes(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return vendedorLogeado.obtenerListaVendedor(vendedorAliado);
     }
 }
 
