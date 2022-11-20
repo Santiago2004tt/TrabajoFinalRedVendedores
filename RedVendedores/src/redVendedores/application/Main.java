@@ -71,7 +71,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../views/signUp.fxml"));
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
-            SignUpCiontroller controller = loader.getController();
+            SignUpController controller = loader.getController();
             controller.ingresarBienvenida(administrador);
             controller.setMain(this);
             //inicializa la escena

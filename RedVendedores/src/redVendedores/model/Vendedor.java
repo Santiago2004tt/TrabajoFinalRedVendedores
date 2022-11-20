@@ -1,5 +1,6 @@
 package redVendedores.model;
 
+import redVendedores.exceptions.MensajeExceptions;
 import redVendedores.exceptions.MuroException;
 import redVendedores.exceptions.UserException;
 
@@ -14,6 +15,7 @@ public class Vendedor extends Usuario {
     private ArrayList<Producto> listaProductos;
 
     private Muro muro;
+    private ArrayList<Mensaje> listaMensajes;
 
     private Cuenta cuenta;
 
@@ -35,11 +37,18 @@ public class Vendedor extends Usuario {
         this.muro = muro;
         this.cuenta = cuenta1;
         listaProductos = new ArrayList<Producto>();
+        listaMensajes = new ArrayList<Mensaje>();
     }
 
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
-        super(nombre, apellido, cedula, direccion, usuario);
-        listaVendedoresAliados = new ArrayList<Vendedor>();
+
+
+    public Vendedor(Vendedor theVendedor, ArrayList<Vendedor> listaVendedoresAliados, ArrayList<Producto> listaProductos, Muro muro, ArrayList<Mensaje> listaMensajes, Cuenta cuenta) {
+        this.theVendedor = theVendedor;
+        this.listaVendedoresAliados = listaVendedoresAliados;
+        this.listaProductos = listaProductos;
+        this.muro = muro;
+        this.listaMensajes = listaMensajes;
+        this.cuenta = cuenta;
     }
 
     public Vendedor() {
@@ -62,6 +71,13 @@ public class Vendedor extends Usuario {
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
+    public ArrayList<Mensaje> getListaMensajes() {
+        return listaMensajes;
+    }
+
+    public void setListaMensajes(ArrayList<Mensaje> listaMensajes) {
+        this.listaMensajes = listaMensajes;
+    }
 
     /**
      * lista productos getter method
@@ -206,4 +222,16 @@ public class Vendedor extends Usuario {
         return false;
     }
 
+    public void enviarMensaje(String s, Vendedor vendedor1) throws MensajeExceptions {
+        Mensaje mensaje1 = null;
+        for (Mensaje mensaje: listaMensajes) {
+            if(mensaje.getVendedor().getCedula().equals(vendedor1.getCedula())){
+                mensaje1 = mensaje;
+                mensaje1.añadirMensaje(s);
+            }
+        }
+        if(mensaje1==null){
+            throw new MensajeExceptions("Error");
+        }
+    }
 }
