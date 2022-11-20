@@ -205,9 +205,9 @@ public class Main extends Application {
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
             ChatsController controller = loader.getController();
-            controller.setMain(this);
-            controller.obtenerVendedorLogeado(vendedorLogeado);
-            controller.obtenerVendedorAliado(vendedorAliado);
+            //controller.setMain(this);
+            //controller.obtenerVendedorLogeado(vendedorLogeado);
+            //controller.obtenerVendedorAliado(vendedorAliado);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
@@ -344,7 +344,19 @@ public class Main extends Application {
     }
 
 
-    public ArrayList<Mensaje> obtenerMensajes(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
-        return red.obtenerListaMensajes(vendedorLogeado, vendedorAliado);
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return red.verificarExisteMeGusta(vendedorLogeado, vendedorAliado);
+    }
+
+    public boolean agregarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return red.agregarMeGusta(vendedorLogeado, vendedorAliado);
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        red.quitarMeGusta(vendedorLogeado, vendedorAliado);
+    }
+
+    public int contarMeGustas(Vendedor vendedorAliado) {
+        return red.contarMeGustas(vendedorAliado);
     }
 }

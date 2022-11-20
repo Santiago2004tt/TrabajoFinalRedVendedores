@@ -15,8 +15,9 @@ public class Vendedor extends Usuario {
 
     private  ArrayList<Comentario> listaComentarios;
 
+    private ArrayList<MeGusta> listaMeGusta;
+
     private Muro muro;
-    private ArrayList<Chats> listaChats;
 
     private Cuenta cuenta;
 
@@ -25,20 +26,22 @@ public class Vendedor extends Usuario {
         this.theVendedor = theVendedor;
         this.muro = muro;
         this.cuenta = cuenta;
-        listaChats = new ArrayList<>();
         listaComentarios= new ArrayList<Comentario>();
         listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
+        listaMeGusta = new ArrayList<MeGusta>();
     }
 
-    public Vendedor(Vendedor theVendedor, Muro muro, Cuenta cuenta) {
-        this.theVendedor = theVendedor;
-        this.muro = muro;
-        this.cuenta = cuenta;
+    public ArrayList<MeGusta> getListaMeGusta() {
+        return listaMeGusta;
+    }
+
+    public void setListaMeGusta(ArrayList<MeGusta> listaMeGusta) {
+        this.listaMeGusta = listaMeGusta;
     }
 
     public Vendedor() {
-
+        listaMeGusta = new ArrayList<MeGusta>();
     }
 
     public Vendedor getTheVendedor() {
@@ -79,14 +82,6 @@ public class Vendedor extends Usuario {
 
     public void setMuro(Muro muro) {
         this.muro = muro;
-    }
-
-    public ArrayList<Chats> getListaChats() {
-        return listaChats;
-    }
-
-    public void setListaChats(ArrayList<Chats> listaChats) {
-        this.listaChats = listaChats;
     }
 
     public Cuenta getCuenta() {
@@ -203,14 +198,25 @@ public class Vendedor extends Usuario {
     }
 
 
-
-    public ArrayList<Mensaje> obtenerListaVendedor(Vendedor vendedorAliado) {
-        Chats chats = null;
-        for (Chats chats1: listaChats) {
-            if(chats.getVendedor().getCedula().equals(vendedorAliado.getCedula())){
-                chats = chats1;
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado) {
+        for (MeGusta meGusta: listaMeGusta) {
+            if(meGusta.getVendedor().getCedula().equals(vendedorLogeado.getCedula())){
+                return false;
             }
         }
-        return chats.getMensajesVendedorLocal();
+        return true;
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado) {
+        for (MeGusta meGusta: listaMeGusta) {
+            if(meGusta.getVendedor().getCedula().equals(vendedorLogeado.getCedula())){
+                listaMeGusta.remove(meGusta);
+                break;
+            }
+        }
+    }
+
+    public int contarMeGustas() {
+        return listaMeGusta.size();
     }
 }

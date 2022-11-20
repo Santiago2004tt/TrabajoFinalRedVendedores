@@ -8,9 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import redVendedores.application.Main;
-import redVendedores.model.Mensaje;
 import redVendedores.model.Vendedor;
 
 public class ChatsController {
@@ -18,8 +16,7 @@ public class ChatsController {
     private Vendedor vendedorLogeado;
     private Vendedor vendedorAliado;
     Main main;
-    ObservableList<Mensaje> listaMensajeData= FXCollections.observableArrayList();
-    Mensaje mensajeSeleccionado = null;
+
 
 
     @FXML
@@ -53,6 +50,7 @@ public class ChatsController {
 
     }
 
+    /**
     public void setMain(Main main) {
         this.main = main;
     }
@@ -93,6 +91,6 @@ public class ChatsController {
         listaMensajeData.addAll(main.obtenerMensajes(vendedorAliado, vendedorLogeado));
         return listaMensajeData;
     }
-
+    */
 
 }

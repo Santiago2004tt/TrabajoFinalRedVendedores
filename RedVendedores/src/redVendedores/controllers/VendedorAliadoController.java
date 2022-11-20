@@ -101,7 +101,21 @@ public class VendedorAliadoController {
 
     @FXML
     void meGusta(ActionEvent event) {
+        meGustaAction();
+    }
 
+    private void meGustaAction() {
+        if(main.verificarExisteMeGusta(vendedorLogeado, vendedorAliado)){
+            boolean meGustaAgregado = main.agregarMeGusta(vendedorLogeado, vendedorAliado);
+            if(meGustaAgregado){
+                int cantidadMeGusta = main.contarMeGustas(vendedorAliado);
+                numeroMeGusta.setText("" + cantidadMeGusta);
+            }
+        }else{
+            main.quitarMeGusta(vendedorLogeado, vendedorAliado);
+            int cantidadMeGusta = main.contarMeGustas(vendedorAliado);
+            numeroMeGusta.setText("" + cantidadMeGusta);
+        }
     }
 
     @FXML
@@ -124,10 +138,12 @@ public class VendedorAliadoController {
 
     public void obtenerVendedorAliado(Vendedor vendedorSeleccionado) {
         this.vendedorAliado = vendedorSeleccionado;
+        int cantidadMeGusta = vendedorSeleccionado.getListaMeGusta().size();
         String nombre = vendedorSeleccionado.getNombre();
         String apellido = vendedorSeleccionado.getApellido();
         nombreLabel.setText("Nombre: " + nombre);
         ApellidoLabel.setText("Apellido: " + apellido);
+        numeroMeGusta.setText("" + cantidadMeGusta);
     }
     @FXML
     void initialize(){
