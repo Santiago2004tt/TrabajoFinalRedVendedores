@@ -219,4 +219,5 @@ public class Vendedor extends Usuario {
     public int contarMeGustas() {
         return listaMeGusta.size();
     }
+
 }

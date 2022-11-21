@@ -85,5 +85,6 @@
             <Button fx:id="cerrarSesionButton" layoutX="458.0" layoutY="24.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
          </children>
       </Pane>
+      <Label fx:id="txtCantidadMeGusta" layoutX="343.0" layoutY="508.0" prefHeight="25.0" prefWidth="183.0" text="Tienes" />
    </children>
 </AnchorPane>

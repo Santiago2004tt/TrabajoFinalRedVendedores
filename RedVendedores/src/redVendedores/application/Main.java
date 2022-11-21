@@ -359,4 +359,5 @@ public class Main extends Application {
     public int contarMeGustas(Vendedor vendedorAliado) {
         return red.contarMeGustas(vendedorAliado);
     }
+
 }

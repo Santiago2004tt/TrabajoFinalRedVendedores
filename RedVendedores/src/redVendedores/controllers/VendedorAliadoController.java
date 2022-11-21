@@ -205,7 +205,6 @@ public class VendedorAliadoController {
                 comentarioField.clear();
                 tableComentarios.refresh();
 
-
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
