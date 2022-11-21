@@ -55,6 +55,8 @@ public class VendedorController {
     @FXML
     private Label fechaLabel;
 
+    @FXML
+    private Label txtCantidadMeGusta;
 
     @FXML
     private Button crearPublicacionButton;
@@ -204,9 +206,13 @@ public class VendedorController {
     public void mostrarBienvenida(Vendedor vendedor) {
         this.vendedorLogeado = vendedor;
         String nombre ="";
+        int cantidadMeGusta = vendedor.getListaMeGusta().size();
         nombre = vendedor.getNombre();
         bienvenidaLabel.setText("Que bueno verte de nuevo, " + nombre + "!!");
+        txtCantidadMeGusta.setText("Tienes: "+ cantidadMeGusta + " Me gustas");
     }
+
+
     @FXML
     void cerrarSesion(ActionEvent event) {
         main.mostrarLogin();
