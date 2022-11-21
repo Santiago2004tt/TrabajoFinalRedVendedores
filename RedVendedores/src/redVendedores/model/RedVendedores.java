@@ -28,7 +28,6 @@ public class RedVendedores {
         inicializarDatos();
         inicializarAdministradores();
     }
-
     private void inicializarDatos() {
         Vendedor vendedor = new Vendedor();
         vendedor.setNombre("pepe");
@@ -66,6 +65,7 @@ public class RedVendedores {
         listaCuentas.add(cuenta1);
         listaVendedores.add(vendedor1);
     }
+
 
     private void inicializarAdministradores(){
         Administrador administrador = new Administrador();
@@ -581,6 +581,26 @@ public class RedVendedores {
         comentario.setMensaje(mensaje);
         vendedorAliado.getListaComentarios().add(comentario);
         return true;
+    }
+
+
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return vendedorAliado.verificarExisteMeGusta(vendedorLogeado);
+    }
+
+    public boolean agregarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        MeGusta meGusta = new MeGusta();
+        meGusta.setVendedor(vendedorLogeado);
+        vendedorAliado.getListaMeGusta().add(meGusta);
+        return true;
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        vendedorAliado.quitarMeGusta(vendedorLogeado);
+    }
+
+    public int contarMeGustas(Vendedor vendedorAliado) {
+        return vendedorAliado.contarMeGustas();
     }
 }
 
