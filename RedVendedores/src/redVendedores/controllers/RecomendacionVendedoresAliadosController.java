@@ -38,8 +38,6 @@ public class RecomendacionVendedoresAliadosController {
     @FXML
     private TableView<Vendedor> tableRecomendaciones;
 
-    @FXML
-    private Button txtBuscarVendedor;
 
     @FXML
     private TextField txtFiltroMeGusta;

@@ -244,8 +244,7 @@ public class Main extends Application {
         }
     }
 
-<<<<<<< HEAD
-    public void mostrarSolicitudes(Vendedor vendedorLogeado){
+    public void mostrarSolicitudes(Vendedor vendedorLogeado) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/SolicitudesViews.fxml"));
@@ -263,7 +262,9 @@ public class Main extends Application {
 
         } catch (VendedorException e) {
             throw new RuntimeException(e);
-=======
+        }
+    }
+
     public void mostrarVentanaMensajes(Vendedor vendedorLogeado) {
         try{
             //carga el fxml
@@ -283,7 +284,7 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
->>>>>>> master
+
         }
     }
 
@@ -443,7 +444,7 @@ public class Main extends Application {
         return red.obtenerListaVendedoresRecomendados(vendedorLogeado);
     }
 
-<<<<<<< HEAD
+
     public ArrayList<Vendedor> obtenerListaSolicitudes(Vendedor vendedorLogeado) {
         return red.obtenerListaVendedoresSolicitud(vendedorLogeado);
     }
@@ -453,8 +454,7 @@ public class Main extends Application {
     }
 
     public void rechazarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
-        red.rechazarSolicitud(vendedorLogeado, vendedorSeleccionado);
-=======
+        red.rechazarSolicitud(vendedorLogeado, vendedorSeleccionado);}
 
     public boolean enviarMensaje(String mensaje, Vendedor vendedorLogeado, Vendedor vendedorAliado) {
         return red.enviarMensaje(mensaje, vendedorLogeado, vendedorAliado);
@@ -466,6 +466,6 @@ public class Main extends Application {
 
     public boolean respoderMensaje(String mensaje, Vendedor vendedorLogeado, Vendedor autor) {
        return red.responderMensaje(mensaje, autor, vendedorLogeado);
->>>>>>> master
+
     }
 }
