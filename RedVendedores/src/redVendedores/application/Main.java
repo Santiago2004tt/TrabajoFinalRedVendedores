@@ -196,6 +196,51 @@ public class Main extends Application {
         }
     }
 
+    public void mostrarChat(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/ChatsViews.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            ChatsController controller = loader.getController();
+            //controller.setMain(this);
+            //controller.obtenerVendedorLogeado(vendedorLogeado);
+            //controller.obtenerVendedorAliado(vendedorAliado);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Inicia la conversacion!!");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarRecomendaciones(Vendedor vendedorLogeado){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/RecomendacionesVenedoresViews.fxml"));
+            AnchorPane rootLayout = loader.load();
+
+            RecomendacionVendedoresAliadosController controller = loader.getController();
+            controller.setMain(this);
+            controller.obtenerVendedorLogeado(vendedorLogeado);
+            controller.actualizarTablaRecomendados(vendedorLogeado.getCedula());
+
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Recomendaciones y solicitudes");
+            stage.show();
+        } catch (VendedorException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
     //-----------RESTO DE METODOS------------
@@ -318,5 +363,38 @@ public class Main extends Application {
 
     public boolean agregarComenterio(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
         return red.agregarComentario(vendedorLogeado, vendedorAliado, mensaje);
+    }
+
+
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return red.verificarExisteMeGusta(vendedorLogeado, vendedorAliado);
+    }
+
+    public boolean agregarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return red.agregarMeGusta(vendedorLogeado, vendedorAliado);
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        red.quitarMeGusta(vendedorLogeado, vendedorAliado);
+    }
+
+    public int contarMeGustas(Vendedor vendedorAliado) {
+        return red.contarMeGustas(vendedorAliado);
+    }
+
+    public ArrayList<Vendedor> obtenerVendedorSolicitud(Vendedor vendedorLogeado) {
+        return red.obtenerListaVendedoresSolicitud(vendedorLogeado);
+    }
+
+    public void actualizarTablaRecomendados(String cedula) throws VendedorException {
+        red.actualizarTablaRecomendados(cedula);
+    }
+
+    public boolean enviarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        return red.enviarSolicitud(vendedorLogeado, vendedorSeleccionado);
+    }
+
+    public ArrayList<Vendedor> obtenerListaVendedoresRecomendados(Vendedor vendedorLogeado) {
+        return red.obtenerListaVendedoresRecomendados(vendedorLogeado);
     }
 }

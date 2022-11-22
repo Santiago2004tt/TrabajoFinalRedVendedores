@@ -28,7 +28,6 @@ public class RedVendedores {
         inicializarDatos();
         inicializarAdministradores();
     }
-
     private void inicializarDatos() {
         Vendedor vendedor = new Vendedor();
         vendedor.setNombre("pepe");
@@ -51,6 +50,7 @@ public class RedVendedores {
         //-----------------------------------
 
         Vendedor vendedor1 = new Vendedor();
+        ArrayList<Vendedor> listaVendedoresRecomendados = new ArrayList<Vendedor>();
         vendedor1.setNombre("miguel");
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
@@ -60,12 +60,14 @@ public class RedVendedores {
         listaVendedoresAliados.add(vendedor);
         vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
         vendedor1.setListaProductos(listaProductos2);
+        vendedor1.setListaRecomendados(listaVendedoresRecomendados);
 
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
         listaVendedores.add(vendedor1);
     }
+
 
     private void inicializarAdministradores(){
         Administrador administrador = new Administrador();
@@ -581,6 +583,68 @@ public class RedVendedores {
         comentario.setMensaje(mensaje);
         vendedorAliado.getListaComentarios().add(comentario);
         return true;
+    }
+
+
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return vendedorAliado.verificarExisteMeGusta(vendedorLogeado);
+    }
+
+    public boolean agregarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        MeGusta meGusta = new MeGusta();
+        meGusta.setVendedor(vendedorLogeado);
+        vendedorAliado.getListaMeGusta().add(meGusta);
+        return true;
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        vendedorAliado.quitarMeGusta(vendedorLogeado);
+    }
+
+    public int contarMeGustas(Vendedor vendedorAliado) {
+        return vendedorAliado.contarMeGustas();
+    }
+
+    public ArrayList<Vendedor> obtenerListaVendedoresSolicitud(Vendedor vendedorLogeado) {
+        return vendedorLogeado.obtenerListaVendedorSolicitud();
+    }
+
+    public void actualizarTablaRecomendados(String cedula) throws VendedorException {
+        Vendedor vendedorAux = buscarVendedor(cedula);
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+
+        for (Vendedor vendedor: listaVendedores) {
+            if(verificarVendedorRepetido(vendedor, vendedorAux) != false){
+                if(verificarVendedorRepetidoAliados(vendedor, vendedorAux) != false){
+                    vendedorAux.agregarVendedorRecomendado(vendedor);
+                }
+            }
+        }
+    }
+
+    private boolean verificarVendedorRepetidoAliados(Vendedor vendedor, Vendedor vendedorAux) {
+        ArrayList<Vendedor> listaVendedoresAliados = vendedorAux.getListaVendedoresAliados();
+        for (Vendedor vendedor1 : listaVendedoresAliados) {
+            if(vendedor1.getNombre().equals(vendedor.getNombre())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean verificarVendedorRepetido(Vendedor vendedor, Vendedor vendedorAux) {
+        if(vendedor.getCedula().equals(vendedorAux.getCedula())){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean enviarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        return vendedorSeleccionado.aniadirSolicitud(vendedorLogeado);
+    }
+
+    public ArrayList<Vendedor> obtenerListaVendedoresRecomendados(Vendedor vendedorLogeado) {
+        return vendedorLogeado.getListaRecomendados();
     }
 }
 

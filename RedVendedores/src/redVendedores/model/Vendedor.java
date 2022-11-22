@@ -15,37 +15,43 @@ public class Vendedor extends Usuario {
 
     private  ArrayList<Comentario> listaComentarios;
 
+    private ArrayList<MeGusta> listaMeGusta;
+    private ArrayList<Vendedor> listaSolicitudes;
+    private ArrayList<Vendedor> listaRecomendados;
+
     private Muro muro;
 
     private Cuenta cuenta;
 
-    /**
-     * Constructor method for Vendedor class
-     * @param nombre
-     * @param apellido
-     * @param cedula
-     * @param direccion
-     * @param theVendedor
-     */
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Vendedor theVendedor, Cuenta cuenta1, Muro muro) {
-        this.setNombre(nombre);
-        this.setApellido(apellido);
-        this.setCedula(cedula);
-        this.setDireccion(direccion);
+    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario, Vendedor theVendedor, Muro muro, Cuenta cuenta) {
+        super(nombre, apellido, cedula, direccion, usuario);
         this.theVendedor = theVendedor;
         this.muro = muro;
-        this.cuenta = cuenta1;
+        this.cuenta = cuenta;
+        listaComentarios= new ArrayList<Comentario>();
+        listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
+        listaMeGusta = new ArrayList<MeGusta>();
+        listaSolicitudes = new ArrayList<Vendedor>();
+        listaComentarios = new ArrayList<Comentario>();
+        listaRecomendados= new ArrayList<Vendedor>();
     }
 
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
-        super(nombre, apellido, cedula, direccion, usuario);
-        listaVendedoresAliados = new ArrayList<Vendedor>();
-        listaComentarios = new ArrayList<Comentario>();
+    public ArrayList<MeGusta> getListaMeGusta() {
+        return listaMeGusta;
+    }
+
+    public void setListaMeGusta(ArrayList<MeGusta> listaMeGusta) {
+        this.listaMeGusta = listaMeGusta;
     }
 
     public Vendedor() {
-        super();
+        listaVendedoresAliados = new ArrayList<Vendedor>();
+        listaProductos = new ArrayList<Producto>();
+        listaMeGusta = new ArrayList<MeGusta>();
+        listaSolicitudes = new ArrayList<Vendedor>();
+        listaComentarios = new ArrayList<Comentario>();
+        listaRecomendados= new ArrayList<Vendedor>();
     }
 
     public Vendedor getTheVendedor() {
@@ -64,28 +70,21 @@ public class Vendedor extends Usuario {
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
-
-    /**
-     * lista productos getter method
-     * @return
-     */
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
 
-
-    /**
-     * listaProductos setter method
-     * @param listaProductos
-     */
     public void setListaProductos(ArrayList<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
 
-    /**
-     * Muro getter method
-     * @return
-     */
+    public ArrayList<Comentario> getListaComentarios() {
+        return listaComentarios;
+    }
+
+    public void setListaComentarios(ArrayList<Comentario> listaComentarios) {
+        this.listaComentarios = listaComentarios;
+    }
 
     public Muro getMuro() {
         return muro;
@@ -103,15 +102,22 @@ public class Vendedor extends Usuario {
         this.cuenta = cuenta;
     }
 
-    public ArrayList<Comentario> getListaComentarios() {
-        return listaComentarios;
+    public ArrayList<Vendedor> getListaSolicitudes() {
+        return listaSolicitudes;
     }
 
-    public void setListaComentarios(ArrayList<Comentario> listaComentarios) {
-        this.listaComentarios = listaComentarios;
+    public void setListaSolicitudes(ArrayList<Vendedor> listaSolicitudes) {
+        this.listaSolicitudes = listaSolicitudes;
     }
 
-    //--------------------------------------crud de cuenta
+    public ArrayList<Vendedor> getListaRecomendados() {
+        return listaRecomendados;
+    }
+
+    public void setListaRecomendados(ArrayList<Vendedor> listaRecomendados) {
+        this.listaRecomendados = listaRecomendados;
+    }
+    //--------------------------------------crud de cuenta-------------------------------
     
     
     
@@ -216,4 +222,51 @@ public class Vendedor extends Usuario {
         return false;
     }
 
+
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado) {
+        for (MeGusta meGusta: listaMeGusta) {
+            if(meGusta.getVendedor().getCedula().equals(vendedorLogeado.getCedula())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado) {
+        for (MeGusta meGusta: listaMeGusta) {
+            if(meGusta.getVendedor().getCedula().equals(vendedorLogeado.getCedula())){
+                listaMeGusta.remove(meGusta);
+                break;
+            }
+        }
+    }
+
+    public int contarMeGustas() {
+        return listaMeGusta.size();
+    }
+
+    public ArrayList<Vendedor> obtenerListaVendedorSolicitud() {
+        return listaSolicitudes;
+    }
+
+    public void agregarVendedorRecomendado(Vendedor vendedor) {
+        listaRecomendados.add(vendedor);
+    }
+
+    public boolean aniadirSolicitud(Vendedor vendedorLogeado) {
+        if(verificarExisteSolicitud(vendedorLogeado)){
+            listaSolicitudes.add(vendedorLogeado);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean verificarExisteSolicitud(Vendedor vendedorLogeado) {
+        for (Vendedor vendedor: listaSolicitudes) {
+            if(vendedor.getCedula().equals(vendedorLogeado.getCedula())){
+                return false;
+            }
+        }
+        return true;
+    }
 }

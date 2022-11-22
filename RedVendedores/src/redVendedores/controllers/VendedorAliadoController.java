@@ -96,12 +96,26 @@ public class VendedorAliadoController {
 
     @FXML
     void irChat(ActionEvent event) {
-
+        main.mostrarChat(this.vendedorLogeado,this.vendedorAliado);
     }
 
     @FXML
     void meGusta(ActionEvent event) {
+        meGustaAction();
+    }
 
+    private void meGustaAction() {
+        if(main.verificarExisteMeGusta(vendedorLogeado, vendedorAliado)){
+            boolean meGustaAgregado = main.agregarMeGusta(vendedorLogeado, vendedorAliado);
+            if(meGustaAgregado){
+                int cantidadMeGusta = main.contarMeGustas(vendedorAliado);
+                numeroMeGusta.setText("" + cantidadMeGusta);
+            }
+        }else{
+            main.quitarMeGusta(vendedorLogeado, vendedorAliado);
+            int cantidadMeGusta = main.contarMeGustas(vendedorAliado);
+            numeroMeGusta.setText("" + cantidadMeGusta);
+        }
     }
 
     @FXML
@@ -124,10 +138,12 @@ public class VendedorAliadoController {
 
     public void obtenerVendedorAliado(Vendedor vendedorSeleccionado) {
         this.vendedorAliado = vendedorSeleccionado;
+        int cantidadMeGusta = vendedorSeleccionado.getListaMeGusta().size();
         String nombre = vendedorSeleccionado.getNombre();
         String apellido = vendedorSeleccionado.getApellido();
         nombreLabel.setText("Nombre: " + nombre);
         ApellidoLabel.setText("Apellido: " + apellido);
+        numeroMeGusta.setText("" + cantidadMeGusta);
     }
     @FXML
     void initialize(){
@@ -144,14 +160,8 @@ public class VendedorAliadoController {
 
         tableComentarios.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection, newSelection) -> {
             comentarioSeleccionado = newSelection;
-
-
         });
-
-
     }
-
-
 
     private void mostrarDatosProducto(Producto productoSeleccionado) {
         nombreProductoLabel.setText(productoSeleccionado.getNombre());
@@ -175,7 +185,7 @@ public class VendedorAliadoController {
 
     @FXML
     void agregarComentario(ActionEvent event) {
-        agregarComentarioAction();
+        //agregarComentarioAction();
 
     }
 
@@ -195,7 +205,6 @@ public class VendedorAliadoController {
                 comentarioField.clear();
                 tableComentarios.refresh();
 
-
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -206,7 +215,6 @@ public class VendedorAliadoController {
             dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
-
     }
 
     private boolean verificarTexto(String mensaje) {

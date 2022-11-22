@@ -55,6 +55,8 @@ public class VendedorController {
     @FXML
     private Label fechaLabel;
 
+    @FXML
+    private Label txtCantidadMeGusta;
 
     @FXML
     private Button crearPublicacionButton;
@@ -120,7 +122,6 @@ public class VendedorController {
             alert.showAndWait();
             listaProductosData.remove(productoSeleccionado);
             limpiarCamposProducto();
-
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Error :(");
@@ -142,12 +143,11 @@ public class VendedorController {
     void irMuroVendedor(ActionEvent event) {
         main.mostrarMuroVendedorAliado(vendedorLogeado, vendedorSeleccionado);
 
-
     }
 
     @FXML
     void obtenerSolicitudesAmistad(ActionEvent event) {
-
+        main.mostrarRecomendaciones(vendedorLogeado);
     }
 
     @FXML
@@ -206,9 +206,13 @@ public class VendedorController {
     public void mostrarBienvenida(Vendedor vendedor) {
         this.vendedorLogeado = vendedor;
         String nombre ="";
+        int cantidadMeGusta = vendedor.getListaMeGusta().size();
         nombre = vendedor.getNombre();
         bienvenidaLabel.setText("Que bueno verte de nuevo, " + nombre + "!!");
+        txtCantidadMeGusta.setText("Tienes: "+ cantidadMeGusta + " Me gustas");
     }
+
+
     @FXML
     void cerrarSesion(ActionEvent event) {
         main.mostrarLogin();
