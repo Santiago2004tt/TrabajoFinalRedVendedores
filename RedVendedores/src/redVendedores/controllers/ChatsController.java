@@ -40,7 +40,7 @@ public class ChatsController {
                 alert.setHeaderText("Listo!!");
                 alert.setContentText("Mensaje enviado");
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
                 dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
                 txtMensaje.clear();
@@ -49,7 +49,7 @@ public class ChatsController {
                 alert.setHeaderText("Error!!");
                 alert.setContentText("No se pudo enviar el mensaje, intenta de nuevo");
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
                 dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
             }
@@ -58,7 +58,7 @@ public class ChatsController {
             alert.setHeaderText("Atencion");
             alert.setContentText("Al parecer vas a enviar un mensaje vacio");
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }

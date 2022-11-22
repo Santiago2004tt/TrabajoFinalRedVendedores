@@ -77,11 +77,13 @@ public class RecomendacionVendedoresAliadosController {
             mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             boolean enviarSolicitud =  main.enviarSolicitud(vendedorLogeado, vendedorSeleccionado);
-            mostrarMensaje("Notificacion Vendedor", "La invitacion fue enviada", "la solicitud fue enviada con exito", Alert.AlertType.INFORMATION);
-            listaVendedorData.remove(vendedorSeleccionado);
-            tableRecomendaciones.refresh();
+
             if(enviarSolicitud == false){
                 mostrarMensaje("Notificacion Vendedor", "El vendedor ya tiene solicitud ", "El vendedor ya tiene una solicitud", Alert.AlertType.ERROR);
+            }else{
+                mostrarMensaje("Notificacion Vendedor", "La invitacion fue enviada", "la solicitud fue enviada con exito", Alert.AlertType.INFORMATION);
+                listaVendedorData.remove(vendedorSeleccionado);
+                tableRecomendaciones.refresh();
             }
         }
     }

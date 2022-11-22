@@ -53,6 +53,7 @@ public class Vendedor extends Usuario {
         listaSolicitudes = new ArrayList<Vendedor>();
         listaComentarios = new ArrayList<Comentario>();
         listaRecomendados= new ArrayList<Vendedor>();
+        listaMensajes = new ArrayList<Mensaje>();
     }
 
     public Vendedor getTheVendedor() {

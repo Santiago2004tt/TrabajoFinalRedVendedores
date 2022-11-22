@@ -58,7 +58,7 @@ public class SolicitudesController {
             mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             main.rechazarSolicitud(vendedorLogeado, vendedorSeleccionado);
-            mostrarMensaje("Notificacion Vendedor", "El vendedor", "Se acepto la solicitud", Alert.AlertType.INFORMATION);
+            mostrarMensaje("Notificacion Vendedor", "El vendedor", "Se rechazo la solicitud", Alert.AlertType.INFORMATION);
             listaVendedorData.remove(vendedorSeleccionado);
             tableListaSolicitudes.refresh();
         }
@@ -101,7 +101,7 @@ public class SolicitudesController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
         dialogPane.getStyleClass().add("dialog");
         alert.showAndWait();
     }
