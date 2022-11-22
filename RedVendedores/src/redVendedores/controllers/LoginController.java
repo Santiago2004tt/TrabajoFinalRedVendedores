@@ -54,7 +54,7 @@ public class LoginController {
                 alert.setHeaderText("Datos incorrectos");
                 alert.setContentText("Por favor verifica tus datos y vuelve a intentar");
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
                 dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
             }
@@ -63,7 +63,7 @@ public class LoginController {
             alert.setHeaderText("Atencion");
             alert.setContentText("Completa todos los campos para poder continuar");
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }

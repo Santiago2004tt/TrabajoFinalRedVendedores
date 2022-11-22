@@ -88,7 +88,7 @@ public class CrearPublicacionController {
                 alert.setHeaderText("Listo!!");
                 alert.setContentText("Publicacion creada");
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
                 dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
                 limpiarCampos();
@@ -97,7 +97,7 @@ public class CrearPublicacionController {
                 alert.setHeaderText("Error");
                 alert.setContentText("no fue posible crear la publicacion");
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
                 dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
             }
@@ -107,7 +107,7 @@ public class CrearPublicacionController {
             alert.setHeaderText("Error");
             alert.setContentText("Rellena los campos de texto faltantes y vuelve a intentar");
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
