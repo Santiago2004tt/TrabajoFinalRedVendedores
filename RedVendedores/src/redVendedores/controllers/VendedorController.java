@@ -24,7 +24,7 @@ public class VendedorController {
 
     private Main main;
 
-    Vendedor vendedorLogeado = null;
+    Vendedor vendedorLogeado;
     @FXML
     private Button actualizarProductoButton;
 
