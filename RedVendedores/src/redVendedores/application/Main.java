@@ -253,6 +253,7 @@ public class Main extends Application {
             controller.obtenerVendedorLogeado(vendedorLogeado);
             controller.setMain(this);
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Solicitudes");
             stage.show();

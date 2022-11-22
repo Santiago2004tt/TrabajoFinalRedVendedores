@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="581.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.VendedorController">
+<AnchorPane prefHeight="581.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.VendedorController">
    <children>
       <TabPane layoutX="598.0" layoutY="24.0" prefHeight="445.0" prefWidth="305.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -63,7 +63,6 @@
          </children>
       </Pane>
       <Label fx:id="txtCantidadMeGusta" layoutX="343.0" layoutY="513.0" prefHeight="25.0" prefWidth="183.0" text="Tienes" />
-      <Button fx:id="mensajesButton" layoutX="550.0" layoutY="514.0" mnemonicParsing="false" onAction="#mostrarMensajes" text="Mensajes" />
       <Pane id="pane5" layoutX="54.0" layoutY="109.0" prefHeight="363.0" prefWidth="434.0">
          <children>
             <Pane id="pane6" layoutX="-29.0" layoutY="14.0" prefHeight="382.0" prefWidth="449.0">
@@ -95,5 +94,6 @@
             </Pane>
          </children>
       </Pane>
+      <Button fx:id="mensajesButton" layoutX="526.0" layoutY="509.0" mnemonicParsing="false" onAction="#mostrarMensajes" prefHeight="31.0" prefWidth="85.0" text="Mensaje" />
    </children>
 </AnchorPane>

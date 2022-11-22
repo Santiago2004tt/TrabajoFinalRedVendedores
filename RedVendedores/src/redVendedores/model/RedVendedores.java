@@ -280,6 +280,8 @@ public class RedVendedores {
         ArrayList<Producto> listaProductos = new ArrayList<Producto>();
         ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
         ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
+        ArrayList<Mensaje> listaMensajes = new ArrayList<Mensaje>();
+        vendedor.setListaMensajes(listaMensajes);
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
