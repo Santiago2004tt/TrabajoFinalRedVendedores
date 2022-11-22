@@ -167,7 +167,7 @@ public class SignUpController {
 
     private void eliminarVendedorAction() {
         if(vendedorSeleccionado == null){
-            mostrarMensaje("Notificacion Estudiante", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             boolean eliminado = main.eliminarVendedor(vendedorSeleccionado.getCedula());
             if(eliminado){

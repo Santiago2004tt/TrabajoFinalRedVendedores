@@ -16,6 +16,8 @@ public class Vendedor extends Usuario {
     private  ArrayList<Comentario> listaComentarios;
 
     private ArrayList<MeGusta> listaMeGusta;
+    private ArrayList<Vendedor> listaSolicitudes;
+    private ArrayList<Vendedor> listaRecomendados;
 
     private Muro muro;
 
@@ -30,6 +32,9 @@ public class Vendedor extends Usuario {
         listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaMeGusta = new ArrayList<MeGusta>();
+        listaSolicitudes = new ArrayList<Vendedor>();
+        listaComentarios = new ArrayList<Comentario>();
+        listaRecomendados= new ArrayList<Vendedor>();
     }
 
     public ArrayList<MeGusta> getListaMeGusta() {
@@ -41,7 +46,12 @@ public class Vendedor extends Usuario {
     }
 
     public Vendedor() {
+        listaVendedoresAliados = new ArrayList<Vendedor>();
+        listaProductos = new ArrayList<Producto>();
         listaMeGusta = new ArrayList<MeGusta>();
+        listaSolicitudes = new ArrayList<Vendedor>();
+        listaComentarios = new ArrayList<Comentario>();
+        listaRecomendados= new ArrayList<Vendedor>();
     }
 
     public Vendedor getTheVendedor() {
@@ -92,6 +102,21 @@ public class Vendedor extends Usuario {
         this.cuenta = cuenta;
     }
 
+    public ArrayList<Vendedor> getListaSolicitudes() {
+        return listaSolicitudes;
+    }
+
+    public void setListaSolicitudes(ArrayList<Vendedor> listaSolicitudes) {
+        this.listaSolicitudes = listaSolicitudes;
+    }
+
+    public ArrayList<Vendedor> getListaRecomendados() {
+        return listaRecomendados;
+    }
+
+    public void setListaRecomendados(ArrayList<Vendedor> listaRecomendados) {
+        this.listaRecomendados = listaRecomendados;
+    }
     //--------------------------------------crud de cuenta-------------------------------
     
     
@@ -220,4 +245,28 @@ public class Vendedor extends Usuario {
         return listaMeGusta.size();
     }
 
+    public ArrayList<Vendedor> obtenerListaVendedorSolicitud() {
+        return listaSolicitudes;
+    }
+
+    public void agregarVendedorRecomendado(Vendedor vendedor) {
+        listaRecomendados.add(vendedor);
+    }
+
+    public boolean aniadirSolicitud(Vendedor vendedorLogeado) {
+        if(verificarExisteSolicitud(vendedorLogeado)){
+            listaSolicitudes.add(vendedorLogeado);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean verificarExisteSolicitud(Vendedor vendedorLogeado) {
+        for (Vendedor vendedor: listaSolicitudes) {
+            if(vendedor.getCedula().equals(vendedorLogeado.getCedula())){
+                return false;
+            }
+        }
+        return true;
+    }
 }

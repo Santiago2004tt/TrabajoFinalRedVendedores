@@ -147,7 +147,7 @@ public class VendedorController {
 
     @FXML
     void obtenerSolicitudesAmistad(ActionEvent event) {
-
+        main.mostrarRecomendaciones(vendedorLogeado);
     }
 
     @FXML
