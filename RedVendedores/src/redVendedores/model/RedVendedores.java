@@ -34,6 +34,20 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
+<<<<<<< HEAD
+=======
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Mensaje> listaMensajes = new ArrayList<Mensaje>();
+        ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
+        Comentario comentario = new Comentario();
+        comentario.setMensaje("Ofrece buenos productos");
+        ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
+        listaComentarios.add(comentario);
+        vendedor.setListaComentarios(listaComentarios);
+        vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
+        vendedor.setListaProductos(listaProductos);
+        vendedor.setListaMensajes(listaMensajes);
+>>>>>>> master
         Cuenta cuenta = new Cuenta("pepito","pepe123");
         vendedor.setCuenta(cuenta);
         listaCuentas.add(cuenta);
@@ -45,6 +59,18 @@ public class RedVendedores {
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
+<<<<<<< HEAD
+=======
+        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+        ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
+        ArrayList<Mensaje> listaMensajes1 = new ArrayList<Mensaje>();
+        listaVendedoresAliados.add(vendedor);
+        vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
+        vendedor1.setListaProductos(listaProductos2);
+        vendedor1.setListaRecomendados(listaVendedoresRecomendados);
+        vendedor1.setListaMensajes(listaMensajes1);
+
+>>>>>>> master
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
@@ -409,6 +435,10 @@ public class RedVendedores {
         return vendedor.getListaVendedoresAliados();
     }
 
+    public ArrayList<Mensaje> obtenerListaMensajesVendedor(Vendedor vendedorLogeado) {
+        return vendedorLogeado.getListaMensajes();
+    }
+
     public Cuenta crearCuenta(String user, String password) throws UserException {
         Cuenta cuenta = new Cuenta();
         cuenta.setUsuario(user);
@@ -568,6 +598,23 @@ public class RedVendedores {
         return comentario;
     }
 
+    public boolean enviarMensaje(String mensaje, Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        Mensaje mensaje1 = new Mensaje();
+        mensaje1.setAutor(vendedorLogeado);
+        mensaje1.setContenido(mensaje);
+        vendedorAliado.getListaMensajes().add(mensaje1);
+        return true;
+
+    }
+
+    public boolean responderMensaje(String mensaje, Vendedor autor, Vendedor vendedorLogeado) {
+        Mensaje mensaje1 = new Mensaje();
+        mensaje1.setAutor(vendedorLogeado);
+        mensaje1.setContenido(mensaje);
+        autor.getListaMensajes().add(mensaje1);
+        return true;
+    }
+
 
     public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
         return vendedorAliado.verificarExisteMeGusta(vendedorLogeado);
@@ -630,6 +677,7 @@ public class RedVendedores {
         return vendedorLogeado.getListaRecomendados();
     }
 
+<<<<<<< HEAD
     public void aceptarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
         vendedorLogeado.aceptarSolicitud(vendedorSeleccionado);
         vendedorSeleccionado.aceptarSolicitud(vendedorLogeado);
@@ -638,6 +686,10 @@ public class RedVendedores {
     public void rechazarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
         vendedorLogeado.rechazarSolicitud(vendedorSeleccionado);
     }
+=======
+
+
+>>>>>>> master
 }
 
 

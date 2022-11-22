@@ -1,0 +1,13 @@
+.root{
+    -fx-background-color: #FCFDEF;
+}
+
+.button{
+    -fx-background-color: #78C5F7;
+    -fx-font-family: Futura;
+    -fx-border-radius: 5px 5px 5px 5px;
+}
+.label{
+    -fx-font-family: Futura;
+    -fx-background-radius: 9px;
+}

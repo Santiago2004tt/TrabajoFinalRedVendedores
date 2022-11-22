@@ -8,12 +8,15 @@ import java.util.ArrayList;
 public class Vendedor extends Usuario {
     //Atributs
 
+
     private Vendedor theVendedor;
     private ArrayList<Vendedor> listaVendedoresAliados;
 
     private ArrayList<Producto> listaProductos;
 
     private  ArrayList<Comentario> listaComentarios;
+
+    private ArrayList<Mensaje> listaMensajes;
 
     private ArrayList<MeGusta> listaMeGusta;
     private ArrayList<Vendedor> listaSolicitudes;
@@ -26,13 +29,13 @@ public class Vendedor extends Usuario {
         super(nombre, apellido, cedula, direccion, usuario);
         this.theVendedor = theVendedor;
         this.cuenta = cuenta;
-        listaComentarios= new ArrayList<Comentario>();
         listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaMeGusta = new ArrayList<MeGusta>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaComentarios = new ArrayList<Comentario>();
         listaRecomendados= new ArrayList<Vendedor>();
+        listaMensajes = new ArrayList<Mensaje>();
     }
 
     public ArrayList<MeGusta> getListaMeGusta() {
@@ -108,6 +111,15 @@ public class Vendedor extends Usuario {
     public void setListaRecomendados(ArrayList<Vendedor> listaRecomendados) {
         this.listaRecomendados = listaRecomendados;
     }
+
+    public ArrayList<Mensaje> getListaMensajes() {
+        return listaMensajes;
+    }
+
+    public void setListaMensajes(ArrayList<Mensaje> listaMensajes) {
+        this.listaMensajes = listaMensajes;
+    }
+
     //--------------------------------------crud de cuenta-------------------------------
     
     

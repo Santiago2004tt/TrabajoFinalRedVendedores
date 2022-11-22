@@ -192,6 +192,7 @@ public class VendedorAliadoController {
     private void agregarComentarioAction() {
         String mensaje ="";
         mensaje = comentarioField.getText();
+<<<<<<< HEAD
         if(mensaje.equals("")){
             mostrarMensaje("Notificacion Vendedor", "El vendedor", "Rellena el comentario", Alert.AlertType.ERROR);
         }else{
@@ -199,6 +200,30 @@ public class VendedorAliadoController {
             listaComentariosDate.add(comentarioAgregado);
             tableComentarios.refresh();
             mostrarMensaje("Notificacion Vendedor", "El vendedor", "Se envio correctamente el mensaje", Alert.AlertType.INFORMATION);
+=======
+        if(verificarTexto(mensaje)){
+            boolean comentarioAgregado = main.agregarComenterio(vendedorLogeado, vendedorAliado, mensaje);
+            if(comentarioAgregado){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Listo!!");
+                alert.setContentText("Comentario agregado");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
+                alert.showAndWait();
+                comentarioField.clear();
+                tableComentarios.refresh();
+
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Atencion");
+            alert.setContentText("Rellena los campos necesarios");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
+            alert.showAndWait();
+>>>>>>> master
         }
     }
 
