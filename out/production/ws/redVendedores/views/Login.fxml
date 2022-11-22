@@ -5,6 +5,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.LoginController">
@@ -27,7 +28,17 @@
       <TextField fx:id="userField" layoutX="280.0" layoutY="165.0" promptText="user@Example" />
       <Button fx:id="loginButton" layoutX="257.0" layoutY="258.0" mnemonicParsing="false" onAction="#logInUser" text="Iniciar sesion" />
       <PasswordField fx:id="passwordField" layoutX="280.0" layoutY="206.0" />
-      <Label layoutX="194.0" layoutY="366.0" prefHeight="17.0" prefWidth="114.0" text="Eres administrador?" textFill="#9a9292" />
-      <Button layoutX="303.0" layoutY="362.0" mnemonicParsing="false" text="Ingresa aqui" />
+      <Label layoutX="178.0" layoutY="367.0" prefHeight="17.0" prefWidth="126.0" text="Eres administrador?" textFill="#9a9292" />
+      <Button fx:id="btnIngresarAdministrador" layoutX="303.0" layoutY="362.0" mnemonicParsing="false" onAction="#iniciarSesionAdministrador" text="Ingresa aqui" />
+      <Polygon fx:id="t10" fill="#bcdaf5" layoutX="64.0" layoutY="309.0" points="-50.0, 40.0, 0.0, 67.0, -25.5, -19.0" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fx:id="t8" fill="#c8def2" layoutX="197.0" layoutY="286.0" points="-35.5, 51.0, -22.5, 17.0, -35.5, 10.0" stroke="#fcf9f9" strokeType="INSIDE" />
+      <Polygon fx:id="t1" fill="#c4e2ff" layoutX="42.0" layoutY="75.0" points="30.5, 38.0, 44.5, -48.0, 0.0, -60.0" stroke="#fffbfb" strokeType="INSIDE" />
+      <Polygon fx:id="t3" fill="#def7ff" layoutX="438.0" layoutY="85.0" points="0.0, -21.0, 44.5, -48.0, 0.0, -60.0" stroke="WHITE" strokeType="INSIDE" />
+      <Polygon fx:id="t2" fill="#d4eaff" layoutX="254.0" layoutY="35.0" points="-50.0, 40.0, -50.0, 17.0, -22.5, -10.0" stroke="#fffdfd" strokeType="INSIDE" />
+      <Polygon fx:id="t9" fill="#dceeff" layoutX="172.0" layoutY="188.0" points="-50.0, 40.0, -1.5, 7.0, -22.5, -10.0" stroke="#fcfafa" strokeType="INSIDE" />
+      <Polygon fx:id="t6" fill="#bee5ff" layoutX="510.0" layoutY="298.0" points="-64.5, 38.0, 11.5, -10.0, -22.5, -10.0" stroke="#fcfcfc" strokeType="INSIDE" />
+      <Polygon fx:id="t4" fill="#d1eaff" layoutX="522.0" layoutY="124.0" points="30.5, 38.0, 44.5, -48.0, 0.0, -60.0" stroke="#fffdfd" strokeType="INSIDE" />
+      <Polygon fx:id="t5" fill="#c4ddf5" layoutX="517.0" layoutY="204.0" points="-64.5, 38.0, -22.5, 11.0, -22.5, -10.0" stroke="#fcfcfc" strokeType="INSIDE" />
+      <Polygon fx:id="t7" fill="#bfd4e8" layoutX="336.0" layoutY="306.0" points="9.5, 37.0, -22.5, 14.0, -22.5, -10.0" stroke="#fffdfd" strokeType="INSIDE" />
    </children>
 </AnchorPane>

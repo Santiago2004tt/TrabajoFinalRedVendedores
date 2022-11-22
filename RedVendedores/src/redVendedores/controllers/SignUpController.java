@@ -1,6 +1,5 @@
 package redVendedores.controllers;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,20 +12,20 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import redVendedores.application.Main;
-import redVendedores.exception.VendedorException;
-import redVendedores.model.Estado;
-import redVendedores.model.Usuario;
+import redVendedores.exceptions.VendedorException;
+import redVendedores.exceptions.UserException;
+import redVendedores.model.Administrador;
+import redVendedores.model.Cuenta;
 import redVendedores.model.Vendedor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class SignUpController {
 
     Main main = new Main();
     ObservableList<Vendedor> listaVendedorData= FXCollections.observableArrayList();
     Vendedor vendedorSeleccionado = null;
+    Administrador administradorLogeado = null;
     @FXML
     private Button btnActualizar;
 
@@ -35,6 +34,10 @@ public class SignUpController {
 
     @FXML
     private Button btnCrear;
+
+    @FXML
+    private Button btnNuevo;
+
 
     @FXML
     private Button btnEliminar;
@@ -75,16 +78,13 @@ public class SignUpController {
     @FXML
     private TextField txtUsuario;
 
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
-    void actualizarVendedor(ActionEvent event) {
+    void actualizarVendedor(ActionEvent event) throws UserException {
         actualizarVendedorAction();
     }
 
-    private void actualizarVendedorAction() {
+    private void actualizarVendedorAction() throws UserException {
         String nombre = txtNombre.getText();
         String apellido = txtApellidos.getText();
         String direccion = txtDireccion.getText();
@@ -92,17 +92,19 @@ public class SignUpController {
         String usuario = txtUsuario.getText();
         String contrasenia = txtClave.getText();
 
-
         if(vendedorSeleccionado == null){
             mostrarMensaje("Notificacion vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             //2. Validar la informaci�n
             if(verificarCampos(nombre, apellido, direccion, cedula,contrasenia,usuario) == true){
-                Usuario usuarioNuevo = new Usuario(usuario, contrasenia);
-                main.actualizarVendedor(vendedorSeleccionado.getCedula(),nombre, apellido, direccion, cedula,usuarioNuevo);
-                tableListaVendedores.refresh();
+                if(main.actualizarCuenta(usuario,contrasenia,cedula)){
+                    main.actualizarVendedor(vendedorSeleccionado.getCedula(),nombre, apellido, direccion, cedula);
+                    tableListaVendedores.refresh();
+                }else{
+                    mostrarMensaje("Notificacion vendedor", "Vendedor no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
+                }
             }else{
-                mostrarMensaje("Notificaci�n Estudiante", "Estudiante no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificacion vendedor", "Vendedor no actualizado", "Datos invalidos", Alert.AlertType.ERROR);
 
             }
 
@@ -111,37 +113,49 @@ public class SignUpController {
 
     @FXML
     void cerrarSesion(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Sign Up");
-        stage.setScene(scene);
-        stage.show();
+        main.mostrarLogin();
     }
 
     @FXML
-    void crearVendedor(ActionEvent event) throws VendedorException {
+    void nuevoVendedor(ActionEvent event) {
+        nuevoVendedorAction();
+    }
+
+    private void nuevoVendedorAction() {
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtCedula.setText("");
+        txtDireccion.setText("");
+        txtUsuario.setText("");
+        txtClave.setText("");
+    }
+
+    @FXML
+    void crearVendedor(ActionEvent event) throws VendedorException, UserException {
         crearVendedorAction();
     }
 
-    private void crearVendedorAction() throws VendedorException {
+    private void crearVendedorAction() throws VendedorException, UserException {
         String name = txtNombre.getText();
         String apellidos = txtApellidos.getText();
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
         String password = txtClave.getText();
         String user =txtUsuario.getText();
-        Usuario usuario = new Usuario(user, password);
-        if(verificarCampos(name, apellidos, direccion, cedula, password, user) == true){
 
+        if(verificarCampos(name, apellidos, direccion, cedula, password, user) == true){
             Vendedor vendedor = null;
+            Cuenta cuenta = null;
             try {
-                vendedor = main.crearVendedor(name, apellidos, cedula, direccion, usuario);
+                cuenta = main.crearUsuario(user, password);
+                vendedor = main.crearVendedor(name, apellidos, cedula, direccion, cuenta);
                 listaVendedorData.add(vendedor);
                 mostrarMensaje("Notificacion vendedor", "Vendedor registrado", "El Vendedor se ha registrado con exito", Alert.AlertType.INFORMATION);
                 limpiarDatos();
             } catch (VendedorException e){
                 mostrarMensaje("Notificacion vendedor", "El vendedor no registrado", "El vendedor con cedula "+cedula+" ya se encuentra registrado", Alert.AlertType.ERROR);
+            } catch (UserException e){
+                mostrarMensaje("Notificacion vendedor", "El vendedor no registrado", "El vendedor con usuario "+user+" ya se encuentra registrado", Alert.AlertType.ERROR);
             }
         }
     }
@@ -153,7 +167,7 @@ public class SignUpController {
 
     private void eliminarVendedorAction() {
         if(vendedorSeleccionado == null){
-            mostrarMensaje("Notificacion Estudiante", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             boolean eliminado = main.eliminarVendedor(vendedorSeleccionado.getCedula());
             if(eliminado){
@@ -199,8 +213,8 @@ public class SignUpController {
         txtApellidos.setText(vendedorSeleccionado.getApellido());
         txtCedula.setText(vendedorSeleccionado.getCedula());
         txtDireccion.setText(vendedorSeleccionado.getDireccion());
-        txtUsuario.setText(vendedorSeleccionado.getUsuario().getUsuario());
-        txtClave.setText(vendedorSeleccionado.getUsuario().getContrasenia());;
+        txtUsuario.setText(vendedorSeleccionado.getCuenta().getUsuario());
+        txtClave.setText(vendedorSeleccionado.getCuenta().getContrasenia());;
     }
 
     public void setMain(Main main){
@@ -241,6 +255,17 @@ public class SignUpController {
         alert.setTitle(titulo);
         alert.setHeaderText(header);
         alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog");
         alert.showAndWait();
+    }
+
+
+    public void ingresarBienvenida(Administrador administrador) {
+        this.administradorLogeado = administrador;
+        String nombre ="";
+        nombre = administrador.getNombre();
+        txtNombreBienvenida.setText("Que bueno verte de nuevo, " + nombre + "!!");
     }
 }

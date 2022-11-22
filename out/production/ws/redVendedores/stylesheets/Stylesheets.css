@@ -1,0 +1,65 @@
+.root{
+    -fx-background-color: #FCFDEF;
+}
+
+.button{
+    -fx-background-color: #78C5F7;
+    -fx-font-family: Futura;
+    -fx-border-radius: 5px 5px 5px 5px;
+}
+.text-field{
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+}
+
+.label{
+    -fx-font-family: Futura;
+}
+.table-view{
+    -fx-border-radius: 5px;
+    -fx-font-family: Futura;
+    -fx-background-color: #FCFDEF;
+}
+.tab-pane{
+    -fx-border-radius: 5px;
+    -fx-background-color: black;
+    -fx-border-color: black;
+
+}
+.password-field{
+    -fx-font-size:12px ;
+}
+#tab1, #tab2, #tab3, #tab4, .tabs{
+    -fx-background-color: #FCFDEF;
+    -fx-border-radius: 5px;
+    -fx-font-family: Futura;
+}
+
+.table-column{
+    -fx-background-color: #8cc1ee;
+    -fx-border-color: #3b3a3a;
+    -fx-border-radius: 2px;
+    -fx-font-family: Futura;
+}
+#pane1,#pane2, #pane4, .pane{
+    -fx-background-color: #cfe2f1;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+#pane3, .pane{
+    -fx-background-color: #cfe2f1;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

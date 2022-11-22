@@ -2,93 +2,73 @@ package redVendedores.model;
 
 import java.util.Objects;
 
-public class Usuario {
-    private String usuario;
-    private String contrasenia;
+public abstract class Usuario {
 
-    /**
-     * constructor method for usuario
-     * @param usuario
-     * @param contrasenia
-     */
-    public Usuario(String usuario, String contrasenia) {
+    private String nombre;
+    private String apellido;
+    private String cedula;
+    private String direccion;
+    private Usuario usuario;
+
+    public Usuario(String nombre, String apellido, String cedula, String direccion, Usuario usuario) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.direccion = direccion;
         this.usuario = usuario;
-        this.contrasenia = contrasenia;
     }
 
-    /**
-     * empty constructor method for usuario
-     */
     public Usuario() {
+
     }
 
-    /**
-     * Usuario getter method
-     * @return
-     */
-    public String getUsuario() {
-        return usuario;
+    public String getNombre() {
+        return nombre;
     }
 
-    /**
-     * Usuario setter method
-     * @param usuario
-     */
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    /**
-     * contrasenia getter method
-     * @return
-     */
-    public String getContrasenia() {
-        return contrasenia;
+    public String getApellido() {
+        return apellido;
     }
 
-    /**
-     * contrasenia setter method
-     * @param contrasenia
-     */
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    /**
-     * Equals method for Usuario class
-     * @param o
-     * @return
-     */
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario1 = (Usuario) o;
-        return Objects.equals(usuario, usuario1.usuario) && Objects.equals(contrasenia, usuario1.contrasenia);
+
+        Usuario usuario = (Usuario) o;
+
+        return Objects.equals(cedula, usuario.cedula);
     }
 
-    /**
-     * hashCode method for usuario class
-     * @return
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(usuario, contrasenia);
+        return cedula != null ? cedula.hashCode() : 0;
     }
-
-    /**
-     * toString method for Usuario class
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "usuario='" + usuario + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                '}';
-    }
-
-
 }
 
 
