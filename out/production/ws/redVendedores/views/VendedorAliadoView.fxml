@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="641.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.VendedorAliadoController">
    <children>
       <TabPane layoutX="464.0" layoutY="14.0" prefHeight="426.0" prefWidth="306.0" tabClosingPolicy="UNAVAILABLE">
@@ -89,7 +88,7 @@
       <Button fx:id="volverButton" layoutX="13.0" layoutY="599.0" mnemonicParsing="false" onAction="#volverAtras" text="Volver" />
       <Label fx:id="fechaLabel" layoutX="249.0" layoutY="458.0" prefHeight="17.0" prefWidth="127.0" />
       <Label fx:id="numeroMeGusta" layoutX="102.0" layoutY="531.0" prefHeight="17.0" prefWidth="56.0" text="Label" />
-      <Button fx:id="comentarButton" layoutX="555.0" layoutY="578.0" mnemonicParsing="false" onAction="#agregarComentario" text="AgregarComentario" />
+      <Button fx:id="comentarButton" layoutX="555.0" layoutY="578.0" mnemonicParsing="false" onAction="#agregarComentario" text="Agregar Comentario" />
       <TextField fx:id="comentarioField" layoutX="469.0" layoutY="456.0" prefHeight="97.0" prefWidth="299.0" />
    </children>
 </AnchorPane>
