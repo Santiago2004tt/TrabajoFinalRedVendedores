@@ -221,21 +221,21 @@ public class Main extends Application {
 
     public void mostrarRecomendaciones(Vendedor vendedorLogeado){
         try{
+            //carga el fxml
             FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
             loader.setLocation(Main.class.getResource("../views/RecomendacionesVenedoresViews.fxml"));
             AnchorPane rootLayout = loader.load();
-
+            //invoca los controladores
             RecomendacionVendedoresAliadosController controller = loader.getController();
-            controller.setMain(this);
             controller.obtenerVendedorLogeado(vendedorLogeado);
-            controller.actualizarTablaRecomendados(vendedorLogeado.getCedula());
-
+            controller.setMain(this);
+            //inicializa la escena
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
-            stage.setTitle("Recomendaciones y solicitudes");
+            stage.setTitle("Bienvenido al muro");
             stage.show();
-        } catch (VendedorException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

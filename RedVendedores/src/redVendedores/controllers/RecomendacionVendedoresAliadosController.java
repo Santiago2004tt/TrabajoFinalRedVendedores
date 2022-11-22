@@ -18,7 +18,7 @@ public class RecomendacionVendedoresAliadosController {
     Main main = new Main();
     ObservableList<Vendedor> listaVendedorData= FXCollections.observableArrayList();
     Vendedor vendedorSeleccionado = null;
-    Vendedor vendedorLogeado;
+    private Vendedor vendedorLogeado;
 
     @FXML
     private Button btnAtras;
@@ -68,6 +68,7 @@ public class RecomendacionVendedoresAliadosController {
 
     @FXML
     void regresar(ActionEvent event) {
+        main.mostrarPanelVendedor(vendedorLogeado);
 
     }
 
@@ -80,14 +81,14 @@ public class RecomendacionVendedoresAliadosController {
         });
     }
 
-    public void setMain(Main main) throws VendedorException {
+    public void setMain(Main main){
         this.main = main;
         tableRecomendaciones.getItems().clear();
-        tableRecomendaciones.setItems((ObservableList<Vendedor>) main.obtenerListaVendedoresRecomendados(vendedorLogeado));
+        tableRecomendaciones.setItems(obtenerListaVendedoresRecomendados());
     }
 
-    private ObservableList<Vendedor> obtenerListaVendedores() throws VendedorException {
-        listaVendedorData.addAll(obtenerListaVendedores());
+    private ObservableList<Vendedor> obtenerListaVendedoresRecomendados() {
+        listaVendedorData.addAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
         return listaVendedorData;
     }
 
