@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Vendedor extends Usuario {
     //Atributs
 
+
     private Vendedor theVendedor;
     private ArrayList<Vendedor> listaVendedoresAliados;
 
@@ -15,26 +16,26 @@ public class Vendedor extends Usuario {
 
     private  ArrayList<Comentario> listaComentarios;
 
+    private ArrayList<Mensaje> listaMensajes;
+
     private ArrayList<MeGusta> listaMeGusta;
     private ArrayList<Vendedor> listaSolicitudes;
     private ArrayList<Vendedor> listaRecomendados;
 
-    private Muro muro;
 
     private Cuenta cuenta;
 
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario, Vendedor theVendedor, Muro muro, Cuenta cuenta) {
+    public Vendedor(String nombre, String apellido, String cedula, String direccion, Usuario usuario, Vendedor theVendedor, Cuenta cuenta) {
         super(nombre, apellido, cedula, direccion, usuario);
         this.theVendedor = theVendedor;
-        this.muro = muro;
         this.cuenta = cuenta;
-        listaComentarios= new ArrayList<Comentario>();
         listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaMeGusta = new ArrayList<MeGusta>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaComentarios = new ArrayList<Comentario>();
         listaRecomendados= new ArrayList<Vendedor>();
+        listaMensajes = new ArrayList<Mensaje>();
     }
 
     public ArrayList<MeGusta> getListaMeGusta() {
@@ -86,13 +87,6 @@ public class Vendedor extends Usuario {
         this.listaComentarios = listaComentarios;
     }
 
-    public Muro getMuro() {
-        return muro;
-    }
-
-    public void setMuro(Muro muro) {
-        this.muro = muro;
-    }
 
     public Cuenta getCuenta() {
         return cuenta;
@@ -117,6 +111,15 @@ public class Vendedor extends Usuario {
     public void setListaRecomendados(ArrayList<Vendedor> listaRecomendados) {
         this.listaRecomendados = listaRecomendados;
     }
+
+    public ArrayList<Mensaje> getListaMensajes() {
+        return listaMensajes;
+    }
+
+    public void setListaMensajes(ArrayList<Mensaje> listaMensajes) {
+        this.listaMensajes = listaMensajes;
+    }
+
     //--------------------------------------crud de cuenta-------------------------------
     
     
@@ -162,56 +165,7 @@ public class Vendedor extends Usuario {
 
 
     //-----------------------------crud----------------------
-    /**
-     * Muro create method
-     * @param mensaje
-     * @param comentarios
-     * @param me_gusta
-     * @return
-     * @throws MuroException
-     */
-    public Muro crearMuro(String mensaje, String comentarios, int me_gusta) throws MuroException {
-        Muro nuevoMuro = null;
-        if(muro == null){
-            nuevoMuro = new Muro();
-            nuevoMuro.setComentarios(comentarios);
-            nuevoMuro.setMensaje(mensaje);
-            nuevoMuro.setMe_gusta(me_gusta);
-        }else{
-            throw new MuroException("el muro ya existe");
-        }
 
-
-        return nuevoMuro;
-    }
-
-    /**
-     * Muro delete method
-     */
-    public void deleteMuro (){
-        muro = null;
-    }
-
-    /**
-     * Muro update method
-     * @param mensaje
-     * @param comentarios
-     * @param me_gusta
-     * @return
-     * @throws MuroException
-     */
-    public boolean actualizarMuro(String mensaje, String comentarios, int me_gusta) throws MuroException {
-
-        if(muro != null){
-            muro.setComentarios(comentarios);
-            muro.setMensaje(mensaje);
-            muro.setMe_gusta(me_gusta);
-            return true;
-        }else{
-            throw new MuroException("El muro no existe");
-        }
-
-    }
 
 
     public boolean verificarCuenta(String usuario, String password) {
@@ -268,5 +222,36 @@ public class Vendedor extends Usuario {
             }
         }
         return true;
+    }
+
+    public void aceptarSolicitud(Vendedor vendedorSeleccionado) {
+       if( existeVendedorAliado(vendedorSeleccionado)){
+           listaVendedoresAliados.add(vendedorSeleccionado);
+           quitarLista(vendedorSeleccionado);
+       }
+    }
+
+    private void quitarLista(Vendedor vendedorSeleccionado) {
+        for (Vendedor vendedor: listaSolicitudes) {
+            if(vendedor.getCedula().equals(vendedorSeleccionado.getCedula())){
+                listaSolicitudes.remove(vendedor);
+                break;
+            }
+        }
+    }
+
+    private boolean existeVendedorAliado(Vendedor vendedorSeleccionado) {
+        for (Vendedor vendedor: listaVendedoresAliados) {
+            if(vendedor.getCedula().equals(vendedorSeleccionado.getCedula())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void rechazarSolicitud(Vendedor vendedorSeleccionado) {
+        if(existeVendedorAliado(vendedorSeleccionado)){
+            quitarLista(vendedorSeleccionado);
+        }
     }
 }

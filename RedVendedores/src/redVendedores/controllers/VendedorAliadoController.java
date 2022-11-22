@@ -185,43 +185,40 @@ public class VendedorAliadoController {
 
     @FXML
     void agregarComentario(ActionEvent event) {
-        //agregarComentarioAction();
+        agregarComentarioAction();
 
+    }
+
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog");
+        alert.showAndWait();
     }
 
     private void agregarComentarioAction() {
-        String mensaje ="";
+        String mensaje = "";
         mensaje = comentarioField.getText();
-        if(verificarTexto(mensaje)){
-            boolean comentarioAgregado = main.agregarComenterio(vendedorLogeado, vendedorAliado, mensaje);
-            if(comentarioAgregado){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Listo!!");
-                alert.setContentText("Comentario agregado");
-                DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
-                dialogPane.getStyleClass().add("dialog");
-                alert.showAndWait();
-                comentarioField.clear();
-                tableComentarios.refresh();
+        if (mensaje.equals("")) {
+            mostrarMensaje("Notificacion Vendedor", "El vendedor", "Rellena el comentario", Alert.AlertType.ERROR);
+        } else {
+            Comentario comentarioAgregado = main.agregarComenterio(vendedorLogeado, vendedorAliado, mensaje);
+            listaComentariosDate.add(comentarioAgregado);
+            tableComentarios.refresh();
+            mostrarMensaje("Notificacion Vendedor", "El vendedor", "Se envio correctamente el mensaje", Alert.AlertType.INFORMATION);
 
-            }
-        }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Atencion");
-            alert.setContentText("Rellena los campos necesarios");
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog");
-            alert.showAndWait();
         }
     }
 
-    private boolean verificarTexto(String mensaje) {
-        if(mensaje.equals("")){
+    private boolean verificarTexto (String mensaje){
+        if (mensaje.equals("")) {
             return false;
         }
         return true;
     }
-
 }

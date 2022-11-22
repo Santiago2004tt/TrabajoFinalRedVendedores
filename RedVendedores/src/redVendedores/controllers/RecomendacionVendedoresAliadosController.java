@@ -18,7 +18,7 @@ public class RecomendacionVendedoresAliadosController {
     Main main = new Main();
     ObservableList<Vendedor> listaVendedorData= FXCollections.observableArrayList();
     Vendedor vendedorSeleccionado = null;
-    Vendedor vendedorLogeado;
+    private Vendedor vendedorLogeado;
 
     @FXML
     private Button btnAtras;
@@ -38,16 +38,34 @@ public class RecomendacionVendedoresAliadosController {
     @FXML
     private TableView<Vendedor> tableRecomendaciones;
 
-    @FXML
-    private Button txtBuscarVendedor;
 
     @FXML
     private TextField txtFiltroMeGusta;
 
     @FXML
     void cambiarSolicitudes(ActionEvent event) {
-
+        main.mostrarSolicitudes(vendedorLogeado);
     }
+    @FXML
+    void buscarVendedor(ActionEvent event) {
+        buscarVendedorAction();
+    }
+
+
+    private void buscarVendedorAction() {
+        main.actualizarTablaRecomendados(vendedorLogeado);
+        listaVendedorData.removeAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
+        tableRecomendaciones.refresh();
+        aniadirTabla();
+        tableRecomendaciones.refresh();
+        mostrarMensaje("Notificacion Vendedor", "Vendedores encontrados", "Los vendedores se han encontrado", Alert.AlertType.INFORMATION);
+    }
+
+    private void aniadirTabla() {
+        listaVendedorData.addAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
+        tableRecomendaciones.setItems(listaVendedorData);
+    }
+
 
     @FXML
     void enviarSolicitud(ActionEvent event) {
@@ -59,15 +77,18 @@ public class RecomendacionVendedoresAliadosController {
             mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             boolean enviarSolicitud =  main.enviarSolicitud(vendedorLogeado, vendedorSeleccionado);
-            mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "El vendedor", Alert.AlertType.INFORMATION);
-            if(enviarSolicitud){
-                mostrarMensaje("Notificacion Vendedor", "El vendedor ", "El vendedor ya tiene solicitud", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificacion Vendedor", "La invitacion fue enviada", "la solicitud fue enviada con exito", Alert.AlertType.INFORMATION);
+            listaVendedorData.remove(vendedorSeleccionado);
+            tableRecomendaciones.refresh();
+            if(enviarSolicitud == false){
+                mostrarMensaje("Notificacion Vendedor", "El vendedor ya tiene solicitud ", "El vendedor ya tiene una solicitud", Alert.AlertType.ERROR);
             }
         }
     }
 
     @FXML
     void regresar(ActionEvent event) {
+        main.mostrarPanelVendedor(vendedorLogeado);
 
     }
 
@@ -83,17 +104,14 @@ public class RecomendacionVendedoresAliadosController {
     public void setMain(Main main) throws VendedorException {
         this.main = main;
         tableRecomendaciones.getItems().clear();
-        tableRecomendaciones.setItems((ObservableList<Vendedor>) main.obtenerListaVendedoresRecomendados(vendedorLogeado));
+        tableRecomendaciones.setItems(obtenerListaVendedoresRecomendados());
     }
 
-    private ObservableList<Vendedor> obtenerListaVendedores() throws VendedorException {
-        listaVendedorData.addAll(obtenerListaVendedores());
+    private ObservableList<Vendedor> obtenerListaVendedoresRecomendados() throws VendedorException {
+        listaVendedorData.addAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
         return listaVendedorData;
     }
 
-    public void actualizarTablaRecomendados(String cedula) throws VendedorException {
-        main.actualizarTablaRecomendados(cedula);
-    }
 
     public void obtenerVendedorLogeado(Vendedor vendedorLogeado) {
         this.vendedorLogeado = vendedorLogeado;
@@ -106,7 +124,7 @@ public class RecomendacionVendedoresAliadosController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
         dialogPane.getStyleClass().add("dialog");
         alert.showAndWait();
     }

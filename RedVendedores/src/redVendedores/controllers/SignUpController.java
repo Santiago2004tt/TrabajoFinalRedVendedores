@@ -256,7 +256,7 @@ public class SignUpController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
         dialogPane.getStyleClass().add("dialog");
         alert.showAndWait();
     }
