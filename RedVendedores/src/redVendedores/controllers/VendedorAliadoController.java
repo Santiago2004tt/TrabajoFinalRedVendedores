@@ -199,7 +199,7 @@ public class VendedorAliadoController {
                 alert.setHeaderText("Listo!!");
                 alert.setContentText("Comentario agregado");
                 DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
                 dialogPane.getStyleClass().add("dialog");
                 alert.showAndWait();
                 comentarioField.clear();
@@ -211,7 +211,7 @@ public class VendedorAliadoController {
             alert.setHeaderText("Atencion");
             alert.setContentText("Rellena los campos necesarios");
             DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }

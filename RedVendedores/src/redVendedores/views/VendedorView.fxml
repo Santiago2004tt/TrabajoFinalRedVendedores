@@ -47,33 +47,10 @@
           </Tab>
         </tabs>
       </TabPane>
-      <ImageView fx:id="imagenProducto" fitHeight="168.0" fitWidth="191.0" layoutX="79.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="nombreProductoLabel" layoutX="72.0" layoutY="283.0" prefHeight="18.0" prefWidth="191.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="codigoProductoLabel" layoutX="75.0" layoutY="331.0" prefHeight="17.0" prefWidth="191.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="categoriaProductoLabel" layoutX="76.0" layoutY="375.0" prefHeight="17.0" prefWidth="191.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="precioProductoLabel" layoutX="79.0" layoutY="416.0" prefHeight="17.0" prefWidth="191.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <Button fx:id="eliminarProductoButton" layoutX="75.0" layoutY="512.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar" />
       <Button fx:id="actualizarProductoButton" layoutX="220.0" layoutY="512.0" mnemonicParsing="false" onAction="#actualizarProducto" text="Actualizar" />
-      <Label fx:id="estadoProductoLabel" layoutX="81.0" layoutY="452.0" prefHeight="17.0" prefWidth="191.0" textFill="#726e6e" />
       <Button fx:id="irMuroButton" layoutX="803.0" layoutY="514.0" mnemonicParsing="false" onAction="#irMuroVendedor" text="Ir a muro" />
-      <Button fx:id="solicitudesButton" layoutX="611.0" layoutY="514.0" mnemonicParsing="false" onAction="#obtenerSolicitudesAmistad" text="Solicitudes de amistad" />
-      <Label fx:id="fechaLabel" layoutX="310.0" layoutY="452.0" prefHeight="17.0" prefWidth="127.0" />
+      <Button fx:id="solicitudesButton" layoutX="645.0" layoutY="514.0" mnemonicParsing="false" onAction="#obtenerSolicitudesAmistad" text="Solicitudes de amistad" />
       <Pane fx:id="pane1" layoutX="14.0" layoutY="27.0" prefHeight="73.0" prefWidth="571.0">
          <children>
             <Label fx:id="bienvenidaLabel" layoutX="7.0" layoutY="22.0" prefHeight="31.0" prefWidth="314.0" text="Que bueno verte de vuelta, ">
@@ -81,10 +58,42 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="crearPublicacionButton" layoutX="328.0" layoutY="24.0" mnemonicParsing="false" onAction="#crearPublucacion" text="Crear publicacion" />
+            <Button fx:id="crearPublicacionButton" layoutX="327.0" layoutY="25.0" mnemonicParsing="false" onAction="#crearPublucacion" text="Crear publicacion" />
             <Button fx:id="cerrarSesionButton" layoutX="458.0" layoutY="24.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
          </children>
       </Pane>
-      <Label fx:id="txtCantidadMeGusta" layoutX="343.0" layoutY="508.0" prefHeight="25.0" prefWidth="183.0" text="Tienes" />
+      <Label fx:id="txtCantidadMeGusta" layoutX="343.0" layoutY="513.0" prefHeight="25.0" prefWidth="183.0" text="Tienes" />
+      <Button fx:id="mensajesButton" layoutX="550.0" layoutY="514.0" mnemonicParsing="false" onAction="#mostrarMensajes" text="Mensajes" />
+      <Pane id="pane5" layoutX="54.0" layoutY="109.0" prefHeight="363.0" prefWidth="434.0">
+         <children>
+            <Pane id="pane6" layoutX="-29.0" layoutY="14.0" prefHeight="382.0" prefWidth="449.0">
+               <children>
+                  <ImageView fx:id="imagenProducto" fitHeight="148.0" fitWidth="174.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="nombreProductoLabel" layoutX="38.0" layoutY="162.0" prefHeight="18.0" prefWidth="191.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="codigoProductoLabel" layoutX="38.0" layoutY="201.0" prefHeight="17.0" prefWidth="191.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="categoriaProductoLabel" layoutX="38.0" layoutY="243.0" prefHeight="17.0" prefWidth="191.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="precioProductoLabel" layoutX="38.0" layoutY="289.0" prefHeight="17.0" prefWidth="191.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="estadoProductoLabel" layoutX="38.0" layoutY="356.0" prefHeight="17.0" prefWidth="191.0" textFill="#726e6e" />
+                  <Label fx:id="fechaLabel" layoutX="280.0" layoutY="356.0" prefHeight="17.0" prefWidth="127.0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

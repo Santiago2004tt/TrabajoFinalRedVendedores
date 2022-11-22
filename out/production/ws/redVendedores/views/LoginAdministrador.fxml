@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="redVendedores.controllers.LoginAdministradorController">
     <children>
-        <Label alignment="CENTER" layoutX="-2.0" layoutY="91.0" prefHeight="38.0" prefWidth="600.0" text="Que bueno verte de nuevo admin!" textAlignment="CENTER">
+        <Label alignment="CENTER" layoutX="96.0" layoutY="92.0" prefHeight="38.0" prefWidth="409.0" text="Que bueno verte de nuevo admin!" textAlignment="CENTER">
             <font>
                 <Font name="Arial" size="24.0" />
             </font>
@@ -27,7 +27,7 @@
         <TextField fx:id="txtUsuario" layoutX="280.0" layoutY="165.0" promptText="user@Example" />
         <Button fx:id="btnIniciarSesion" layoutX="257.0" layoutY="258.0" mnemonicParsing="false" onAction="#iniciarSesionAdministrador" text="Iniciar sesión" />
         <PasswordField fx:id="txtClave" layoutX="280.0" layoutY="206.0" />
-        <Label layoutX="203.0" layoutY="366.0" prefHeight="17.0" prefWidth="114.0" text="Eres vendedor?" textFill="#9a9292" />
+        <Label layoutX="203.0" layoutY="366.0" prefHeight="17.0" prefWidth="97.0" text="Eres vendedor?" textFill="#9a9292" />
         <Button fx:id="btnRegresar" layoutX="303.0" layoutY="362.0" mnemonicParsing="false" onAction="#regresar" text="Ingresa aquí" />
     </children>
 

@@ -29,6 +29,9 @@ public class VendedorController {
     private Button actualizarProductoButton;
 
     @FXML
+    private Button mensajesButton;
+
+    @FXML
     private Button cerrarSesionButton;
 
     @FXML
@@ -119,6 +122,9 @@ public class VendedorController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Listo!!");
             alert.setContentText("Producto eliminado");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
             listaProductosData.remove(productoSeleccionado);
             limpiarCamposProducto();
@@ -126,6 +132,9 @@ public class VendedorController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Error :(");
             alert.setContentText("Imposible eliminar el producto");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
             alert.showAndWait();
         }
     }
@@ -216,5 +225,11 @@ public class VendedorController {
     @FXML
     void cerrarSesion(ActionEvent event) {
         main.mostrarLogin();
+    }
+
+    @FXML
+    void mostrarMensajes(ActionEvent event) {
+        main.mostrarVentanaMensajes(vendedorLogeado);
+
     }
 }
