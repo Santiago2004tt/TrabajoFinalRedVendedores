@@ -2,6 +2,7 @@ package redVendedores.application;
 
 //imports
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -238,9 +239,31 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (VendedorException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    public void mostrarSolicitudes(Vendedor vendedorLogeado){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/SolicitudesViews.fxml"));
+            AnchorPane rootLayout = loader.load();
+            SolicitudesController controller = loader.getController();
+            controller.obtenerVendedorLogeado(vendedorLogeado);
+            controller.setMain(this);
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Solicitudes");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+
+
+        } catch (VendedorException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     //-----------RESTO DE METODOS------------
@@ -361,7 +384,7 @@ public class Main extends Application {
     }
 
 
-    public boolean agregarComenterio(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
+    public Comentario agregarComenterio(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
         return red.agregarComentario(vendedorLogeado, vendedorAliado, mensaje);
     }
 
@@ -386,8 +409,8 @@ public class Main extends Application {
         return red.obtenerListaVendedoresSolicitud(vendedorLogeado);
     }
 
-    public void actualizarTablaRecomendados(String cedula) throws VendedorException {
-        red.actualizarTablaRecomendados(cedula);
+    public void actualizarTablaRecomendados(Vendedor vendedor) {
+        red.actualizarTablaRecomendados(vendedor);
     }
 
     public boolean enviarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
@@ -396,5 +419,17 @@ public class Main extends Application {
 
     public ArrayList<Vendedor> obtenerListaVendedoresRecomendados(Vendedor vendedorLogeado) {
         return red.obtenerListaVendedoresRecomendados(vendedorLogeado);
+    }
+
+    public ArrayList<Vendedor> obtenerListaSolicitudes(Vendedor vendedorLogeado) {
+        return red.obtenerListaVendedoresSolicitud(vendedorLogeado);
+    }
+
+    public void aceptarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        red.aceptarSolicitud(vendedorLogeado, vendedorSeleccionado);
+    }
+
+    public void rechazarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        red.rechazarSolicitud(vendedorLogeado, vendedorSeleccionado);
     }
 }

@@ -34,15 +34,6 @@ public class RedVendedores {
         vendedor.setApellido("Martinez");
         vendedor.setCedula("123");
         vendedor.setDireccion("en una casa");
-        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
-        ArrayList<Vendedor> listaVendedoresAliados2 = new ArrayList<Vendedor>();
-        Comentario comentario = new Comentario();
-        comentario.setMensaje("Ofrece buenos productos");
-        ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
-        listaComentarios.add(comentario);
-        vendedor.setListaComentarios(listaComentarios);
-        vendedor.setListaVendedoresAliados(listaVendedoresAliados2);
-        vendedor.setListaProductos(listaProductos);
         Cuenta cuenta = new Cuenta("pepito","pepe123");
         vendedor.setCuenta(cuenta);
         listaCuentas.add(cuenta);
@@ -50,18 +41,10 @@ public class RedVendedores {
         //-----------------------------------
 
         Vendedor vendedor1 = new Vendedor();
-        ArrayList<Vendedor> listaVendedoresRecomendados = new ArrayList<Vendedor>();
         vendedor1.setNombre("miguel");
         vendedor1.setApellido("garcia");
         vendedor1.setCedula("7");
         vendedor1.setDireccion("Waza");
-        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
-        ArrayList<Producto> listaProductos2 = new ArrayList<Producto>();
-        listaVendedoresAliados.add(vendedor);
-        vendedor1.setListaVendedoresAliados(listaVendedoresAliados);
-        vendedor1.setListaProductos(listaProductos2);
-        vendedor1.setListaRecomendados(listaVendedoresRecomendados);
-
         Cuenta cuenta1 = new Cuenta("Pachito","elpacho123");
         vendedor1.setCuenta(cuenta1);
         listaCuentas.add(cuenta1);
@@ -576,13 +559,13 @@ public class RedVendedores {
         return vendedorAliado.getListaComentarios();
     }
 
-    public boolean agregarComentario(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
+    public Comentario agregarComentario(Vendedor vendedorLogeado, Vendedor vendedorAliado, String mensaje) {
 
         Comentario comentario = new Comentario();
         comentario.setVendedor(vendedorLogeado);
         comentario.setMensaje(mensaje);
         vendedorAliado.getListaComentarios().add(comentario);
-        return true;
+        return comentario;
     }
 
 
@@ -609,23 +592,23 @@ public class RedVendedores {
         return vendedorLogeado.obtenerListaVendedorSolicitud();
     }
 
-    public void actualizarTablaRecomendados(String cedula) throws VendedorException {
-        Vendedor vendedorAux = buscarVendedor(cedula);
-        ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<Vendedor>();
+    public ArrayList<Vendedor> actualizarTablaRecomendados(Vendedor vendedor) {
 
-        for (Vendedor vendedor: listaVendedores) {
-            if(verificarVendedorRepetido(vendedor, vendedorAux) != false){
-                if(verificarVendedorRepetidoAliados(vendedor, vendedorAux) != false){
-                    vendedorAux.agregarVendedorRecomendado(vendedor);
+        for (Vendedor vendedor1: listaVendedores) {
+            if(verificarVendedorRepetido(vendedor1, vendedor)){
+                if(verificarVendedorRepetidoAliados(vendedor1, vendedor)){
+                    if(verificarVendedorRepetidoAliados(vendedor, vendedor1)){
+                        vendedor.agregarVendedorRecomendado(vendedor1);
+                    }
                 }
             }
         }
+        return vendedor.getListaRecomendados();
     }
 
     private boolean verificarVendedorRepetidoAliados(Vendedor vendedor, Vendedor vendedorAux) {
-        ArrayList<Vendedor> listaVendedoresAliados = vendedorAux.getListaVendedoresAliados();
-        for (Vendedor vendedor1 : listaVendedoresAliados) {
-            if(vendedor1.getNombre().equals(vendedor.getNombre())){
+        for (Vendedor vendedor1 : vendedorAux.getListaRecomendados()) {
+            if(vendedor1.getCedula().equals(vendedor.getCedula())){
                 return false;
             }
         }
@@ -645,6 +628,15 @@ public class RedVendedores {
 
     public ArrayList<Vendedor> obtenerListaVendedoresRecomendados(Vendedor vendedorLogeado) {
         return vendedorLogeado.getListaRecomendados();
+    }
+
+    public void aceptarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        vendedorLogeado.aceptarSolicitud(vendedorSeleccionado);
+        vendedorSeleccionado.aceptarSolicitud(vendedorLogeado);
+    }
+
+    public void rechazarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        vendedorLogeado.rechazarSolicitud(vendedorSeleccionado);
     }
 }
 

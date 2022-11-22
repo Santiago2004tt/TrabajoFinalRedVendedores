@@ -46,8 +46,28 @@ public class RecomendacionVendedoresAliadosController {
 
     @FXML
     void cambiarSolicitudes(ActionEvent event) {
-
+        main.mostrarSolicitudes(vendedorLogeado);
     }
+    @FXML
+    void buscarVendedor(ActionEvent event) {
+        buscarVendedorAction();
+    }
+
+
+    private void buscarVendedorAction() {
+        main.actualizarTablaRecomendados(vendedorLogeado);
+        listaVendedorData.removeAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
+        tableRecomendaciones.refresh();
+        aniadirTabla();
+        tableRecomendaciones.refresh();
+        mostrarMensaje("Notificacion Vendedor", "Vendedores encontrados", "Los vendedores se han encontrado", Alert.AlertType.INFORMATION);
+    }
+
+    private void aniadirTabla() {
+        listaVendedorData.addAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
+        tableRecomendaciones.setItems(listaVendedorData);
+    }
+
 
     @FXML
     void enviarSolicitud(ActionEvent event) {
@@ -59,9 +79,11 @@ public class RecomendacionVendedoresAliadosController {
             mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "Debe seleccionar vendedor", Alert.AlertType.ERROR);
         }else{
             boolean enviarSolicitud =  main.enviarSolicitud(vendedorLogeado, vendedorSeleccionado);
-            mostrarMensaje("Notificacion Vendedor", "Selecciona vendedor", "El vendedor", Alert.AlertType.INFORMATION);
-            if(enviarSolicitud){
-                mostrarMensaje("Notificacion Vendedor", "El vendedor ", "El vendedor ya tiene solicitud", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificacion Vendedor", "La invitacion fue enviada", "la solicitud fue enviada con exito", Alert.AlertType.INFORMATION);
+            listaVendedorData.remove(vendedorSeleccionado);
+            tableRecomendaciones.refresh();
+            if(enviarSolicitud == false){
+                mostrarMensaje("Notificacion Vendedor", "El vendedor ya tiene solicitud ", "El vendedor ya tiene una solicitud", Alert.AlertType.ERROR);
             }
         }
     }
@@ -81,20 +103,17 @@ public class RecomendacionVendedoresAliadosController {
         });
     }
 
-    public void setMain(Main main){
+    public void setMain(Main main) throws VendedorException {
         this.main = main;
         tableRecomendaciones.getItems().clear();
         tableRecomendaciones.setItems(obtenerListaVendedoresRecomendados());
     }
 
-    private ObservableList<Vendedor> obtenerListaVendedoresRecomendados() {
+    private ObservableList<Vendedor> obtenerListaVendedoresRecomendados() throws VendedorException {
         listaVendedorData.addAll(main.obtenerListaVendedoresRecomendados(vendedorLogeado));
         return listaVendedorData;
     }
 
-    public void actualizarTablaRecomendados(String cedula) throws VendedorException {
-        main.actualizarTablaRecomendados(cedula);
-    }
 
     public void obtenerVendedorLogeado(Vendedor vendedorLogeado) {
         this.vendedorLogeado = vendedorLogeado;
