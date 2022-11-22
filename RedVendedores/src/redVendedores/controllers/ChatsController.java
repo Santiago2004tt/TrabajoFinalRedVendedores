@@ -4,14 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import redVendedores.application.Main;
 import redVendedores.model.Vendedor;
 
 public class ChatsController {
+
+
+
 
     private Vendedor vendedorLogeado;
     private Vendedor vendedorAliado;
@@ -25,32 +25,60 @@ public class ChatsController {
     @FXML
     private Button btnRegresar;
 
-    @FXML
-    private TableColumn<?, ?> columnLocal;
-
-    @FXML
-    private TableColumn<?, ?> columnVisitante;
-
-    @FXML
-    private TableView<?> tableListaMensajesLocales;
-
-    @FXML
-    private TableView<?> tableListaMensajesVisitante;
 
     @FXML
     private TextField txtMensaje;
 
     @FXML
     void enviarMensaje(ActionEvent event) {
+        String mensaje = "";
+        mensaje = txtMensaje.getText();
+        if(verificarCampos(mensaje)){
+            boolean enviarMensaje = main.enviarMensaje(mensaje, vendedorLogeado, vendedorAliado);
+            if (enviarMensaje){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Listo!!");
+                alert.setContentText("Mensaje enviado");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
+                alert.showAndWait();
+                txtMensaje.clear();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Error!!");
+                alert.setContentText("No se pudo enviar el mensaje, intenta de nuevo");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+                dialogPane.getStyleClass().add("dialog");
+                alert.showAndWait();
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Atencion");
+            alert.setContentText("Al parecer vas a enviar un mensaje vacio");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog");
+            alert.showAndWait();
+        }
 
+    }
+
+    private boolean verificarCampos(String mensaje) {
+        if(mensaje.equals("")){
+            return false;
+        }
+        return true;
     }
 
     @FXML
     void regresar(ActionEvent event) {
+        main.mostrarMuroVendedorAliado(vendedorLogeado,vendedorAliado);
 
     }
 
-    /**
+
     public void setMain(Main main) {
         this.main = main;
     }
@@ -64,33 +92,5 @@ public class ChatsController {
     }
 
 
-    // -------------------------Inicializar la primera tabla ------------------------------------
-
-    void initialize(){
-        this.columnLocal.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
-        tableListaMensajesLocales.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection, newSelection) -> {
-            mensajeSeleccionado = (Mensaje) newSelection;
-        });
-    }
-
-    private ObservableList<Mensaje> obtenerMensajesLogeado() {
-        listaMensajeData.addAll(main.obtenerMensajes(vendedorLogeado, vendedorAliado));
-        return listaMensajeData;
-    }
-
-    //---------------------------Inicializar la segunda tabla-------------------------------
-
-    void initializeSegunda(){
-        this.columnVisitante.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
-        tableListaMensajesVisitante.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection, newSelection) -> {
-            mensajeSeleccionado = (Mensaje) newSelection;
-        });
-    }
-
-    private ObservableList<Mensaje> obtenerMensajesVisitantes() {
-        listaMensajeData.addAll(main.obtenerMensajes(vendedorAliado, vendedorLogeado));
-        return listaMensajeData;
-    }
-    */
 
 }

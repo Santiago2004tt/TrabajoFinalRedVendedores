@@ -205,14 +205,14 @@ public class Main extends Application {
             AnchorPane rootLayout = loader.load();
             //invoca los controladores
             ChatsController controller = loader.getController();
-            //controller.setMain(this);
-            //controller.obtenerVendedorLogeado(vendedorLogeado);
-            //controller.obtenerVendedorAliado(vendedorAliado);
+            controller.obtenerVendedorLogeado(vendedorLogeado);
+            controller.obtenerVendedorAliado(vendedorAliado);
+            controller.setMain(this);
             //inicializa la escena
             Scene scene = new Scene(rootLayout);
             scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
             stage.setScene(scene);
-            stage.setTitle("Inicia la conversacion!!");
+            stage.setTitle("Bienvenido al muro");
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -241,6 +241,27 @@ public class Main extends Application {
         }
     }
 
+    public void mostrarVentanaMensajes(Vendedor vendedorLogeado) {
+        try{
+            //carga el fxml
+            FXMLLoader loader = new FXMLLoader();
+            //localiza el fxml
+            loader.setLocation(Main.class.getResource("../views/MensajesEntrantes.fxml"));
+            AnchorPane rootLayout = loader.load();
+            //invoca los controladores
+            MensajesController controller = loader.getController();
+            controller.obtenerVendedorLogeado(vendedorLogeado);
+            controller.setMain(this);
+            //inicializa la escena
+            Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add(getClass().getResource("../stylesheets/Stylesheets.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Que mensajes tienes hoy?");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     //-----------RESTO DE METODOS------------
@@ -396,5 +417,18 @@ public class Main extends Application {
 
     public ArrayList<Vendedor> obtenerListaVendedoresRecomendados(Vendedor vendedorLogeado) {
         return red.obtenerListaVendedoresRecomendados(vendedorLogeado);
+    }
+
+
+    public boolean enviarMensaje(String mensaje, Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        return red.enviarMensaje(mensaje, vendedorLogeado, vendedorAliado);
+    }
+
+    public ArrayList<Mensaje> obtenerListaMensajes(Vendedor vendedorLogeado) {
+        return red.obtenerListaMensajesVendedor(vendedorLogeado);
+    }
+
+    public boolean respoderMensaje(String mensaje, Vendedor vendedorLogeado, Vendedor autor) {
+       return red.responderMensaje(mensaje, autor, vendedorLogeado);
     }
 }
